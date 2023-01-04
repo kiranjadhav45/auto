@@ -1,0 +1,140 @@
+html,
+body {
+  margin: 0px;
+  height: 100%;
+}
+@font-face {
+  font-family: "UbuntuRegular";
+  src: local("UbuntuRegular"),
+    url("./fonts/Ubuntu/Ubuntu-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+.font-ubu {
+  font-family: "UbuntuRegular";
+}
+.menuIcon {
+  background-color: white;
+  border: none;
+  box-shadow: none;
+  color: black;
+  cursor: pointer;
+}
+.menuIcon :hover {
+  border-radius: 5%;
+  color: dodgerblue;
+}
+/* 
+.newCard {
+  align-items: baseline;
+  justify-content: baseline;
+} */
+.sideMenuIcon {
+  background-color: #f1f5f9;
+  border: none;
+  box-shadow: none;
+  color: black;
+  cursor: pointer;
+}
+.sideMenuIcon :hover {
+  border-radius: 5%;
+  color: dodgerblue;
+  background-color: #f1f5f9;
+}
+
+.onClickMenuRightSide {
+  position: fixed;
+  z-index: 999;
+  display: inline-block;
+  top: 0%;
+  margin-left: 0.1%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.onClickMenuBottom {
+  position: fixed;
+  z-index: 999;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.smallText {
+  font-size: small;
+}
+
+.inputAlert {
+  font-size: xx-small;
+  position: relative;
+  line-height: 0.1;
+  color: red;
+  margin: 0%;
+  padding: 0%;
+}
+.menuButton {
+  background-color: white;
+  border: none;
+  color: black;
+  cursor: pointer;
+}
+
+.menuButton:hover {
+  border-radius: 5px;
+  background-color: #f1f5f9;
+}
+
+.headerButton {
+  background-color: #fff;
+  border: none;
+  color: black;
+  cursor: pointer;
+  position: relative;
+  margin: 1%;
+}
+.headerMenu {
+  border-radius: 5px;
+  background-color: #f1f5f9;
+  border: none;
+  color: black;
+  cursor: pointer;
+  position: relative;
+  margin: 1%;
+}
+
+.headerButton:hover {
+  border-radius: 5px;
+  background-color: #f1f5f9;
+}
+
+.buttonTabs > button {
+  margin: 0%;
+  padding: 0%;
+}
+.halfScreen {
+  height: 50vh;
+}
+
+.form-control {
+}
+
+.fixedBottom {
+  bottom: 0%;
+  position: relative;
+  z-index: 5;
+}
+
+.table {
+  padding: 0%;
+  font-size: small;
+}
+
+.table-bordered {
+  border: 1px solid #ddd !important;
+}
+
+table caption {
+  padding: 0.5em 0;
+}
+
+@media screen and (max-width: 767px) {
+  table caption {
+    display: none;
+  }
+}

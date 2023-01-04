@@ -1,0 +1,61 @@
+$theme-colors: (
+  "primary": #ff8e3c,
+  "secondary": #1e1e2a,
+  "success": #6bcb77,
+  "danger": #ff6b6b,
+  "warning": #ffd93d,
+  "info": #d9376e,
+  "dark": #0d0d0d,
+  "light": #e6e5de,
+  "indigo": #202a44,
+  "malibu": #57bee6,
+  "veryLight": #f1f5f9,
+  "blue": #0d6efd,
+  "white": #ffffff,
+  "bootGrey": #dee2e6,
+  "moreLight": #f8f9fa,
+  "dodgerBlue": #005a9c,
+);
+
+// $theme-colors: (
+//   "primary": #3aafa9,
+//   "secondary": #d1e8e2,
+//   "success": #5cdb95,
+//   "danger": #ffb48f,
+//   "warning": #f2c75b,
+//   "info": #8ee4af,
+//   "dark": #172521,
+//   "light": #e6e5de,
+//   "indigo": #94a1b2,
+//   "malibu": #57bee6,
+//   "veryLight": #f8f8f8,
+//   "blue": #0d6efd,
+//   "white": #edf5e1,
+//   "darker": #303c6c,
+//   "orange": #ff652f,
+//   "moreLight": #f8f9fa,
+// );
+
+/* This pen is using external base CSS stylesheet(s) in the CSS Settings */
+$input-btn-focus-width: 0.07rem;
+$input-btn-focus-color: #d1e8e2;
+$white: #fff;
+$black: #172521;
+$enable-gradients: true;
+
+$input-color: $black;
+$cyan: rgb(51, 92, 103);
+$table-bg-level: -20;
+$enable-shadows: true;
+$enable-responsive-font-sizes: true;
+
+$enable-caret: true;
+$enable-rounded: true;
+$enable-transitions: true;
+$enable-prefers-reduced-motion-media-query: true;
+$enable-grid-classes: true;
+$enable-print-styles: true;
+$enable-validation-icons: true;
+$grid-columns: 24;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
