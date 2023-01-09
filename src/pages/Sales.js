@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SideMenu from "../components/ui/sideMenu";
+import Pagination from "./Pagination";
 import {
   Button,
   ButtonGroup,
@@ -10,7 +11,7 @@ import {
   Modal,
   Row,
 } from "react-bootstrap";
-import Pagination from "react-bootstrap/Pagination";
+// import Pagination from "react-bootstrap/Pagination";
 
 import {
   CiBatteryCharging,
@@ -33,8 +34,60 @@ import {
 import { FcSalesPerformance } from "react-icons/fc";
 
 function Sales() {
+  const [pageSize, setPageSize] = useState(7);
+  const [currentPage, setCurrentPage] = useState(1);
   const [searchRes, setSearchRes] = useState([]);
   const [itemList, setItemList] = useState([
+    {
+      itemName: "Product One",
+      itemPrice: 20,
+      itemInvoice: 45845,
+    },
+    {
+      itemName: "Product Two",
+      itemPrice: 20,
+      itemInvoice: 45845,
+    },
+    {
+      itemName: "Product Three",
+      itemPrice: 20,
+      itemInvoice: 45845,
+    },
+    {
+      itemName: "Product Four",
+      itemPrice: 20,
+      itemInvoice: 45845,
+    },
+    {
+      itemName: "Product Five",
+      itemPrice: 20,
+      itemInvoice: 45845,
+    },
+    {
+      itemName: "Product One",
+      itemPrice: 20,
+      itemInvoice: 45845,
+    },
+    {
+      itemName: "Product Two",
+      itemPrice: 20,
+      itemInvoice: 45845,
+    },
+    {
+      itemName: "Product Three",
+      itemPrice: 20,
+      itemInvoice: 45845,
+    },
+    {
+      itemName: "Product Four",
+      itemPrice: 20,
+      itemInvoice: 45845,
+    },
+    {
+      itemName: "Product Five",
+      itemPrice: 20,
+      itemInvoice: 45845,
+    },
     {
       itemName: "Product One",
       itemPrice: 20,
@@ -65,6 +118,13 @@ function Sales() {
   const searchHandle = (e) => {
     let test = itemList.filter((a) => a.itemName === e.target.value);
     setSearchRes(test);
+  };
+
+  const indexOfLastItem = currentPage * pageSize;
+  const indexOfFirstItem = indexOfLastItem - pageSize;
+
+  const pagination = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -116,8 +176,8 @@ function Sales() {
                 searchRes.map((i) => (
                   <small className="saleListgroup">
                     <ListGroup.Item>{i.itemName}</ListGroup.Item>
-                    <ListGroup.Item>{i.itemPrice}</ListGroup.Item>{" "}
-                    <ListGroup.Item>{i.itemInvoice}</ListGroup.Item>{" "}
+                    {/* <ListGroup.Item>{i.itemPrice}</ListGroup.Item>{" "} */}
+                    {/* <ListGroup.Item>{i.itemInvoice}</ListGroup.Item>{" "} */}
                   </small>
                 ))}
             </Col>
@@ -155,25 +215,29 @@ function Sales() {
               {" "}
               <thead>
                 <tr>
-                  <th data-priority="1">Sr No</th>
                   <th data-priority="2">Product Name</th>
+                  <th data-priority="1">Price</th>
                   <th data-priority="2">Invoice No</th>
                 </tr>
               </thead>
               <tbody>
-                {itemList.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.itemPrice}</td>
-                    <td>{item.itemName}</td>
-                    <td>{item.itemInvoice}</td>
-                  </tr>
-                ))}
+                {itemList
+                  .slice(indexOfFirstItem, indexOfLastItem)
+                  .map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.itemName}</td>
+                      <td>{item.itemPrice}</td>
+                      <td>{item.itemInvoice}</td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
-          <Pagination className="float-end" size="sm">
-            {/* {items} */}
-          </Pagination>
+          <Pagination
+            pageSize={pageSize}
+            pagination={pagination}
+            itemList={itemList.length}
+          />
         </Col>
         <Col className="col-4 bg-veryLight border-end">Nikhil</Col>
         <Col className="bg-veryLight col-1 ">
