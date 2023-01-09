@@ -195,10 +195,10 @@ function Sales() {
                 </button>
                 <div>
                   <Form.Select size="sm" aria-label="Default select example">
-                    <option>1000</option>
-                    <option value="10">2000</option>
-                    <option value="25">5000</option>
-                    <option value="50">9000</option>
+                    <option>5</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
                   </Form.Select>
                 </div>
               </ButtonGroup>
