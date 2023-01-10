@@ -34,83 +34,118 @@ import {
 import { FcSalesPerformance } from "react-icons/fc";
 
 function Sales() {
-  const [pageSize, setPageSize] = useState(7);
+  const [pageSize, setPageSize] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchRes, setSearchRes] = useState([]);
   const [itemList, setItemList] = useState([
     {
       itemName: "Product One",
-      itemPrice: 20,
+      itemPrice: 202,
       itemInvoice: 45845,
     },
     {
       itemName: "Product Two",
-      itemPrice: 20,
+      itemPrice: 260,
       itemInvoice: 45845,
     },
     {
       itemName: "Product Three",
-      itemPrice: 20,
+      itemPrice: 240,
       itemInvoice: 45845,
     },
     {
       itemName: "Product Four",
-      itemPrice: 20,
+      itemPrice: 260,
       itemInvoice: 45845,
     },
     {
       itemName: "Product Five",
-      itemPrice: 20,
+      itemPrice: 250,
       itemInvoice: 45845,
     },
     {
       itemName: "Product One",
-      itemPrice: 20,
+      itemPrice: 204,
       itemInvoice: 45845,
     },
     {
       itemName: "Product Two",
-      itemPrice: 20,
+      itemPrice: 207,
       itemInvoice: 45845,
     },
     {
       itemName: "Product Three",
-      itemPrice: 20,
+      itemPrice: 203,
       itemInvoice: 45845,
     },
     {
       itemName: "Product Four",
-      itemPrice: 20,
+      itemPrice: 202,
       itemInvoice: 45845,
     },
     {
       itemName: "Product Five",
-      itemPrice: 20,
+      itemPrice: 202,
       itemInvoice: 45845,
     },
     {
       itemName: "Product One",
-      itemPrice: 20,
+      itemPrice: 2045,
       itemInvoice: 45845,
     },
     {
       itemName: "Product Two",
-      itemPrice: 20,
+      itemPrice: 207,
       itemInvoice: 45845,
     },
     {
       itemName: "Product Three",
-      itemPrice: 20,
+      itemPrice: 205,
       itemInvoice: 45845,
     },
     {
       itemName: "Product Four",
-      itemPrice: 20,
+      itemPrice: 25,
       itemInvoice: 45845,
     },
     {
       itemName: "Product Five",
-      itemPrice: 20,
+      itemPrice: 255,
+      itemInvoice: 45845,
+    },
+    {
+      itemName: "Product Five",
+      itemPrice: 255,
+      itemInvoice: 45845,
+    },
+    {
+      itemName: "Product Five",
+      itemPrice: 255,
+      itemInvoice: 45845,
+    },
+    {
+      itemName: "Product Five",
+      itemPrice: 255,
+      itemInvoice: 45845,
+    },
+    {
+      itemName: "Product Five",
+      itemPrice: 255,
+      itemInvoice: 45845,
+    },
+    {
+      itemName: "Product Five",
+      itemPrice: 255,
+      itemInvoice: 45845,
+    },
+    {
+      itemName: "Product Five",
+      itemPrice: 255,
+      itemInvoice: 45845,
+    },
+    {
+      itemName: "Product Five",
+      itemPrice: 255,
       itemInvoice: 45845,
     },
   ]);
@@ -125,8 +160,12 @@ function Sales() {
 
   const pagination = (pageNumber) => {
     setCurrentPage(pageNumber);
+    // console.log(indexOfFirstItem + 1);
   };
-
+  const index = [];
+  for (let i = indexOfFirstItem + 1; i <= indexOfLastItem; i++) {
+    index.push(i);
+  }
   return (
     <Container fluid className="bg-white font-ubu">
       <Row className="bg-white border-bottom p-1">
@@ -194,11 +233,15 @@ function Sales() {
                   </small>
                 </button>
                 <div>
-                  <Form.Select size="sm" aria-label="Default select example">
-                    <option>5</option>
+                  <Form.Select
+                    onChange={(e) => setPageSize(e.target.value)}
+                    size="sm"
+                    aria-label="Default select example"
+                  >
+                    <option value="5">5</option>
                     <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
                   </Form.Select>
                 </div>
               </ButtonGroup>
@@ -215,6 +258,7 @@ function Sales() {
               {" "}
               <thead>
                 <tr>
+                  <th data-priority="2">Sr No</th>
                   <th data-priority="2">Product Name</th>
                   <th data-priority="1">Price</th>
                   <th data-priority="2">Invoice No</th>
@@ -223,8 +267,9 @@ function Sales() {
               <tbody>
                 {itemList
                   .slice(indexOfFirstItem, indexOfLastItem)
-                  .map((item, index) => (
-                    <tr key={index}>
+                  .map((item, z) => (
+                    <tr key={z}>
+                      <td>{index[0 + z]}</td>
                       <td>{item.itemName}</td>
                       <td>{item.itemPrice}</td>
                       <td>{item.itemInvoice}</td>
