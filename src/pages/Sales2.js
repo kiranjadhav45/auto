@@ -44,115 +44,137 @@ function Sales() {
       itemName: "Product One",
       itemPrice: 202,
       itemInvoice: 45845,
+      id: 1,
     },
     {
       itemName: "Product Two",
       itemPrice: 260,
       itemInvoice: 45845,
+      id: 2,
     },
     {
       itemName: "Product Three",
       itemPrice: 240,
       itemInvoice: 45845,
+      id: 3,
     },
     {
       itemName: "Product Four",
       itemPrice: 260,
       itemInvoice: 45845,
+      id: 4,
     },
     {
       itemName: "Product Five",
       itemPrice: 250,
       itemInvoice: 45845,
+      id: 5,
     },
     {
       itemName: "Product One",
       itemPrice: 204,
       itemInvoice: 45845,
+      id: 6,
     },
     {
       itemName: "Product Two",
       itemPrice: 207,
       itemInvoice: 45845,
+      id: 7,
     },
     {
       itemName: "Product Three",
       itemPrice: 203,
       itemInvoice: 45845,
+      id: 8,
     },
     {
       itemName: "Product Four",
       itemPrice: 202,
       itemInvoice: 45845,
+      id: 9,
     },
     {
       itemName: "Product Five",
       itemPrice: 202,
       itemInvoice: 45845,
+      id: 10,
     },
     {
       itemName: "Product One",
       itemPrice: 2045,
       itemInvoice: 45845,
+      id: 11,
     },
     {
       itemName: "Product Two",
       itemPrice: 207,
       itemInvoice: 45845,
+      id: 12,
     },
     {
       itemName: "Product Three",
       itemPrice: 205,
       itemInvoice: 45845,
+      id: 13,
     },
     {
       itemName: "Product Four",
       itemPrice: 25,
       itemInvoice: 45845,
+      id: 14,
     },
     {
       itemName: "Product Five",
       itemPrice: 255,
       itemInvoice: 45845,
+      id: 15,
     },
     {
       itemName: "Product Five",
       itemPrice: 255,
       itemInvoice: 45845,
+      id: 16,
     },
     {
       itemName: "Product Five",
       itemPrice: 255,
       itemInvoice: 45845,
+      id: 17,
     },
     {
       itemName: "Product Five",
       itemPrice: 255,
       itemInvoice: 45845,
+      id: 18,
     },
     {
       itemName: "Product Five",
       itemPrice: 255,
       itemInvoice: 45845,
+      id: 19,
     },
     {
       itemName: "Product Five",
       itemPrice: 255,
       itemInvoice: 45845,
+      id: 20,
     },
     {
       itemName: "Product Five",
       itemPrice: 255,
       itemInvoice: 45845,
+      id: 21,
     },
     {
       itemName: "Product Five",
       itemPrice: 255,
       itemInvoice: 45845,
+      id: 22,
     },
   ]);
 
-  // this is Pagination loop
+  // this is Pagination section
   const indexOfLastItem = currentPage * pageSize;
   const indexOfFirstItem = indexOfLastItem - pageSize;
 
@@ -181,11 +203,12 @@ function Sales() {
     setSearchRes(false);
   }
 
-  function handleDeleteTableData(index) {
-    console.warn(index);
+  function handleDeleteTableData(item) {
     let a = [...billInfo];
-    a.pop(index);
-    setBillInfo(a);
+    let test = a.filter((i) => i.id !== item.id);
+    // console.log("TEST", test);
+    // console.log("Id", item.id);
+    setBillInfo(test);
   }
   return (
     <Container fluid className="bg-white font-ubu">
@@ -294,14 +317,15 @@ function Sales() {
               </thead>
               <tbody>
                 {billInfo.map((item, index) => (
-                  <tr key={index} className="text-center">
-                    <td>{index + 1}</td>
+                  <tr key={item.id} className="text-center">
+                    <td>{item.id}</td>
                     <td>{item.itemName}</td>
                     <td>{item.itemPrice}</td>
                     <td>{item.itemInvoice}</td>
-                    <td onClick={(index) => handleDeleteTableData(index)}>
+                    <td onClick={() => handleDeleteTableData(item)}>
                       <AiFillDelete className="text-center" size={20} />
                     </td>
+                    {/* </tr> */}
                   </tr>
                 ))}
               </tbody>
