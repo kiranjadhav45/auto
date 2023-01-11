@@ -33,6 +33,8 @@ import {
 } from "react-icons/ci";
 import { FcSalesPerformance } from "react-icons/fc";
 import { AiFillDelete } from "react-icons/ai";
+import { IoIosAdd } from "react-icons/io";
+import { MdRemove } from "react-icons/md";
 
 function Sales() {
   const [tableData, setTableData] = useState(0);
@@ -195,8 +197,14 @@ function Sales() {
 
   // this is sales table data handle
   const [billInfo, setBillInfo] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalQuantity, setTotalQuantity] = useState(1);
 
   function handleTableData(i) {
+    let additionOfItemPrice = i.itemPrice;
+    let additionOfItemQuantity = i;
+    setTotalPrice(totalPrice + additionOfItemPrice);
+    console.warn("function called");
     let a = [...billInfo];
     a.push(i);
     setBillInfo(a);
@@ -206,10 +214,20 @@ function Sales() {
   function handleDeleteTableData(item) {
     let a = [...billInfo];
     let test = a.filter((i) => i.id !== item.id);
-    // console.log("TEST", test);
-    // console.log("Id", item.id);
     setBillInfo(test);
   }
+
+  // handle Quantity
+  function addItem() {
+    setTotalQuantity(totalQuantity + 1);
+    handleTableData();
+  }
+
+  function removeItem() {
+    setTotalQuantity(totalQuantity - 1);
+    handleTableData();
+  }
+
   return (
     <Container fluid className="bg-white font-ubu">
       <Row className="bg-white border-bottom p-1">
@@ -312,6 +330,7 @@ function Sales() {
                   <th data-priority="2">Product Name</th>
                   <th data-priority="1">Price</th>
                   <th data-priority="2">Quantity</th>
+                  <th data-priority="2">Invoice No</th>
                   <th data-priority="2">Delete</th>
                 </tr>
               </thead>
@@ -320,14 +339,35 @@ function Sales() {
                   <tr key={item.id} className="text-center">
                     <td>{item.id}</td>
                     <td>{item.itemName}</td>
-                    <td>{item.itemPrice}</td>
+                    <td>{item.itemPrice * totalQuantity} </td>
+                    <td>
+                      {" "}
+                      <MdRemove
+                        className="mx-1  "
+                        size={20}
+                        onClick={() => removeItem()}
+                      />{" "}
+                      {totalQuantity}{" "}
+                      <IoIosAdd
+                        className="mx-1"
+                        size={20}
+                        onClick={() => addItem()}
+                      />{" "}
+                    </td>
                     <td>{item.itemInvoice}</td>
                     <td onClick={() => handleDeleteTableData(item)}>
                       <AiFillDelete className="text-center" size={20} />
                     </td>
-                    {/* </tr> */}
                   </tr>
                 ))}
+                <tr className="text-center">
+                  <th data-priority="2"></th>
+                  <th data-priority="2"></th>
+                  <th data-priority="1">{totalPrice}</th>
+                  <th data-priority="2">{}</th>
+                  <th data-priority="2"></th>
+                  <th data-priority="2"></th>
+                </tr>
               </tbody>
             </table>
           </div>
