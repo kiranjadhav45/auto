@@ -47,132 +47,154 @@ function Sales() {
       itemPrice: 202,
       itemInvoice: 45845,
       id: 1,
+      product_qty: 1,
     },
     {
       itemName: "Product Two",
       itemPrice: 260,
       itemInvoice: 45845,
       id: 2,
+      product_qty: 1,
     },
     {
       itemName: "Product Three",
       itemPrice: 240,
       itemInvoice: 45845,
       id: 3,
+      product_qty: 1,
     },
     {
       itemName: "Product Four",
       itemPrice: 260,
       itemInvoice: 45845,
       id: 4,
+      product_qty: 1,
     },
     {
       itemName: "Product Five",
       itemPrice: 250,
       itemInvoice: 45845,
       id: 5,
+      product_qty: 1,
     },
     {
       itemName: "Product One",
       itemPrice: 204,
       itemInvoice: 45845,
       id: 6,
+      product_qty: 1,
     },
     {
       itemName: "Product Two",
       itemPrice: 207,
       itemInvoice: 45845,
       id: 7,
+      product_qty: 1,
     },
     {
       itemName: "Product Three",
       itemPrice: 203,
       itemInvoice: 45845,
       id: 8,
+      product_qty: 1,
     },
     {
       itemName: "Product Four",
       itemPrice: 202,
       itemInvoice: 45845,
       id: 9,
+      product_qty: 1,
     },
     {
       itemName: "Product Five",
       itemPrice: 202,
       itemInvoice: 45845,
       id: 10,
+      product_qty: 1,
     },
     {
       itemName: "Product One",
       itemPrice: 2045,
       itemInvoice: 45845,
       id: 11,
+      product_qty: 1,
     },
     {
       itemName: "Product Two",
       itemPrice: 207,
       itemInvoice: 45845,
       id: 12,
+      product_qty: 1,
     },
     {
       itemName: "Product Three",
       itemPrice: 205,
       itemInvoice: 45845,
       id: 13,
+      product_qty: 1,
     },
     {
       itemName: "Product Four",
       itemPrice: 25,
       itemInvoice: 45845,
       id: 14,
+      product_qty: 1,
     },
     {
       itemName: "Product Five",
       itemPrice: 255,
       itemInvoice: 45845,
       id: 15,
+      product_qty: 1,
     },
     {
       itemName: "Product Five",
       itemPrice: 255,
       itemInvoice: 45845,
       id: 16,
+      product_qty: 1,
     },
     {
       itemName: "Product Five",
       itemPrice: 255,
       itemInvoice: 45845,
       id: 17,
+      product_qty: 1,
     },
     {
       itemName: "Product Five",
       itemPrice: 255,
       itemInvoice: 45845,
       id: 18,
+      product_qty: 1,
     },
     {
       itemName: "Product Five",
       itemPrice: 255,
       itemInvoice: 45845,
       id: 19,
+      product_qty: 1,
     },
     {
       itemName: "Product Five",
       itemPrice: 255,
       itemInvoice: 45845,
       id: 20,
+      product_qty: 1,
     },
     {
       itemName: "Product Five",
       itemPrice: 255,
       itemInvoice: 45845,
       id: 21,
+      product_qty: 1,
     },
     {
       itemName: "Product Five",
       itemPrice: 255,
       itemInvoice: 45845,
       id: 22,
+      product_qty: 1,
     },
   ]);
 
@@ -195,7 +217,7 @@ function Sales() {
     setSearchRes(test);
   };
 
-  // this is sales table data handle
+  // Handle sales table data
   const [billInfo, setBillInfo] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(1);
@@ -218,14 +240,30 @@ function Sales() {
   }
 
   // handle Quantity
-  function addItem() {
-    setTotalQuantity(totalQuantity + 1);
-    handleTableData();
+  function addItem(e) {
+    setBillInfo((billInfo) =>
+      billInfo.map((item) =>
+        e === item.id
+          ? {
+              ...item,
+              product_qty: item.product_qty + (item.product_qty < 10 ? 1 : 0),
+            }
+          : item
+      )
+    );
   }
 
-  function removeItem() {
-    setTotalQuantity(totalQuantity - 1);
-    handleTableData();
+  function removeItem(e) {
+    setBillInfo((billInfo) =>
+      billInfo.map((item) =>
+        e === item.id
+          ? {
+              ...item,
+              product_qty: item.product_qty - (item.product_qty > 1 ? 1 : 0),
+            }
+          : item
+      )
+    );
   }
 
   return (
@@ -339,19 +377,19 @@ function Sales() {
                   <tr key={item.id} className="text-center">
                     <td>{item.id}</td>
                     <td>{item.itemName}</td>
-                    <td>{item.itemPrice * totalQuantity} </td>
+                    <td>{item.itemPrice * item.product_qty} </td>
                     <td>
                       {" "}
                       <MdRemove
                         className="mx-1  "
                         size={20}
-                        onClick={() => removeItem()}
+                        onClick={() => removeItem(item.id)}
                       />{" "}
-                      {totalQuantity}{" "}
+                      {item.product_qty}{" "}
                       <IoIosAdd
                         className="mx-1"
                         size={20}
-                        onClick={() => addItem()}
+                        onClick={() => addItem(item.id)}
                       />{" "}
                     </td>
                     <td>{item.itemInvoice}</td>
