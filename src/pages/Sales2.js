@@ -37,6 +37,8 @@ import { IoIosAdd } from "react-icons/io";
 import { MdRemove } from "react-icons/md";
 
 function Sales() {
+  var totalGrant = 0;
+  var taxation = 0;
   const [tableData, setTableData] = useState(0);
   const [pageSize, setPageSize] = useState(5);
   const [searchRes, setSearchRes] = useState([]);
@@ -219,17 +221,15 @@ function Sales() {
 
   // Handle sales table data
   const [billInfo, setBillInfo] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [totalQuantity, setTotalQuantity] = useState(1);
+  // const [totalPrice, setTotalPrice] = useState(0);
+  // const [totalQuantity, setTotalQuantity] = useState(1);
 
   function handleTableData(i) {
-    let additionOfItemPrice = i.itemPrice;
-    let additionOfItemQuantity = i;
-    setTotalPrice(totalPrice + additionOfItemPrice);
-    console.warn("function called");
     let a = [...billInfo];
     a.push(i);
     setBillInfo(a);
+    setSearchRes(false);
+
     setSearchRes(false);
   }
 
@@ -240,7 +240,7 @@ function Sales() {
   }
 
   // handle Quantity
-  function addItem(e) {
+  function addItem(e, quantity, price) {
     setBillInfo((billInfo) =>
       billInfo.map((item) =>
         e === item.id
@@ -253,7 +253,7 @@ function Sales() {
     );
   }
 
-  function removeItem(e) {
+  function removeItem(e, quantity, price) {
     setBillInfo((billInfo) =>
       billInfo.map((item) =>
         e === item.id
@@ -265,7 +265,12 @@ function Sales() {
       )
     );
   }
+  //handle quantity
+  const [editQuntity, setEditQuntity] = useState(1);
 
+  function quantityEdit(e) {
+    setEditQuntity(e.target.value);
+  }
   return (
     <Container fluid className="bg-white font-ubu">
       <Row className="bg-white border-bottom p-1">
@@ -318,7 +323,7 @@ function Sales() {
                       <ListGroup.Item
                         className=""
                         value={i.itemName}
-                        onClick={(e) => handleTableData(i)}
+                        onClick={() => handleTableData(i)}
                       >
                         {i.itemName}
                       </ListGroup.Item>
@@ -373,36 +378,55 @@ function Sales() {
                 </tr>
               </thead>
               <tbody>
-                {billInfo.map((item, index) => (
-                  <tr key={item.id} className="text-center">
-                    <td>{item.id}</td>
-                    <td>{item.itemName}</td>
-                    <td>{item.itemPrice * item.product_qty} </td>
-                    <td>
-                      {" "}
-                      <MdRemove
-                        className="mx-1  "
-                        size={20}
-                        onClick={() => removeItem(item.id)}
-                      />{" "}
-                      {item.product_qty}{" "}
-                      <IoIosAdd
-                        className="mx-1"
-                        size={20}
-                        onClick={() => addItem(item.id)}
-                      />{" "}
-                    </td>
-                    <td>{item.itemInvoice}</td>
-                    <td onClick={() => handleDeleteTableData(item)}>
-                      <AiFillDelete className="text-center" size={20} />
-                    </td>
-                  </tr>
-                ))}
+                {billInfo.map((item, index) => {
+                  totalGrant += item.product_qty * item.itemPrice;
+                  taxation = Math.round((totalGrant / 100) * 18);
+                  return (
+                    <tr key={item.id} className="text-center">
+                      <td>{item.id}</td>
+                      <td>{item.itemName}</td>
+                      <td>{item.product_qty * item.itemPrice} </td>
+                      <td>
+                        {" "}
+                        <MdRemove
+                          className="mx-1 rounded-circle border "
+                          size={22}
+                          onClick={() =>
+                            removeItem(
+                              item.id,
+                              item.product_qty,
+                              item.itemPrice
+                            )
+                          }
+                        />{" "}
+                        <input
+                          className="text-center"
+                          value={item.product_qty}
+                          size={1}
+                          onChange={(e) => setEditQuntity(e.target.value)}
+                        />{" "}
+                        <IoIosAdd
+                          className="mx-1 rounded-circle border"
+                          size={22}
+                          onClick={() =>
+                            addItem(item.id, item.product_qty, item.itemPrice)
+                          }
+                        />{" "}
+                      </td>
+                      <td>{item.itemInvoice}</td>
+                      <td onClick={() => handleDeleteTableData(item)}>
+                        <AiFillDelete className="text-center" size={20} />
+                      </td>
+                    </tr>
+                  );
+                })}
                 <tr className="text-center">
                   <th data-priority="2"></th>
                   <th data-priority="2"></th>
-                  <th data-priority="1">{totalPrice}</th>
-                  <th data-priority="2">{}</th>
+                  <th data-priority="1">
+                    {totalGrant} + {taxation} tax
+                  </th>
+                  <th data-priority="2">{taxation + totalGrant}</th>
                   <th data-priority="2"></th>
                   <th data-priority="2"></th>
                 </tr>
