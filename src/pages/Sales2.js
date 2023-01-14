@@ -45,35 +45,35 @@ function Sales() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemList, setItemList] = useState([
     {
-      itemName: "Product One",
+      itemName: "one",
       itemPrice: 202,
       itemInvoice: 45845,
       id: 1,
       product_qty: 1,
     },
     {
-      itemName: "Product Two",
+      itemName: "two",
       itemPrice: 260,
       itemInvoice: 45845,
       id: 2,
       product_qty: 1,
     },
     {
-      itemName: "Product Three",
+      itemName: "three",
       itemPrice: 240,
       itemInvoice: 45845,
       id: 3,
       product_qty: 1,
     },
     {
-      itemName: "Product Four",
+      itemName: "four",
       itemPrice: 260,
       itemInvoice: 45845,
       id: 4,
       product_qty: 1,
     },
     {
-      itemName: "Product Five",
+      itemName: "five",
       itemPrice: 250,
       itemInvoice: 45845,
       id: 5,
@@ -221,15 +221,11 @@ function Sales() {
 
   // Handle sales table data
   const [billInfo, setBillInfo] = useState([]);
-  // const [totalPrice, setTotalPrice] = useState(0);
-  // const [totalQuantity, setTotalQuantity] = useState(1);
 
   function handleTableData(i) {
     let a = [...billInfo];
     a.push(i);
     setBillInfo(a);
-    setSearchRes(false);
-
     setSearchRes(false);
   }
 
@@ -266,10 +262,16 @@ function Sales() {
     );
   }
   //handle quantity
-  const [editQuntity, setEditQuntity] = useState(1);
+  const [editQuntity, setEditQuntity] = useState();
 
-  function quantityEdit(e) {
-    setEditQuntity(e.target.value);
+  function quantityEdit(e, item) {
+    let a = [...billInfo];
+    let value = e.target.value;
+    console.warn("value", value);
+    let test = a.filter((z) => z.id == item.id);
+    let z = test[0].product_qty;
+    z = setEditQuntity(value);
+    // console.warn("z", z);
   }
   return (
     <Container fluid className="bg-white font-ubu">
@@ -403,7 +405,7 @@ function Sales() {
                           className="text-center"
                           value={item.product_qty}
                           size={1}
-                          onChange={(e) => setEditQuntity(e.target.value)}
+                          onChange={(e) => quantityEdit(e, item)}
                         />{" "}
                         <IoIosAdd
                           className="mx-1 rounded-circle border"
