@@ -242,5 +242,249 @@
         { "title": "View Master", "path": "/subReports", "status": "active" }
       ]
     }
+  ],
+  "clothingShop": [
+    {
+      "title": "Dashboard",
+      "path": "/dashboard",
+      "status": "active",
+      "subMenu": [
+        {
+          "title": "Previous Orders",
+          "path": "/lastOrders",
+          "status": "active"
+        },
+        {
+          "title": "Total Sales",
+          "path": "/totalSales",
+          "status": "active"
+        },
+        {
+          "title": "Pending Settlements",
+          "path": "/pendingBills",
+          "status": "active"
+        }
+      ]
+    },
+    {
+      "title": "Sales",
+      "path": "/sales",
+      "status": "active",
+      "subMenu": [
+        {
+          "title": "Sales",
+          "path": "/lastOrders",
+          "status": "active"
+        },
+        {
+          "title": "Service",
+          "path": "/totalSales",
+          "status": "active"
+        },
+        {
+          "title": "Maintainance",
+          "path": "/totalSales",
+          "status": "active"
+        }
+      ]
+    },
+    {
+      "title": "Inventory",
+      "path": "/inventory",
+      "status": "active",
+      "subMenu": [
+        {
+          "title": "Most Sold",
+          "path": "/subReports",
+          "status": "active",
+          "fields": [
+            { "title": "Item Name", "path": "itemName" },
+            { "title": "Qty Sold", "path": "soldQty" },
+            { "title": "Qty Remained", "path": "qtyInStock" }
+          ]
+        },
+        {
+          "title": "Expiry Management",
+          "path": "/subReports",
+          "status": "active",
+          "fields": [
+            { "title": "Item Name", "path": "itemName" },
+            { "title": "Expire On", "path": "expiry" },
+            { "title": "Qty Remained", "path": "qtyInStock" }
+          ]
+        },
+        {
+          "title": "Rack Management",
+          "path": "/subReports",
+          "status": "active",
+          "fields": [
+            { "title": "Item Name", "path": "itemName" },
+            { "title": "Placement", "path": "placement" },
+            { "title": "Qty Remained", "path": "qtyInStock" }
+          ]
+        },
+        {
+          "title": "Dead Stock",
+          "path": "/subReports",
+          "status": "active",
+          "fields": [
+            { "title": "Item Name", "path": "itemName" },
+            { "title": "Qty Sold", "path": "soldQty" },
+            { "title": "Qty Remained", "path": "qtyInStock" },
+            { "title": "Capial Invested", "path": "qtyInStock" }
+          ]
+        },
+        {
+          "title": "Return",
+          "path": "/subReports",
+          "status": "active",
+          "fields": [
+            { "title": "Item Name", "path": "itemName" },
+            { "title": "Return Qty", "path": "returnQty" },
+            { "title": "Qty Remained", "path": "qtyInStock" },
+            { "title": "Buy Price", "path": "qtyInStock" },
+            { "title": "Selling Price", "path": "qtyInStock" },
+            { "title": "Capial Invested", "path": "qtyInStock" },
+            { "title": "Statment", "path": "LossOrProfit" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "items",
+      "path": "/items",
+      "status": "active",
+      "expiry": "inactive",
+      "barcode": "inactive",
+      "rack": "inactive",
+      "distributor": "active",
+      "retail": "inactive",
+      "wholesale": "inactive",
+      "category": [{ "title": "general", "subCategory": ["Sub Category"] }],
+      "units": [{ "name": "piece" }],
+      "subMenu": [
+        {
+          "title": "Most Sold",
+          "path": "/subReports",
+          "status": "active",
+          "fields": [
+            { "title": "Item Name", "path": "itemName" },
+            { "title": "Qty Sold", "path": "soldQty" },
+            { "title": "Qty Remained", "path": "qtyInStock" }
+          ]
+        },
+        {
+          "title": "Expiry Management",
+          "path": "/subReports",
+          "status": "active",
+          "fields": [
+            { "title": "Item Name", "path": "itemName" },
+            { "title": "Expire On", "path": "expiry" },
+            { "title": "Qty Remained", "path": "qtyInStock" }
+          ]
+        },
+        {
+          "title": "Rack Management",
+          "path": "/subReports",
+          "status": "active",
+          "fields": [
+            { "title": "Item Name", "path": "itemName" },
+            { "title": "Placement", "path": "placement" },
+            { "title": "Qty Remained", "path": "qtyInStock" }
+          ]
+        },
+        {
+          "title": "Dead Stock",
+          "path": "/subReports",
+          "status": "active",
+          "fields": [
+            { "title": "Item Name", "path": "itemName" },
+            { "title": "Qty Sold", "path": "soldQty" },
+            { "title": "Qty Remained", "path": "qtyInStock" },
+            { "title": "Capial Invested", "path": "qtyInStock" }
+          ]
+        },
+        {
+          "title": "Return",
+          "path": "/subReports",
+          "status": "active",
+          "fields": [
+            { "title": "Item Name", "path": "itemName" },
+            { "title": "Return Qty", "path": "returnQty" },
+            { "title": "Qty Remained", "path": "qtyInStock" },
+            { "title": "Buy Price", "path": "qtyInStock" },
+            { "title": "Selling Price", "path": "qtyInStock" },
+            { "title": "Capial Invested", "path": "qtyInStock" },
+            { "title": "Statment", "path": "LossOrProfit" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "title": "HRM",
+      "path": "/hrm",
+      "status": "inactive",
+      "subMenu": [
+        {
+          "title": "Customers",
+          "path": "/subReports",
+          "status": "active",
+          "fields": [
+            { "title": "Customer Name", "path": "customerName" },
+            { "title": "Mobile", "path": "customerMobile" },
+            { "title": "Last Purchase", "path": "lastPurchase" }
+          ]
+        },
+        {
+          "title": "Suppliers",
+          "path": "/subReports",
+          "status": "active",
+          "fields": [
+            { "title": "Supplier Name", "path": "supplierName" },
+            { "title": "Mobile", "path": "supplierMobile" },
+            { "title": "Credit", "path": "creditRemain" },
+            { "title": "Debit", "path": "debitRemain" }
+          ]
+        },
+        {
+          "title": "Staff",
+          "path": "/subReports",
+          "status": "active",
+          "fields": [
+            { "title": "Staff Name", "path": "staffName" },
+            { "title": "Mobile", "path": "staffMobile" },
+            { "title": "email", "path": "staffEmail" },
+            { "title": "Password", "path": "role" },
+            { "title": "Access", "path": "access" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Accounts",
+      "path": "/accounts",
+      "status": "active",
+      "subMenu": [
+        { "title": "Settle Bills", "path": "/subReports", "status": "active" },
+        { "title": "Transactions", "path": "/subReports", "status": "active" },
+        { "title": "Credits", "path": "/subReports", "status": "active" },
+        { "title": "Debits", "path": "/subReports", "status": "active" },
+        { "title": "Reports", "path": "/subReports", "status": "active" }
+      ]
+    },
+    {
+      "title": "Masters",
+      "path": "/masters",
+      "status": "active",
+      "subMenu": [
+        { "title": "Menu Master", "path": "/subReports", "status": "active" },
+        { "title": "Sell Units", "path": "/subReports", "status": "active" },
+        { "title": "Invoices", "path": "/subReports", "status": "active" },
+        { "title": "Printers", "path": "/subReports", "status": "active" },
+        { "title": "Tax Slab", "path": "/subReports", "status": "active" },
+        { "title": "View Master", "path": "/subReports", "status": "active" }
+      ]
+    }
   ]
 }

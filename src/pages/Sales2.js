@@ -37,8 +37,8 @@ import { IoIosAdd } from "react-icons/io";
 import { MdRemove } from "react-icons/md";
 
 function Sales() {
-  var totalGrant = 0;
-  var taxation = 0;
+  let totalGrand = 0;
+  let taxation = 0;
   const [tableData, setTableData] = useState(0);
   const [pageSize, setPageSize] = useState(5);
   const [searchRes, setSearchRes] = useState([]);
@@ -224,6 +224,10 @@ function Sales() {
 
   function handleTableData(i) {
     let a = [...billInfo];
+    // let result = billInfo.filter((item) =>
+    //   i.id !== item.id ? a.push(i) : alert("item is alreday in cart")
+    // );
+    // console.log(result);
     a.push(i);
     setBillInfo(a);
     setSearchRes(false);
@@ -242,7 +246,7 @@ function Sales() {
         e === item.id
           ? {
               ...item,
-              product_qty: item.product_qty + (item.product_qty < 10 ? 1 : 0),
+              product_qty: item.product_qty + (item.product_qty < 100 ? 1 : 0),
             }
           : item
       )
@@ -264,14 +268,25 @@ function Sales() {
   //handle quantity
   const [editQuntity, setEditQuntity] = useState();
 
-  function quantityEdit(e, item) {
-    let a = [...billInfo];
-    let value = e.target.value;
-    console.warn("value", value);
-    let test = a.filter((z) => z.id == item.id);
-    let z = test[0].product_qty;
-    z = setEditQuntity(value);
-    // console.warn("z", z);
+  function quantityEdit(e, data) {
+    // let a = [...billInfo];
+    // let value = e.target.value;
+    // console.warn("value", value);
+    // let test = a.filter((z) => z.id == item.id);
+    // let z = test[0].product_qty;
+    // z = setEditQuntity(value);
+    // // console.warn("z", z);
+
+    setBillInfo((billInfo) =>
+      billInfo.map((item) =>
+        data.id === item.id
+          ? {
+              ...item,
+              product_qty: e.target.value,
+            }
+          : item
+      )
+    );
   }
   return (
     <Container fluid className="bg-white font-ubu">
@@ -321,7 +336,7 @@ function Sales() {
               {searchRes.length > 0 &&
                 searchRes.map((i) => (
                   <small className="saleListgroup">
-                    <ListGroup>
+                    <ListGroup key={i.id}>
                       <ListGroup.Item
                         className=""
                         value={i.itemName}
@@ -381,8 +396,8 @@ function Sales() {
               </thead>
               <tbody>
                 {billInfo.map((item, index) => {
-                  totalGrant += item.product_qty * item.itemPrice;
-                  taxation = Math.round((totalGrant / 100) * 18);
+                  totalGrand += item.product_qty * item.itemPrice;
+                  taxation = Math.round((totalGrand / 100) * 18);
                   return (
                     <tr key={item.id} className="text-center">
                       <td>{item.id}</td>
@@ -426,9 +441,9 @@ function Sales() {
                   <th data-priority="2"></th>
                   <th data-priority="2"></th>
                   <th data-priority="1">
-                    {totalGrant} + {taxation} tax
+                    {totalGrand} + {taxation} tax
                   </th>
-                  <th data-priority="2">{taxation + totalGrant}</th>
+                  <th data-priority="2">{taxation + totalGrand}</th>
                   <th data-priority="2"></th>
                   <th data-priority="2"></th>
                 </tr>

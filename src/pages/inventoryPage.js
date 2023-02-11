@@ -7,6 +7,8 @@ import {
   Form,
   Modal,
   Row,
+  NavDropdown,
+  ListGroup,
 } from "react-bootstrap";
 import Pagination from "react-bootstrap/Pagination";
 import {
@@ -27,6 +29,7 @@ import {
   CiUser,
   CiViewTimeline,
 } from "react-icons/ci";
+import { CgProfile } from "react-icons/cg";
 
 import { isUser } from "../components/localStore/getCurrentUser";
 import CustomModal from "../components/ui/modal";
@@ -38,6 +41,7 @@ function InventoryPage() {
   const [activeSubMenu, setActiveSubMenu] = useState("Most Sold");
   const [currentSubMenu, setCurrentSubMenu] = useState();
   const [showModal, setShowModal] = useState(false);
+  const [isOpen, updateIsOpen] = useState(false);
   useEffect(() => {
     // const getMaster = async () => {
     //   const findUser = isUser();
@@ -114,6 +118,29 @@ function InventoryPage() {
               <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
               <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
             </ListGroup> */}
+          </button>
+          <button
+            class="headerButton profile-inventory"
+            // onClick={updateIsOpen(true)}
+            // onMouseOver={() => updateIsOpen(true)}
+            // onFocus={() => updateIsOpen(true)}
+            // onMouseLeave={() => updateIsOpen(false)}
+            // onBlur={() => updateIsOpen(false)}
+            // toggle={() => updateIsOpen(!isOpen)}
+            // isOpen={isOpen}
+          >
+            <CgProfile size={20} color="green" />
+            <small className="text-dark m-0 p-0 mx-1">Kiran</small>
+            <ListGroup
+              className="onClickMenuBottom profile-inventory-items  "
+              // value={isOpen}
+            >
+              <ListGroup.Item>Cras justo odio</ListGroup.Item>
+              <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+              <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+              <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+              <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+            </ListGroup>
           </button>
         </Col>
       </Row>
