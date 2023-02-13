@@ -120,27 +120,31 @@ function InventoryPage() {
             </ListGroup> */}
           </button>
           <button
-            class="headerButton profile-inventory"
+            class="headerButton profile-inventory position-relative"
             // onClick={updateIsOpen(true)}
-            // onMouseOver={() => updateIsOpen(true)}
+            onMouseOver={() => updateIsOpen(true)}
             // onFocus={() => updateIsOpen(true)}
-            // onMouseLeave={() => updateIsOpen(false)}
+            onMouseLeave={() => updateIsOpen(false)}
             // onBlur={() => updateIsOpen(false)}
             // toggle={() => updateIsOpen(!isOpen)}
             // isOpen={isOpen}
           >
             <CgProfile size={20} color="green" />
             <small className="text-dark m-0 p-0 mx-1">Kiran</small>
-            <ListGroup
-              className="onClickMenuBottom profile-inventory-items  "
-              // value={isOpen}
-            >
-              <ListGroup.Item>Cras justo odio</ListGroup.Item>
-              <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-              <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-              <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-              <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-            </ListGroup>
+            {isOpen === true ? (
+              <ListGroup
+                className="onClickMenuBottom profile-inventory-items  "
+                // value={isOpen}
+              >
+                <ListGroup.Item to="#">My Profiles</ListGroup.Item>
+                <ListGroup.Item>Orders</ListGroup.Item>
+                <ListGroup.Item>Watchlist</ListGroup.Item>
+                <ListGroup.Item>Notification</ListGroup.Item>
+                <ListGroup.Item>Logout</ListGroup.Item>
+              </ListGroup>
+            ) : (
+              ""
+            )}
           </button>
         </Col>
       </Row>
@@ -161,8 +165,14 @@ function InventoryPage() {
                   >
                     {currentSubMenu &&
                       currentSubMenu.subMenu.map((i) => (
-                        <option value={i.title}>{i.title}</option>
+                        <option value={i.title}>{i.title} 2</option>
                       ))}
+                    <option value={10}>Types</option>
+                    <option value={10}>Most Sold</option>
+                    <option value={20}>Exp Managment</option>
+                    <option value={20}>Rack Managment</option>
+                    <option value={20}>Dead Stock</option>
+                    <option value={20}>Return</option>
                   </Form.Select>
                 </div>
 

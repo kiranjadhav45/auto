@@ -2,7 +2,7 @@ import React from "react";
 
 function Pagination(props) {
   const pageNumbers = [];
-  // this loop for Number of buttons Buttons
+  // this loop for Number of Page Buttons
   for (let i = 1; i <= Math.ceil(props.itemList / props.pageSize); i++) {
     pageNumbers.push(i);
   }

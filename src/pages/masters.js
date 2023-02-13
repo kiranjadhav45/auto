@@ -196,6 +196,9 @@ function MastersPage() {
                     <option value="menu">Menu</option>
                     <option value="items">Items</option>
                     <option value="taxSlab">Tax Slab</option>
+                    <option value="taxSlab">View Master</option>
+                    <option value="taxSlab">Printers</option>
+                    <option value="taxSlab">Sell Units</option>
                   </Form.Select>
                 </div>
 

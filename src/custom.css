@@ -138,6 +138,12 @@ table caption {
     display: none;
   }
 }
-.profile-inventory:hover ListGroup.profile-inventory-items {
+/* .profile-inventory:hover ListGroup.profile-inventory-items {
   background-color: aqua;
+} */
+
+.profile-inventory-items {
+  position: absolute;
+  right: -20px;
+  /* top: 35px; */
 }
