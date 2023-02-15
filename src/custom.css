@@ -111,9 +111,6 @@ body {
   height: 50vh;
 }
 
-.form-control {
-}
-
 .fixedBottom {
   bottom: 0%;
   position: relative;
@@ -146,4 +143,7 @@ table caption {
   position: absolute;
   right: -20px;
   /* top: 35px; */
+}
+.Form-select-main {
+  width: 100px;
 }
