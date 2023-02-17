@@ -1,0 +1,22 @@
+{  "sales":"page",
+
+  "Welcome to React": "Welcome to React and react-i18next",
+  "logo":"Auto",
+  "searchProduct":"Search Product",
+  "search":"Search",
+  "filterPrice": "Filter Price",
+  "srNo":"Sr No",
+  "productName":"Product Name",
+  "price":"Price",
+  "invoice":"Invoice No",
+
+  "Login":"Page",
+
+  "title":"Auto Pilot At Your Service",
+  "loginToContinue":"Login To Continue !",
+  "enterEmailId":"Enter Your Email Id",
+  "enterPassword":"Enter Account Password",
+  "loginToMyAccount":"Login To My Account"
+
+
+   }

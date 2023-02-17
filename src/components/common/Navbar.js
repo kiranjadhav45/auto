@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { CiBellOn, CiStar, CiTrophy } from "react-icons/ci";
 import { FcSalesPerformance, FcExpired } from "react-icons/fc";
 import { GrHostMaintenance, GrVmMaintenance } from "react-icons/gr";
 import {
@@ -33,6 +34,7 @@ import {
 } from "react-icons/md";
 
 function Navbar() {
+  const iconSixe = 10;
   const [activeSubMenu, setActiveSubMenu] = useState("");
   const [submenu, setSubMenu] = useState({
     path1: "/lastOrders",
@@ -47,9 +49,9 @@ function Navbar() {
     title4: "",
     title5: "",
     title6: "",
-    logo1: <BsFillCartCheckFill size={20} color="black" />,
-    logo2: <MdOutlineMiscellaneousServices size={20} color="black" />,
-    logo3: <MdPendingActions size={20} color="black" />,
+    logo1: <BsFillCartCheckFill size={iconSixe} color="black" />,
+    logo2: <MdOutlineMiscellaneousServices size={iconSixe} color="black" />,
+    logo3: <MdPendingActions size={iconSixe} color="black" />,
     logo4: "",
     logo5: "",
     logo6: "",
@@ -63,9 +65,9 @@ function Navbar() {
       path1: "/lastOrders",
       path2: "/totalSales",
       path3: "/Maintainance",
-      logo1: <TbTruckDelivery size={20} color="black" />,
-      logo2: <RiCustomerService2Fill size={20} color="black" />,
-      logo3: <MdPendingActions size={20} color="black" />,
+      logo1: <TbTruckDelivery size={iconSixe} color="black" />,
+      logo2: <RiCustomerService2Fill size={iconSixe} color="black" />,
+      logo3: <MdPendingActions size={iconSixe} color="black" />,
     };
     let salesData = {
       title1: "Sales",
@@ -74,9 +76,9 @@ function Navbar() {
       path1: "/lastOrders",
       path2: "/totalSales",
       path3: "/Maintainance",
-      logo1: <FcSalesPerformance size={20} color="black" />,
-      logo2: <BiTrendingUp size={20} color="black" />,
-      logo3: <GrVmMaintenance size={20} color="black" />,
+      logo1: <FcSalesPerformance size={iconSixe} color="black" />,
+      logo2: <BiTrendingUp size={iconSixe} color="black" />,
+      logo3: <GrVmMaintenance size={iconSixe} color="black" />,
     };
     let inventoryData = {
       title1: "Most Sold",
@@ -87,11 +89,11 @@ function Navbar() {
       path1: "/lastOrders",
       path2: "/totalSales",
       path3: "/Maintainance",
-      logo1: <BiTrendingUp size={20} color="black" />,
-      logo2: <FcExpired size={20} color="black" />,
-      logo3: <BsHddRackFill size={20} color="black" />,
-      logo4: <HiArrowSmDown size={20} color="black" />,
-      logo5: <TbTruckReturn size={20} color="black" />,
+      logo1: <BiTrendingUp size={iconSixe} color="black" />,
+      logo2: <FcExpired size={iconSixe} color="black" />,
+      logo3: <BsHddRackFill size={iconSixe} color="black" />,
+      logo4: <HiArrowSmDown size={iconSixe} color="black" />,
+      logo5: <TbTruckReturn size={iconSixe} color="black" />,
     };
     let taxSlabData = {
       title1: "Sales",
@@ -100,9 +102,9 @@ function Navbar() {
       path1: "/lastOrders",
       path2: "/totalSales",
       path3: "/Maintainance",
-      logo1: <FcSalesPerformance size={20} color="black" />,
-      logo2: <BiTrendingUp size={20} color="black" />,
-      logo3: <GrVmMaintenance size={20} color="black" />,
+      logo1: <FcSalesPerformance size={iconSixe} color="black" />,
+      logo2: <BiTrendingUp size={iconSixe} color="black" />,
+      logo3: <GrVmMaintenance size={iconSixe} color="black" />,
     };
     let hrmData = {
       title1: "Customer",
@@ -111,9 +113,9 @@ function Navbar() {
       path1: "/lastOrders",
       path2: "/totalSales",
       path3: "/Maintainance",
-      logo1: <ImProfile size={20} color="black" />,
-      logo2: <FaTruckMoving size={20} color="black" />,
-      logo3: <RiTeamFill size={20} color="black" />,
+      logo1: <ImProfile size={iconSixe} color="black" />,
+      logo2: <FaTruckMoving size={iconSixe} color="black" />,
+      logo3: <RiTeamFill size={iconSixe} color="black" />,
     };
     let accountsData = {
       title1: "Settle Bill",
@@ -124,11 +126,11 @@ function Navbar() {
       path1: "/lastOrders",
       path2: "/totalSales",
       path3: "/Maintainance",
-      logo1: <RiBillFill size={20} color="black" />,
-      logo2: <AiOutlineTransaction size={20} color="black" />,
-      logo3: <BsFillCreditCard2FrontFill size={20} color="black" />,
-      logo4: <BsFillCreditCard2FrontFill size={20} color="black" />,
-      logo5: <TbReportAnalytics size={20} color="black" />,
+      logo1: <RiBillFill size={iconSixe} color="black" />,
+      logo2: <AiOutlineTransaction size={iconSixe} color="black" />,
+      logo3: <BsFillCreditCard2FrontFill size={iconSixe} color="black" />,
+      logo4: <BsFillCreditCard2FrontFill size={iconSixe} color="black" />,
+      logo5: <TbReportAnalytics size={iconSixe} color="black" />,
     };
     let mastersData = {
       title1: "Menu Master",
@@ -140,12 +142,12 @@ function Navbar() {
       path1: "/lastOrders",
       path2: "/totalSales",
       path3: "/Maintainance",
-      logo1: <GiHamburgerMenu size={20} color="black" />,
-      logo2: <RiNumbersFill size={20} color="black" />,
-      logo3: <MdPendingActions size={20} color="black" />,
-      logo4: <BsFillPrinterFill size={20} color="black" />,
-      logo5: <TbReceiptTax size={20} color="black" />,
-      logo6: <HiViewGrid size={20} color="black" />,
+      logo1: <GiHamburgerMenu size={iconSixe} color="black" />,
+      logo2: <RiNumbersFill size={iconSixe} color="black" />,
+      logo3: <MdPendingActions size={iconSixe} color="black" />,
+      logo4: <BsFillPrinterFill size={iconSixe} color="black" />,
+      logo5: <TbReceiptTax size={iconSixe} color="black" />,
+      logo6: <HiViewGrid size={iconSixe} color="black" />,
     };
 
     if (activeSubMenu && activeSubMenu === "dashboard") {
@@ -167,7 +169,7 @@ function Navbar() {
   return (
     <div>
       <Row>
-        <Col className="col-2 m-1">
+        <Col className="col-2 mx-1">
           <Form.Select
             size="sm"
             className="Form-select-main"
@@ -183,55 +185,72 @@ function Navbar() {
             <option value="masters">Masters</option>
           </Form.Select>
         </Col>
-        <Col className="text-start ">
-          <Link to={submenu.path1}>
+        <Col className="text-start">
+          <Link to={submenu.path1} className="m-0 p-0">
             <button className="headerButton mx-2">
               {submenu.logo1}
-              <span className="text-black m-0 p-0 mx-1 mr-5">
+              <small className="text-black m-0 p-0 mx-1 mr-5">
                 {submenu.title1}
-              </span>
+              </small>
             </button>
           </Link>
           <Link to={submenu.path2}>
             <button className="headerButton mx-2">
               {submenu.logo2}
-              <span className="text-black m-0 p-0 mx-1 mr-5">
+              <small className="text-black m-0 p-0 mx-1 mr-5">
                 {submenu.title2}
-              </span>
+              </small>
             </button>
           </Link>
           <Link to={submenu.path3}>
             <button className="headerButton mx-2">
               {submenu.logo3}
-              <span className="text-black m-0 p-0 mx-1 mr-5">
+              <small className="text-black m-0 p-0 mx-1 mr-5">
                 {submenu.title3}
-              </span>
+              </small>
             </button>
           </Link>
           <Link to={submenu.path4}>
             <button className="headerButton mx-2">
               {submenu.logo4}
-              <span className="text-black m-0 p-0 mx-1 mr-5">
+              <small className="text-black m-0 p-0 mx-1 mr-5">
                 {submenu.title4}
-              </span>
+              </small>
             </button>
           </Link>
           <Link to={submenu.path5}>
             <button className="headerButton mx-2">
               {submenu.logo5}
-              <span className="text-black m-0 p-0 mx-1 mr-5">
+              <small className="text-black m-0 p-0 mx-1 mr-5">
                 {submenu.title5}
-              </span>
+              </small>
             </button>
           </Link>
           <Link to={submenu.path6}>
             <button className="headerButton mx-2">
               {submenu.logo6}
-              <span className="text-black m-0 p-0 mx-1 mr-5">
+              <small className="text-black m-0 p-0 mx-1 mr-5">
                 {submenu.title6}
-              </span>
+              </small>
             </button>
           </Link>
+        </Col>
+
+        <Col className="text-end col-4">
+          <button className="headerButton">
+            <CiBellOn size={iconSixe} color="orange" />
+            <small className="text-dark m-0 p-0 mx-1">2000</small>
+          </button>
+
+          <button className="headerButton">
+            <CiStar size={iconSixe} color="dodgerblue" />
+            <small className="text-dark m-0 p-0 mx-1">120</small>
+          </button>
+
+          <button className="headerButton position-relative">
+            <CiTrophy size={iconSixe} color="green" />
+            <small className="text-dark m-0 p-0 mx-1">200</small>
+          </button>
         </Col>
       </Row>
     </div>

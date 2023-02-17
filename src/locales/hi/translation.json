@@ -1,0 +1,13 @@
+
+    {  "sales":"page",
+
+    "Welcome to React": "Welcome to React and react-i18next",
+    "logo":"Auto",
+    "searchProduct":"खोज उत्पाद",
+    "search":"खोज",
+    "filterPrice": "फ़िल्टर मूल्य",
+    "srNo":"Sr No",
+    "productName":"प्रोडक्ट का नाम",
+    "price":"कीमत",
+    "invoice":"चालान नंबर"
+     }

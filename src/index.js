@@ -6,6 +6,7 @@ import "./custom.css";
 import "./custom.scss";
 import "./fonts/Ubuntu/Ubuntu-Regular.ttf";
 import reportWebVitals from "./reportWebVitals";
+import "./i18n";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

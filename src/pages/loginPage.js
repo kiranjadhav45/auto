@@ -1,8 +1,9 @@
 import Joi from "joi-browser";
 import React, { Component, useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { withNamespaces } from "react-i18next";
 
-const LoginPage = () => {
+const LoginPage = ({ t }) => {
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
@@ -62,8 +63,8 @@ const LoginPage = () => {
       <Row>
         <Col className="col-14">Naved</Col>
         <Col className=" text-center mt-5">
-          <h2 className="mt-5"> Auto Pilot At Your Service</h2>
-          <small>Login To Continue !</small>
+          <h2 className="mt-5">{t("title")}</h2>
+          <small>{t("loginToContinue")}</small>
           <Form onSubmit={verifyUser} className="mt-5">
             <Row className="mb-2 mt-5">
               <Col>
@@ -71,7 +72,7 @@ const LoginPage = () => {
                   onChange={handleOnChange}
                   value={loginForm.email}
                   name="email"
-                  placeholder="Enter Your Email Id"
+                  placeholder={t("enterEmailId")}
                   size="md"
                 />
               </Col>
@@ -81,7 +82,7 @@ const LoginPage = () => {
                   onChange={handleOnChange}
                   value={loginForm.password}
                   name="password"
-                  placeholder="Enter Account Password"
+                  placeholder={t("enterPassword")}
                   size="md"
                 />
               </Col>
@@ -89,7 +90,7 @@ const LoginPage = () => {
             <Row>
               <div className="d-grid gap-2 mt-3">
                 <Button variant="dark" type="submit" size="sm" className="p-1">
-                  Login To My Account
+                  {t("loginToMyAccount")}
                 </Button>
               </div>
             </Row>
@@ -100,4 +101,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default withNamespaces()(LoginPage);

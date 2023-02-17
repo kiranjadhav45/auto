@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SideMenu from "../components/ui/sideMenu";
 import Pagination from "./Pagination";
 import Navbar from "../components/common/Navbar";
+import { withNamespaces } from "react-i18next";
 
 import {
   Button,
@@ -33,11 +34,10 @@ import {
   CiViewTimeline,
 } from "react-icons/ci";
 
-function Sales() {
+function Sales({ t }) {
   const [pageSize, setPageSize] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchRes, setSearchRes] = useState([]);
-  // const [activeSubMenu, setActiveSubMenu] = useState("");
   const [itemList, setItemList] = useState([
     {
       itemName: "Product One",
@@ -173,7 +173,7 @@ function Sales() {
       <Row className="bg-white border-bottom p-1">
         <Col className="col-1">
           <strong size="sm" className=" m-1 mx-1">
-            Auto
+            {t("logo")}
           </strong>
 
           {/* <button className="headerButton mx-2">
@@ -184,7 +184,7 @@ function Sales() {
         <Col>
           <Navbar />
         </Col>
-
+        {/* 
         <Col className="text-end col-4">
           <button className="headerButton">
             <CiBellOn size={20} color="orange" />
@@ -200,7 +200,7 @@ function Sales() {
             <CiTrophy size={20} color="green" />
             <small className="text-dark m-0 p-0 mx-1">200</small>
           </button>
-        </Col>
+        </Col> */}
       </Row>
       <Row className="">
         <Col className="col-1 bg-white  border-end">
@@ -209,12 +209,12 @@ function Sales() {
         <Col className="col-18 bg-white ">
           <Row className="mt-2">
             <Col>
-              <small>Search Product</small>
+              <small>{t("searchProduct")}</small>
             </Col>
             <Col className="col-8">
               <Form.Control
                 size="sm"
-                placeholder="Search"
+                placeholder={t("search")}
                 onChange={searchHandle}
               ></Form.Control>
 
@@ -236,7 +236,7 @@ function Sales() {
                 <button className="menuButton">
                   <CiFilter size={16} color="black" />
                   <small className="text-dark m-0 p-0 mx-1">
-                    Filters Price{" "}
+                    {t("filterPrice")}{" "}
                   </small>
                 </button>
                 <div>
@@ -265,10 +265,10 @@ function Sales() {
               {" "}
               <thead>
                 <tr>
-                  <th data-priority="2">Sr No</th>
-                  <th data-priority="2">Product Name</th>
-                  <th data-priority="1">Price</th>
-                  <th data-priority="2">Invoice No</th>
+                  <th data-priority="2">{t("srNo")}</th>
+                  <th data-priority="2">{t("productName")}</th>
+                  <th data-priority="1">{t("price")}</th>
+                  <th data-priority="2">{t("invoice")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -323,4 +323,5 @@ function Sales() {
   );
 }
 
-export default Sales;
+export default withNamespaces()(Sales);
+// export default Sales;

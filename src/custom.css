@@ -86,7 +86,7 @@ body {
   color: black;
   cursor: pointer;
   position: relative;
-  margin: 1%;
+  /* margin: 1%; */
 }
 .headerMenu {
   border-radius: 5px;
@@ -146,4 +146,8 @@ table caption {
 }
 .Form-select-main {
   width: 100px;
+  height: 25px;
+  margin-top: auto;
+  padding: 0;
+  font-size: smaller;
 }
