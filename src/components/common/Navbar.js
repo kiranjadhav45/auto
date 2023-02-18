@@ -1,10 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Col, Form, Row } from "react-bootstrap";
+import { Col, Form, Row, ListGroup } from "react-bootstrap";
+import { withNamespaces } from "react-i18next";
 import { Link } from "react-router-dom";
 import { CiBellOn, CiStar, CiTrophy } from "react-icons/ci";
 import { FcSalesPerformance, FcExpired } from "react-icons/fc";
-import { GrHostMaintenance, GrVmMaintenance } from "react-icons/gr";
+import { GrHostMaintenance, GrVmMaintenance, GrLanguage } from "react-icons/gr";
 import {
   BsFillCartCheckFill,
   BsHddRackFill,
@@ -16,6 +17,7 @@ import { HiArrowSmDown, HiViewGrid } from "react-icons/hi";
 import { TbTruckReturn, TbReportAnalytics } from "react-icons/tb";
 import { ImProfile } from "react-icons/im";
 import { FaTruckMoving } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 import {
   RiTeamFill,
   RiBillFill,
@@ -33,9 +35,12 @@ import {
   MdOutlineMiscellaneousServices,
 } from "react-icons/md";
 
-function Navbar() {
-  const iconSixe = 10;
+function Navbar({ t }) {
+  const iconSixe = 15;
   const [activeSubMenu, setActiveSubMenu] = useState("");
+  const [isOpen, updateIsOpen] = useState(false);
+  const [profileDropDwon, setProfileDropDwon] = useState("");
+  const [language, setLanguage] = useState(false);
   const [submenu, setSubMenu] = useState({
     path1: "/lastOrders",
     path2: "/totalSales",
@@ -58,6 +63,7 @@ function Navbar() {
   });
 
   useEffect(() => {
+    console.log(profileDropDwon);
     let dashboardData = {
       title1: "Pre-Order",
       title2: "Service",
@@ -166,6 +172,17 @@ function Navbar() {
       setSubMenu(mastersData);
     }
   }, [activeSubMenu]);
+
+  const changeLanguage = (lng) => {
+    console.log(lng);
+    // i18n.changeLanguage(lng);
+    setLanguage(false);
+  };
+
+  const handleOnProfile = (value) => {
+    updateIsOpen(false);
+    console.log(value);
+  };
   return (
     <div>
       <Row>
@@ -176,13 +193,13 @@ function Navbar() {
             onChange={(e) => setActiveSubMenu(e.target.value)}
             aria-label="Default select example"
           >
-            <option value="dashboard">Dashboard</option>
-            <option value="sales">Sales</option>
-            <option value="inventory">Inventory</option>
-            <option value="taxSlab">items</option>
-            <option value="hrm">HRM</option>
-            <option value="accounts">Accounts</option>
-            <option value="masters">Masters</option>
+            <option value="dashboard">{t("Dashboard")}</option>
+            <option value="sales">{t("Sales")}</option>
+            <option value="inventory">{t("Inventory")}</option>
+            <option value="taxSlab">{t("items")}</option>
+            <option value="hrm">{t("HRM")}</option>
+            <option value="accounts">{t("Accounts")}</option>
+            <option value="masters">{t("Masters")}</option>
           </Form.Select>
         </Col>
         <Col className="text-start">
@@ -236,7 +253,7 @@ function Navbar() {
           </Link>
         </Col>
 
-        <Col className="text-end col-4">
+        <Col className="text-end col-6">
           <button className="headerButton">
             <CiBellOn size={iconSixe} color="orange" />
             <small className="text-dark m-0 p-0 mx-1">2000</small>
@@ -251,10 +268,88 @@ function Navbar() {
             <CiTrophy size={iconSixe} color="green" />
             <small className="text-dark m-0 p-0 mx-1">200</small>
           </button>
+          <button
+            class="headerButton profile-inventory position-relative"
+            // onClick={updateIsOpen(true)}
+            onMouseOver={() => updateIsOpen(true)}
+            // onFocus={() => updateIsOpen(true)}
+            onMouseLeave={() => updateIsOpen(false)}
+            // onBlur={() => updateIsOpen(false)}
+            // toggle={() => updateIsOpen(!isOpen)}
+            // isOpen={isOpen}
+          >
+            <CgProfile size={iconSixe} color="green" />
+            <small className="text-dark m-0 p-0 mx-1">Kiran</small>
+            {isOpen === true ? (
+              <ListGroup
+                className="onClickMenuBottom profile-inventory-items  "
+                onClick={(e) => setProfileDropDwon(e.target.value)}
+                // value={isOpen}
+              >
+                <ListGroup.Item
+                  to="#"
+                  onClick={(e) => handleOnProfile(e.target.value)}
+                >
+                  {t("My Profiles")}
+                </ListGroup.Item>
+                <ListGroup.Item
+                  onClick={(e) => handleOnProfile(e.target.value)}
+                >
+                  {t("Orders")}
+                </ListGroup.Item>
+                <ListGroup.Item
+                  onClick={(e) => handleOnProfile(e.target.value)}
+                >
+                  {t("Watchlist")}
+                </ListGroup.Item>
+                <ListGroup.Item
+                  onClick={(e) => handleOnProfile(e.target.value)}
+                >
+                  {t("Notification")}
+                </ListGroup.Item>
+                <ListGroup.Item
+                  onClick={(e) => handleOnProfile(e.target.value)}
+                >
+                  {t("Logout")}
+                </ListGroup.Item>
+              </ListGroup>
+            ) : (
+              ""
+            )}
+          </button>
+          <button
+            class="headerButton language-dropdown position-relative"
+            onMouseOver={() => setLanguage(true)}
+            onMouseLeave={() => setLanguage(false)}
+          >
+            <GrLanguage />
+            <small className="text-dark m-0 p-0 mx-1"></small>
+            {language === true ? (
+              <ListGroup
+                className="onClickMenuBottom profile-inventory-items  "
+                // onClick={(e) => setProfileDropDwon(e.target.value)}
+              >
+                <ListGroup.Item
+                  value={"en"}
+                  onClick={(e) => changeLanguage(e.target.value)}
+                >
+                  Eng
+                </ListGroup.Item>
+                <ListGroup.Item
+                  value={"ar"}
+                  onClick={(e) => changeLanguage(e.target.value)}
+                >
+                  Ar
+                </ListGroup.Item>
+              </ListGroup>
+            ) : (
+              ""
+            )}
+          </button>
         </Col>
       </Row>
     </div>
   );
 }
 
-export default Navbar;
+export default withNamespaces()(Navbar);

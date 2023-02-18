@@ -1,9 +1,10 @@
 import Joi from "joi-browser";
 import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { withNamespaces } from "react-i18next";
 
 import config from "../config.json";
-function RegisterPage() {
+function RegisterPage({ t }) {
   const [registerForm, setRegisterForm] = useState({
     firstName: "",
     lastName: "",
@@ -81,9 +82,9 @@ function RegisterPage() {
       <Row>
         <Col className="col-14">Naved</Col>
         <Col className=" text-center mt-5">
-          <h2>Create Your Account</h2>
+          <h2>{t("create Your Account")}</h2>
           <small>
-            Lifetime Free Billing Application For Every Business ! <br />{" "}
+            {t("Lifetime Free Billing Application For Every Business !")} <br />{" "}
             <strong> Auto Pilot We Call It !</strong>
           </small>
           <Form onSubmit={createUser} className="mt-5">
@@ -93,7 +94,7 @@ function RegisterPage() {
                   onChange={handleOnChange}
                   value={registerForm.firstName}
                   name="firstName"
-                  placeholder="First name"
+                  placeholder={t("First name")}
                   size="md"
                 />
               </Col>
@@ -102,7 +103,7 @@ function RegisterPage() {
                   onChange={handleOnChange}
                   value={registerForm.lastName}
                   name="lastName"
-                  placeholder="Last name"
+                  placeholder={t("Last name")}
                   size="md"
                 />
               </Col>
@@ -114,7 +115,7 @@ function RegisterPage() {
                   onChange={handleOnChange}
                   value={registerForm.mobile}
                   name="mobile"
-                  placeholder="Your Mobile No"
+                  placeholder={t("Your Mobile No")}
                   size="md"
                 />
               </Col>
@@ -126,10 +127,10 @@ function RegisterPage() {
                   aria-label="Default select example"
                   size="md"
                 >
-                  <option>Choose Your Business Category</option>
-                  <option value="medical">Medical</option>
-                  <option value="salon">Salon</option>
-                  <option value="shop">Shop</option>
+                  <option>{t("Choose Your Business Category")}</option>
+                  <option value="medical">{t("Medical")}</option>
+                  <option value="salon">{t("Salon")}</option>
+                  <option value="shop">{t("Shop")}</option>
                 </Form.Select>
               </Col>
             </Row>
@@ -140,7 +141,7 @@ function RegisterPage() {
                   onChange={handleOnChange}
                   value={registerForm.userName}
                   name="userName"
-                  placeholder="Choose Your User Name"
+                  placeholder={t("Choose Your User Name")}
                   size="md"
                 />
               </Col>
@@ -149,7 +150,7 @@ function RegisterPage() {
                   onChange={handleOnChange}
                   value={registerForm.email}
                   name="email"
-                  placeholder="Your Email Id"
+                  placeholder={t("Your Email Id")}
                   size="md"
                 />
               </Col>
@@ -161,7 +162,7 @@ function RegisterPage() {
                   onChange={handleOnChange}
                   value={registerForm.password}
                   name="password"
-                  placeholder="Setup Your Account Password"
+                  placeholder={t("Setup Your Account Password")}
                   size="md"
                 />
               </Col>
@@ -170,7 +171,7 @@ function RegisterPage() {
                   onChange={handleOnChange}
                   value={registerForm.confirmPassword}
                   name="confirmPassword"
-                  placeholder="Confirm Your Password Again"
+                  placeholder={t("Confirm Your Password Again")}
                   size="md"
                 />
               </Col>
@@ -178,7 +179,7 @@ function RegisterPage() {
             <Row>
               <div className="d-grid gap-2 mt-3">
                 <Button variant="dark" type="submit" size="sm" className="p-1">
-                  Create & Setup My Account
+                  {t("Create & Setup My Account")}
                 </Button>
               </div>
             </Row>
@@ -189,4 +190,4 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default withNamespaces()(RegisterPage);

@@ -135,14 +135,10 @@ table caption {
     display: none;
   }
 }
-/* .profile-inventory:hover ListGroup.profile-inventory-items {
-  background-color: aqua;
-} */
 
 .profile-inventory-items {
   position: absolute;
   right: -20px;
-  /* top: 35px; */
 }
 .Form-select-main {
   width: 100px;
@@ -150,4 +146,16 @@ table caption {
   margin-top: auto;
   padding: 0;
   font-size: smaller;
+}
+/* .list-group {
+  position: absolute;
+  width: 230px;
+  height: 10px;
+  padding: 0;
+  margin: 0;
+} */
+
+.language-dropdown {
+  position: absolute;
+  right: 0;
 }

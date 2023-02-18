@@ -29,19 +29,19 @@ import {
   CiUser,
   CiViewTimeline,
 } from "react-icons/ci";
-import { CgProfile } from "react-icons/cg";
 
 import { isUser } from "../components/localStore/getCurrentUser";
 import CustomModal from "../components/ui/modal";
 import SideMenu from "../components/ui/sideMenu";
+import { withNamespaces } from "react-i18next";
 
-function InventoryPage() {
+function InventoryPage({ t }) {
   const [allMasters, setAllMasters] = useState();
   const [currentTableHeaders, setCurrentTableHeaders] = useState();
   const [activeSubMenu, setActiveSubMenu] = useState("Most Sold");
   const [currentSubMenu, setCurrentSubMenu] = useState();
   const [showModal, setShowModal] = useState(false);
-  const [isOpen, updateIsOpen] = useState(false);
+
   useEffect(() => {
     // const getMaster = async () => {
     //   const findUser = isUser();
@@ -81,22 +81,24 @@ function InventoryPage() {
           <button class="headerButton mx-2">
             <CiBellOn size={20} color="black" />
             <strong className="text-blue m-0 p-0 mx-1 mr-5">
-              Inventory Management
+              {t("Inventory Management")}
             </strong>
           </button>
 
           <button class="headerButton ">
             <CiImport size={16} color="black" />{" "}
-            <small className="text-dark m-0 p-0 mx-1">Import</small>
+            <small className="text-dark m-0 p-0 mx-1">{t("Import")}</small>
           </button>
           <button class="headerButton ">
             <CiExport size={16} color="black" />{" "}
-            <small className="text-dark m-0 p-0 mx-1">Export</small>
+            <small className="text-dark m-0 p-0 mx-1">{t("Export")}</small>
           </button>
 
           <button class="headerButton">
             <CiSettings size={20} color="black" />
-            <small className="text-dark m-0 p-0 mx-1">Settings</small>{" "}
+            <small className="text-dark m-0 p-0 mx-1">
+              {t("Settings")}
+            </small>{" "}
           </button>
         </Col>
         <Col className="text-end">
@@ -119,7 +121,7 @@ function InventoryPage() {
               <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
             </ListGroup> */}
           </button>
-          <button
+          {/* <button
             class="headerButton profile-inventory position-relative"
             // onClick={updateIsOpen(true)}
             onMouseOver={() => updateIsOpen(true)}
@@ -136,16 +138,16 @@ function InventoryPage() {
                 className="onClickMenuBottom profile-inventory-items  "
                 // value={isOpen}
               >
-                <ListGroup.Item to="#">My Profiles</ListGroup.Item>
-                <ListGroup.Item>Orders</ListGroup.Item>
-                <ListGroup.Item>Watchlist</ListGroup.Item>
-                <ListGroup.Item>Notification</ListGroup.Item>
-                <ListGroup.Item>Logout</ListGroup.Item>
+                <ListGroup.Item to="#">{t("My Profiles")}</ListGroup.Item>
+                <ListGroup.Item>{t("Orders")}</ListGroup.Item>
+                <ListGroup.Item>{t("Watchlist")}</ListGroup.Item>
+                <ListGroup.Item>{t("Notification")}</ListGroup.Item>
+                <ListGroup.Item>{t("Logout")}</ListGroup.Item>
               </ListGroup>
             ) : (
               ""
             )}
-          </button>
+          </button> */}
         </Col>
       </Row>
 
@@ -167,23 +169,27 @@ function InventoryPage() {
                       currentSubMenu.subMenu.map((i) => (
                         <option value={i.title}>{i.title} 2</option>
                       ))}
-                    <option value={10}>Types</option>
-                    <option value={10}>Most Sold</option>
-                    <option value={20}>Exp Managment</option>
-                    <option value={20}>Rack Managment</option>
-                    <option value={20}>Dead Stock</option>
-                    <option value={20}>Return</option>
+                    <option value={10}>{t("Types")}</option>
+                    <option value={10}>{t("Most Sold")}</option>
+                    <option value={20}>{t("Exp Managment")}</option>
+                    <option value={20}>{t("Rack Managment")}</option>
+                    <option value={20}>{t("Dead Stock")}</option>
+                    <option value={20}>{t("Return")}</option>
                   </Form.Select>
                 </div>
 
                 <button class="menuButton mx-2">
                   <CiPlay1 size={16} color="black" />
-                  <small className="text-dark m-0 p-0 mx-1">577 Items</small>
+                  <small className="text-dark m-0 p-0 mx-1">
+                    577 {t("Items")}
+                  </small>
                 </button>
 
                 <button class="menuButton mx-2">
                   <CiSquarePlus size={16} color="black" />
-                  <small className="text-dark m-0 p-0 mx-1">Add New</small>
+                  <small className="text-dark m-0 p-0 mx-1">
+                    {t("Add New")}
+                  </small>
                 </button>
 
                 {/* <button class="menuButton">
@@ -199,7 +205,9 @@ function InventoryPage() {
                 </button>
                 <button class="menuButton">
                   <CiFilter size={16} color="black" />
-                  <small className="text-dark m-0 p-0 mx-1">Filters</small>
+                  <small className="text-dark m-0 p-0 mx-1">
+                    {t("Filters")}
+                  </small>
                 </button>
                 <div>
                   <Form.Select size="sm" aria-label="Default select example">
@@ -348,5 +356,4 @@ function InventoryPage() {
     </Container>
   );
 }
-
-export default InventoryPage;
+export default withNamespaces()(InventoryPage);

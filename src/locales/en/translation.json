@@ -16,7 +16,105 @@
   "loginToContinue":"Login To Continue !",
   "enterEmailId":"Enter Your Email Id",
   "enterPassword":"Enter Account Password",
-  "loginToMyAccount":"Login To My Account"
+  "loginToMyAccount":"Login To My Account",
 
 
-   }
+  "register ":"page",
+"create Your Account":"Create Your Account",
+"Lifetime Free Billing Application For Every Business !":"Lifetime Free Billing Application For Every Business !",
+"Auto Pilot We Call It !":"Auto Pilot We Call It !",
+"First name":"First name",
+"Last name":"Last name",
+"Your Mobile No":"Your Mobile No",
+"Choose Your Business Category":"Choose Your Business Category",
+"Medical":"Medical",
+"Salon":"Salon",
+"Shop":"Shop",
+"Choose Your User Name":"Choose Your User Name",
+"Your Email Id":"Your Email Id",
+"Setup Your Account Password":"Setup Your Account Password",
+"Confirm Your Password Again":"Confirm Your Password Again",
+"Create & Setup My Account":"Create & Setup My Account",
+
+
+
+"inventory ":"page",
+"Inventory Management":"Inventory Management",
+"Import":"Import",
+"Export":"Export",
+"Settings":"Settings",
+"Types":"Types",
+"Most Sold":"Most Sold",
+"Exp Managment":"Exp Managment",
+"Rack Managment":"Rack Managment",
+"Dead Stock":"Dead Stock",
+"Return":"Return",
+"Items":"Items",
+"Add New":"Add New",
+"Filters":"Filters",
+
+
+"NavBar":"Page",
+
+"Dashboard":"Dashboard",
+"Sales":"Sales",
+"Inventory":"Inventory",
+"items":"items",
+"HRM":"HRM",
+"Accounts":"Accounts",
+"Masters":"Masters",
+"My Profiles":"My Profiles",
+"Orders":"Orders",
+"Watchlist":"Watchlist",
+"Notification":"Notification",
+"Logout":"Logout",
+
+
+"masters":"page",
+
+"Master Management":"Master Management",
+"Invoice":"Invoice",
+"Menu":"Menu",
+"Tax Slab":"Tax Slab",
+"View Master":"View Master",
+"Printers":"Printers",
+"Sell Units":"Sell Units",
+
+"master": "invoiceMaster",
+
+"Update Invoice No":"Update Invoice No",
+"Curr. Invoice No.":"Curr. Invoice No.",
+"Starting String":"Starting String",
+"Ending String":"Ending String",
+"Update Inv No":"Update Inv No",
+"Choose Print Style":"Choose Print Style",
+"Curr. Printer Style":"Curr. Printer Style",
+"Left":"Left",
+"Middle":"Middle",
+"Right":"Right",
+"Select":"Select",
+
+"masters.": "itemMaster",
+
+"Choose What Best Describes Your Items":"Choose What Best Describes Your Items",
+" You Are Selling To":" You Are Selling To",
+"Unit Name":"Unit Name",
+"Count In The Unit":"Count In The Unit",
+"Add Unit":"Add Unit",
+"Add Rack Name":"Add Rack Name",
+"Add Rack":"Add Rack",
+"Rack Management":"Rack Management",
+"Do You Sell Expiry Products ?":"Do You Sell Expiry Products ?",
+"Do You Want Barcodes For Your Products":"Do You Want Barcodes For Your Products",
+"Do You Need Rack Management ?":"Do You Need Rack Management ?",
+"Retailers":"Retailers",
+"Wholesaler":"Wholesaler",
+
+"masters..":"modal.js",
+
+"closeButton":"closeButton",
+"Large Modal":"Large Modal"
+
+
+
+}

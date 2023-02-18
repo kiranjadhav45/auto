@@ -21,14 +21,14 @@ import {
   CiUser,
   CiViewTimeline,
 } from "react-icons/ci";
-
+import { withNamespaces } from "react-i18next";
 import { isUser } from "../components/localStore/getCurrentUser";
 import InvoiceMaster from "../components/masters/invMaster";
 import ItemMaster from "../components/masters/itemMaster";
 import MenuMaster from "../components/masters/menuMaster";
 import SideMenu from "../components/ui/sideMenu";
 
-function MastersPage() {
+function MastersPage({ t }) {
   const [allMasters, setAllMasters] = useState();
   const [currentTableHeaders, setCurrentTableHeaders] = useState();
   const [activeSubMenu, setActiveSubMenu] = useState("menu");
@@ -137,21 +137,21 @@ function MastersPage() {
         <Col className="bg-white col-7 ">
           <button className="headerButton ">
             <CiImport size={16} color="black" />
-            <small className="text-dark m-0 p-0">Import</small>
+            <small className="text-dark m-0 p-0">{t("Import")}</small>
           </button>
           <button className="headerButton ">
             <CiExport size={16} color="black" />
-            <small className="text-dark m-0 p-0">Export</small>
+            <small className="text-dark m-0 p-0">{t("Export")}</small>
           </button>
           <button className="headerButton">
             <CiSettings size={20} color="black" />
-            <small className="text-dark m-0 p-0">Settings</small>
+            <small className="text-dark m-0 p-0">{t("Settings")}</small>
           </button>
         </Col>
         <Col className="bg-white text-center">
           <button className="headerMenu mx-2">
             <strong className="text-blue m-1 p-1 mx-1 bg-veryLight">
-              Master Management
+              {t("Master Management")}
             </strong>
           </button>
         </Col>
@@ -278,5 +278,4 @@ function MastersPage() {
     </Container>
   );
 }
-
-export default MastersPage;
+export default withNamespaces()(MastersPage);

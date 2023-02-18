@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-
-function CustomModal({ showModal, setShowModal }) {
+import { withNamespaces } from "react-i18next";
+function CustomModal({ showModal, setShowModal, t }) {
   return (
     <Modal
       size="md"
@@ -9,12 +9,14 @@ function CustomModal({ showModal, setShowModal }) {
       onHide={() => setShowModal(false)}
       aria-labelledby="example-modal-sizes-title-sm"
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="example-modal-sizes-title-sm">Large Modal</Modal.Title>
+      <Modal.Header>
+        {t("closeButton")}
+        <Modal.Title id="example-modal-sizes-title-sm">
+          {t("Large Modal")}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>...</Modal.Body>
     </Modal>
   );
 }
-
-export default CustomModal;
+export default withNamespaces()(CustomModal);

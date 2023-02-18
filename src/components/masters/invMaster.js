@@ -1,14 +1,17 @@
 import React from "react";
 import { Card, Row, Col, Button, Form, ButtonGroup } from "react-bootstrap";
-
-function InvoiceMaster({ inv, updateInvData, handleChange }) {
+import { withNamespaces } from "react-i18next";
+function InvoiceMaster({ inv, updateInvData, handleChange, t }) {
   return (
     <Row className=" mt-3">
       <Col className="col-12 text-center">
-        <strong className="border-bottom mb-2"> Update Invoice No</strong>
+        <strong className="border-bottom mb-2">
+          {" "}
+          {t("Update Invoice No")}
+        </strong>
         <Row className="p-1 mt-2 m-1 border">
           <div className="mb-2">
-            <small className="float-start">Curr. Invoice No.</small>
+            <small className="float-start">{t("Curr. Invoice No.")}</small>
             <small className="float-end">
               {inv.start}
               {inv.end}
@@ -21,7 +24,7 @@ function InvoiceMaster({ inv, updateInvData, handleChange }) {
               name="start"
               value={inv.start}
               onChange={handleChange}
-              placeholder="Starting String"
+              placeholder={t("Starting String")}
             />
           </Col>
           <Col>
@@ -31,7 +34,7 @@ function InvoiceMaster({ inv, updateInvData, handleChange }) {
               name="end"
               value={inv.end}
               onChange={handleChange}
-              placeholder="Ending String"
+              placeholder={t("Ending String")}
             />
           </Col>
           <Col>
@@ -41,23 +44,25 @@ function InvoiceMaster({ inv, updateInvData, handleChange }) {
               size="sm"
               className="btn-block"
             >
-              Update Inv No
+              {t("Update Inv No")}
             </Button>
           </Col>
         </Row>
       </Col>
       <Col className="col-12 text-center">
-        <strong className="border-bottom mb-2"> Choose Print Style</strong>
+        <strong className="border-bottom mb-2">
+          {t(" Choose Print Style")}
+        </strong>
         <Row className="p-1 mt-2 m-1 border">
           <div className="mb-2">
-            <small className="float-start">Curr. Printer Style</small>
+            <small className="float-start">{t("Curr. Printer Style")}</small>
             <small className="float-end"></small>
           </div>
           <Col>
             <ButtonGroup size="sm" aria-label="Basic example">
-              <Button variant="secondary">Left</Button>
-              <Button variant="secondary">Middle</Button>
-              <Button variant="secondary">Right</Button>
+              <Button variant="secondary">{t("Left")}</Button>
+              <Button variant="secondary">{t("Middle")}</Button>
+              <Button variant="secondary">{t("Right")}</Button>
             </ButtonGroup>
           </Col>
 
@@ -68,7 +73,7 @@ function InvoiceMaster({ inv, updateInvData, handleChange }) {
               size="sm"
               className="btn-block"
             >
-              Select
+              {t("Select")}
             </Button>
           </Col>
         </Row>
@@ -77,4 +82,4 @@ function InvoiceMaster({ inv, updateInvData, handleChange }) {
   );
 }
 
-export default InvoiceMaster;
+export default withNamespaces()(InvoiceMaster);
