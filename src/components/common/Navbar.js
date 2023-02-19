@@ -189,7 +189,7 @@ function Navbar({ t }) {
         <Col className="col-2 mx-1">
           <Form.Select
             size="sm"
-            className="Form-select-main"
+            className="Form-select-main formSelect-Navbar"
             onChange={(e) => setActiveSubMenu(e.target.value)}
             aria-label="Default select example"
           >

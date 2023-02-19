@@ -3,6 +3,7 @@ import SideMenu from "../components/ui/sideMenu";
 import Pagination from "./Pagination";
 import Navbar from "../components/common/Navbar";
 import { withNamespaces } from "react-i18next";
+import Footer from "../components/common/Footer";
 
 import {
   Button,
@@ -35,7 +36,7 @@ import {
 } from "react-icons/ci";
 
 function Sales({ t }) {
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchRes, setSearchRes] = useState([]);
   const [itemList, setItemList] = useState([
@@ -290,6 +291,21 @@ function Sales({ t }) {
             pagination={pagination}
             itemList={itemList.length}
           />
+          <Row className="border-top ">
+            <Col className="col-18 text-center p-1 mt-1"></Col>
+            <Col className="col-6 float-end">
+              <Row>
+                <Col className="border text-center p-1">C</Col>
+                <Col className="border text-center p-1">H</Col>
+                <Col className="border text-center p-1">A</Col>
+              </Row>
+              <Row className="">
+                <Col className="border text-center p-1">R</Col>
+                <Col className="border text-center p-1">T</Col>
+                <Col className="border text-center p-1">S</Col>
+              </Row>
+            </Col>
+          </Row>
         </Col>
         <Col className="col-4 bg-veryLight border-end">Nikhil</Col>
         <Col className="bg-veryLight col-1 ">
@@ -319,9 +335,43 @@ function Sales({ t }) {
           </ButtonGroup>
         </Col>
       </Row>
+      {/* <Row className="border-top bg-bootGrey mt-1" style={{ height: "25vh" }}>
+        <Col className="col-16 my-auto text-center ">
+          {" "}
+          © Copyright 2023 by{" "}
+          <strong className="text-info"> Caliph Code</strong>
+        </Col>
+        <Col className="col-8 my-auto text-center">
+          <ButtonGroup className="p-1 bg-bootGrey">
+            <Link to="/inventory">
+              <div className="p-0 m-0 menuIcon bg-bootGrey">
+                <BsLinkedin size={25} className="mx-4" />
+              </div>
+            </Link>
+
+            <Link>
+              <div className="p-0 m-0 menuIcon bg-bootGrey">
+                <BsTwitter size={30} className="mx-4" />
+              </div>
+            </Link>
+
+            <Link>
+              <div className="p-0 m-0 menuIcon bg-bootGrey">
+                <RiInstagramFill size={30} className="mx-4" />
+              </div>
+            </Link>
+
+            <Link to="/masters">
+              <div className="p-0 m-0 menuIcon bg-bootGrey">
+                <BsFacebook size={25} className="mx-4" />
+              </div>
+            </Link>
+          </ButtonGroup>
+        </Col>
+      </Row> */}
+      <Footer />
     </Container>
   );
 }
 
 export default withNamespaces()(Sales);
-// export default Sales;
