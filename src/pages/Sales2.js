@@ -338,7 +338,7 @@ function Sales() {
                   <small className="saleListgroup">
                     <ListGroup key={i.id}>
                       <ListGroup.Item
-                        className=""
+                        className="list-group"
                         value={i.itemName}
                         onClick={() => handleTableData(i)}
                       >

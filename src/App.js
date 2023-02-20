@@ -7,19 +7,27 @@ import RegisterPage from "./pages/registerPage";
 import Sales from "./pages/Sales";
 import Sales2 from "./pages/Sales2";
 import { withNamespaces } from "react-i18next";
+// import MostSold from "./components/inventory/MostSold";
+import Dashboard from "./pages/Dashboard";
+import HRM from ".//pages/HRM";
+import Account from ".//pages/Account";
 
 function App({ t }) {
   return (
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/masters" element={<MastersPage />} />
-          <Route path="/inventory" element={<InventoryPage />} />
-          <Route path="/" element={<RegisterPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/sales" element={<Sales />} />
+          <Route path="/inventory" element={<InventoryPage />} />
+          <Route path="/hrm" element={<HRM />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/masters" element={<MastersPage />} />
+          {/* <Route path="/subReports" element={<MostSold />} /> */}
+          <Route path="/" element={<RegisterPage />} />
           <Route path="/sales2" element={<Sales2 />} />
-          <Route path="register" element={<RegisterPage />} />
         </Routes>
       </BrowserRouter>
     </>

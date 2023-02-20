@@ -27,6 +27,7 @@ import InvoiceMaster from "../components/masters/invMaster";
 import ItemMaster from "../components/masters/itemMaster";
 import MenuMaster from "../components/masters/menuMaster";
 import SideMenu from "../components/ui/sideMenu";
+import Navbar from "../components/common/Navbar";
 
 function MastersPage({ t }) {
   const [allMasters, setAllMasters] = useState();
@@ -128,8 +129,11 @@ function MastersPage({ t }) {
 
   return (
     <Container fluid className="bg-white font-ubu">
-      <Row className="bg-white border-bottom">
-        <Col className="bg-white col-1">
+      <Row className="bg-white border-bottom mt-1 ">
+        <Col>
+          <Navbar />
+        </Col>
+        {/* <Col className="bg-white col-1">
           <button className="headerButton ">
             <small className="text-dark fs-5 m-0 p-0 mx-1">N</small>
           </button>
@@ -174,8 +178,8 @@ function MastersPage({ t }) {
               <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
               <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
             </ListGroup> */}
-          </button>
-        </Col>
+        {/* </button> */}
+        {/* </Col> */}
       </Row>
 
       <Row className="">
@@ -186,7 +190,7 @@ function MastersPage({ t }) {
           <Row className="mt-2">
             <Col className="col-16">
               <ButtonGroup className="">
-                <div className="mr-1">
+                {/* <div className="mr-1">
                   <Form.Select
                     size="sm"
                     onChange={(e) => setActiveSubMenu(e.target.value)}
@@ -200,7 +204,7 @@ function MastersPage({ t }) {
                     <option value="taxSlab">Printers</option>
                     <option value="taxSlab">Sell Units</option>
                   </Form.Select>
-                </div>
+                </div> */}
 
                 {/* <button className="menuButton">
                   <CiSettings size={16} color="black" />

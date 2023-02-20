@@ -172,36 +172,9 @@ function Sales({ t }) {
   return (
     <Container fluid className="bg-white font-ubu">
       <Row className="bg-white border-bottom p-1">
-        <Col className="col-1">
-          <strong size="sm" className=" m-1 mx-1">
-            {t("logo")}
-          </strong>
-
-          {/* <button className="headerButton mx-2">
-            <FcSalesPerformance size={20} color="dark" />
-            <strong className="text-blue m-0 p-0 mx-1 mr-5">Sales</strong>
-          </button> */}
-        </Col>
         <Col>
           <Navbar />
         </Col>
-        {/* 
-        <Col className="text-end col-4">
-          <button className="headerButton">
-            <CiBellOn size={20} color="orange" />
-            <small className="text-dark m-0 p-0 mx-1">2000</small>
-          </button>
-
-          <button className="headerButton">
-            <CiStar size={20} color="dodgerblue" />
-            <small className="text-dark m-0 p-0 mx-1">120</small>
-          </button>
-
-          <button className="headerButton position-relative">
-            <CiTrophy size={20} color="green" />
-            <small className="text-dark m-0 p-0 mx-1">200</small>
-          </button>
-        </Col> */}
       </Row>
       <Row className="">
         <Col className="col-1 bg-white  border-end">

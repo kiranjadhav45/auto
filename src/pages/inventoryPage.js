@@ -34,6 +34,7 @@ import { isUser } from "../components/localStore/getCurrentUser";
 import CustomModal from "../components/ui/modal";
 import SideMenu from "../components/ui/sideMenu";
 import { withNamespaces } from "react-i18next";
+import Navbar from "../components/common/Navbar";
 
 function InventoryPage({ t }) {
   const [allMasters, setAllMasters] = useState();
@@ -74,7 +75,8 @@ function InventoryPage({ t }) {
     <Container fluid className="bg-white font-ubu">
       <Row className="bg-white border-bottom p-1">
         <Col className="">
-          <strong size="sm" className="mx-2">
+          <Navbar />
+          {/* <strong size="sm" className="mx-2">
             N
           </strong>
 
@@ -109,18 +111,18 @@ function InventoryPage({ t }) {
           <button class="headerButton">
             <CiStar size={20} color="dodgerblue" />
             <small className="text-dark m-0 p-0 mx-1">120</small>
-          </button>
-          <button class="headerButton position-relative">
+          </button> */}
+          {/* <button class="headerButton position-relative">
             <CiTrophy size={20} color="green" />
-            <small className="text-dark m-0 p-0 mx-1">200</small>
-            {/* <ListGroup className="onClickMenuBottom">
+            <small className="text-dark m-0 p-0 mx-1">200</small> */}
+          {/* <ListGroup className="onClickMenuBottom">
               <ListGroup.Item>Cras justo odio</ListGroup.Item>
               <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
               <ListGroup.Item>Morbi leo risus</ListGroup.Item>
               <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
               <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
             </ListGroup> */}
-          </button>
+          {/* </button> */}
           {/* <button
             class="headerButton profile-inventory position-relative"
             // onClick={updateIsOpen(true)}
@@ -325,7 +327,7 @@ function InventoryPage({ t }) {
             {items}
           </Pagination>
         </Col>
-        <Col className="col-4 bg-veryLight border-end">Nikhil</Col>
+        {/* <Col className="col-4 bg-veryLight border-end">Nikhil</Col>
         <Col className="bg-veryLight col-1 ">
           <ButtonGroup vertical className="p-1">
             <div className="p-0 m-0 sideMenuIcon">
@@ -351,7 +353,7 @@ function InventoryPage({ t }) {
               <CiSettings size={20} className=" my-2" />
             </div>
           </ButtonGroup>
-        </Col>
+        </Col> */}
       </Row>
     </Container>
   );

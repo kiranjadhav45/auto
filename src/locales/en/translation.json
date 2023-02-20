@@ -1,5 +1,6 @@
 {  "sales":"page",
 
+
   "Welcome to React": "Welcome to React and react-i18next",
   "logo":"Auto",
   "searchProduct":"Search Product",
@@ -10,7 +11,9 @@
   "price":"Price",
   "invoice":"Invoice No",
 
+
   "Login":"Page",
+
 
   "title":"Auto Pilot At Your Service",
   "loginToContinue":"Login To Continue !",
@@ -20,6 +23,8 @@
 
 
   "register ":"page",
+
+
 "create Your Account":"Create Your Account",
 "Lifetime Free Billing Application For Every Business !":"Lifetime Free Billing Application For Every Business !",
 "Auto Pilot We Call It !":"Auto Pilot We Call It !",
@@ -56,6 +61,7 @@
 
 "NavBar":"Page",
 
+
 "Dashboard":"Dashboard",
 "Sales":"Sales",
 "Inventory":"Inventory",
@@ -72,6 +78,7 @@
 
 "masters":"page",
 
+
 "Master Management":"Master Management",
 "Invoice":"Invoice",
 "Menu":"Menu",
@@ -80,7 +87,9 @@
 "Printers":"Printers",
 "Sell Units":"Sell Units",
 
+
 "master": "invoiceMaster",
+
 
 "Update Invoice No":"Update Invoice No",
 "Curr. Invoice No.":"Curr. Invoice No.",
@@ -94,7 +103,9 @@
 "Right":"Right",
 "Select":"Select",
 
+
 "masters.": "itemMaster",
+
 
 "Choose What Best Describes Your Items":"Choose What Best Describes Your Items",
 " You Are Selling To":" You Are Selling To",
@@ -110,7 +121,9 @@
 "Retailers":"Retailers",
 "Wholesaler":"Wholesaler",
 
+
 "masters..":"modal.js",
+
 
 "closeButton":"closeButton",
 "Large Modal":"Large Modal"

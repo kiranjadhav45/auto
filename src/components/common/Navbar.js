@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Col, Form, Row, ListGroup } from "react-bootstrap";
 import { withNamespaces } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -61,6 +62,25 @@ function Navbar({ t }) {
     logo5: "",
     logo6: "",
   });
+  const navigate = useNavigate();
+  const handleOnNavigation = () => {
+    if (activeSubMenu && activeSubMenu === "dashboard") {
+      // setSubMenu(dashboardData);
+    } else if (activeSubMenu && activeSubMenu === "sales") {
+      // setSubMenu(salesData);
+    } else if (activeSubMenu && activeSubMenu === "inventory") {
+      // setSubMenu(inventoryData);
+    } else if (activeSubMenu && activeSubMenu === "taxSlab") {
+      // setSubMenu(taxSlabData);
+    } else if (activeSubMenu && activeSubMenu === "hrm") {
+      // setSubMenu(hrmData);
+    } else if (activeSubMenu && activeSubMenu === "accounts") {
+      // setSubMenu(accountsData);
+    } else if (activeSubMenu && activeSubMenu === "masters") {
+      // setSubMenu(mastersData);
+      // navigate("/masters");
+    }
+  };
 
   useEffect(() => {
     console.log(profileDropDwon);
@@ -92,7 +112,7 @@ function Navbar({ t }) {
       title3: "Rack Managment",
       title4: "Dead Stocks",
       title5: "Returns",
-      path1: "/lastOrders",
+      path1: "/subReports",
       path2: "/totalSales",
       path3: "/Maintainance",
       logo1: <BiTrendingUp size={iconSixe} color="black" />,
@@ -158,18 +178,24 @@ function Navbar({ t }) {
 
     if (activeSubMenu && activeSubMenu === "dashboard") {
       setSubMenu(dashboardData);
+      navigate("/dashboard");
     } else if (activeSubMenu && activeSubMenu === "sales") {
       setSubMenu(salesData);
+      navigate("/sales");
     } else if (activeSubMenu && activeSubMenu === "inventory") {
       setSubMenu(inventoryData);
+      navigate("/inventory");
     } else if (activeSubMenu && activeSubMenu === "taxSlab") {
       setSubMenu(taxSlabData);
     } else if (activeSubMenu && activeSubMenu === "hrm") {
       setSubMenu(hrmData);
+      navigate("/hrm");
     } else if (activeSubMenu && activeSubMenu === "accounts") {
       setSubMenu(accountsData);
+      navigate("/account");
     } else if (activeSubMenu && activeSubMenu === "masters") {
       setSubMenu(mastersData);
+      navigate("/masters");
     }
   }, [activeSubMenu]);
 
@@ -183,9 +209,14 @@ function Navbar({ t }) {
     updateIsOpen(false);
     console.log(value);
   };
+  console.log(submenu);
+
   return (
     <div>
       <Row>
+        <Col className="col-1">
+          <strong>Auto</strong>
+        </Col>
         <Col className="col-2 mx-1">
           <Form.Select
             size="sm"
