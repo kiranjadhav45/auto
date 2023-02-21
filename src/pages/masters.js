@@ -21,6 +21,14 @@ import {
   CiUser,
   CiViewTimeline,
 } from "react-icons/ci";
+
+import { HiViewGrid } from "react-icons/hi";
+import { TbReceiptTax } from "react-icons/tb";
+import { BsFillPrinterFill } from "react-icons/bs";
+import { MdPendingActions } from "react-icons/md";
+import { RiNumbersFill } from "react-icons/ri";
+import { GiHamburgerMenu } from "react-icons/gi";
+
 import { withNamespaces } from "react-i18next";
 import { isUser } from "../components/localStore/getCurrentUser";
 import InvoiceMaster from "../components/masters/invMaster";
@@ -41,6 +49,24 @@ function MastersPage({ t }) {
   const [runEffect, setRunEffect] = useState(0);
   const [findUser, setFindUser] = useState();
 
+  const iconSixe = 15;
+  let mastersData = {
+    title1: "Menu Master",
+    title2: "Sell Unit",
+    title3: "Invoice",
+    title4: "Printers",
+    title5: "Tax Slab",
+    title6: "View Master",
+    path1: "/lastOrders",
+    path2: "/totalSales",
+    path3: "/Maintainance",
+    logo1: <GiHamburgerMenu size={iconSixe} color="black" />,
+    logo2: <RiNumbersFill size={iconSixe} color="black" />,
+    logo3: <MdPendingActions size={iconSixe} color="black" />,
+    logo4: <BsFillPrinterFill size={iconSixe} color="black" />,
+    logo5: <TbReceiptTax size={iconSixe} color="black" />,
+    logo6: <HiViewGrid size={iconSixe} color="black" />,
+  };
   const handleTopicChange = async (index) => {
     const temp = [...menuMaster];
     temp[index].status =
@@ -72,7 +98,7 @@ function MastersPage({ t }) {
   useEffect(() => {
     const getMaster = async () => {
       const test = isUser();
-      console.log("IS USER", test);
+      // console.log("IS USER", test);
       setFindUser(test);
       // let res = await getMasterPerUser(test._id);
 
@@ -131,7 +157,7 @@ function MastersPage({ t }) {
     <Container fluid className="bg-white font-ubu">
       <Row className="bg-white border-bottom mt-1 ">
         <Col>
-          <Navbar />
+          <Navbar mastersData={mastersData} />
         </Col>
         {/* <Col className="bg-white col-1">
           <button className="headerButton ">

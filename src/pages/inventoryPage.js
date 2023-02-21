@@ -29,6 +29,11 @@ import {
   CiUser,
   CiViewTimeline,
 } from "react-icons/ci";
+import { BiTrendingUp } from "react-icons/bi";
+import { FcExpired } from "react-icons/fc";
+import { TbTruckReturn } from "react-icons/tb";
+import { HiArrowSmDown } from "react-icons/hi";
+import { BsHddRackFill } from "react-icons/bs";
 
 import { isUser } from "../components/localStore/getCurrentUser";
 import CustomModal from "../components/ui/modal";
@@ -42,6 +47,23 @@ function InventoryPage({ t }) {
   const [activeSubMenu, setActiveSubMenu] = useState("Most Sold");
   const [currentSubMenu, setCurrentSubMenu] = useState();
   const [showModal, setShowModal] = useState(false);
+
+  const iconSixe = 15;
+  let inventoryData = {
+    title1: "Most Sold",
+    title2: "Exp Managment",
+    title3: "Rack Managment",
+    title4: "Dead Stocks",
+    title5: "Returns",
+    path1: "/subReports",
+    path2: "/totalSales",
+    path3: "/Maintainance",
+    logo1: <BiTrendingUp size={iconSixe} color="black" />,
+    logo2: <FcExpired size={iconSixe} color="black" />,
+    logo3: <BsHddRackFill size={iconSixe} color="black" />,
+    logo4: <HiArrowSmDown size={iconSixe} color="black" />,
+    logo5: <TbTruckReturn size={iconSixe} color="black" />,
+  };
 
   useEffect(() => {
     // const getMaster = async () => {
@@ -75,7 +97,7 @@ function InventoryPage({ t }) {
     <Container fluid className="bg-white font-ubu">
       <Row className="bg-white border-bottom p-1">
         <Col className="">
-          <Navbar />
+          <Navbar inventoryData={inventoryData} />
           {/* <strong size="sm" className="mx-2">
             N
           </strong>
