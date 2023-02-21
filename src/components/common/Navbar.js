@@ -1,40 +1,40 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Col, Form, Row, ListGroup } from "react-bootstrap";
 import { withNamespaces } from "react-i18next";
 import { Link } from "react-router-dom";
 import { CiBellOn, CiStar, CiTrophy } from "react-icons/ci";
 import { FcSalesPerformance, FcExpired } from "react-icons/fc";
 import { GrHostMaintenance, GrVmMaintenance, GrLanguage } from "react-icons/gr";
-import {
-  BsFillCartCheckFill,
-  BsHddRackFill,
-  BsFillCreditCard2FrontFill,
-  BsFillPrinterFill,
-} from "react-icons/bs";
 import { BiTrendingUp } from "react-icons/bi";
 import { HiArrowSmDown, HiViewGrid } from "react-icons/hi";
 import { TbTruckReturn, TbReportAnalytics } from "react-icons/tb";
 import { ImProfile } from "react-icons/im";
 import { FaTruckMoving } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
+import { AiOutlineTransaction } from "react-icons/ai";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { TbReceiptTax, TbTruckDelivery } from "react-icons/tb";
+import {
+  BsFillCartCheckFill,
+  BsHddRackFill,
+  BsFillCreditCard2FrontFill,
+  BsFillPrinterFill,
+} from "react-icons/bs";
 import {
   RiTeamFill,
   RiBillFill,
   RiNumbersFill,
   RiCustomerService2Fill,
 } from "react-icons/ri";
-import { AiOutlineTransaction } from "react-icons/ai";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { TbReceiptTax, TbTruckDelivery } from "react-icons/tb";
 
 import {
-  MdCategory,
-  MdMiscellaneousServices,
   MdPendingActions,
   MdOutlineMiscellaneousServices,
 } from "react-icons/md";
+import { setMessage } from "../../redux/slices/navslice";
 
 function Navbar({ t }) {
   const iconSixe = 15;
@@ -42,10 +42,11 @@ function Navbar({ t }) {
   const [isOpen, updateIsOpen] = useState(false);
   const [profileDropDwon, setProfileDropDwon] = useState("");
   const [language, setLanguage] = useState(false);
+  const [subsubmenu, setSubSubMenu] = useState("");
   const [submenu, setSubMenu] = useState({
-    path1: "/lastOrders",
-    path2: "/totalSales",
-    path3: "/Maintainance",
+    path1: "",
+    path2: "",
+    path3: "",
     path4: "",
     path5: "",
     path6: "",
@@ -63,34 +64,16 @@ function Navbar({ t }) {
     logo6: "",
   });
   const navigate = useNavigate();
-  const handleOnNavigation = () => {
-    if (activeSubMenu && activeSubMenu === "dashboard") {
-      // setSubMenu(dashboardData);
-    } else if (activeSubMenu && activeSubMenu === "sales") {
-      // setSubMenu(salesData);
-    } else if (activeSubMenu && activeSubMenu === "inventory") {
-      // setSubMenu(inventoryData);
-    } else if (activeSubMenu && activeSubMenu === "taxSlab") {
-      // setSubMenu(taxSlabData);
-    } else if (activeSubMenu && activeSubMenu === "hrm") {
-      // setSubMenu(hrmData);
-    } else if (activeSubMenu && activeSubMenu === "accounts") {
-      // setSubMenu(accountsData);
-    } else if (activeSubMenu && activeSubMenu === "masters") {
-      // setSubMenu(mastersData);
-      // navigate("/masters");
-    }
-  };
-
+  const dispatch = useDispatch();
   useEffect(() => {
     console.log(profileDropDwon);
     let dashboardData = {
       title1: "Pre-Order",
       title2: "Service",
       title3: "pending settlements",
-      path1: "/lastOrders",
-      path2: "/totalSales",
-      path3: "/Maintainance",
+      path1: "",
+      path2: "",
+      path3: "",
       logo1: <TbTruckDelivery size={iconSixe} color="black" />,
       logo2: <RiCustomerService2Fill size={iconSixe} color="black" />,
       logo3: <MdPendingActions size={iconSixe} color="black" />,
@@ -209,8 +192,14 @@ function Navbar({ t }) {
     updateIsOpen(false);
     console.log(value);
   };
-  console.log(submenu);
 
+  const handleSubSubMenu = (e) => {
+    dispatch(setMessage(e));
+    // setSubSubMenu(e);
+    let data = e;
+    console.log("data--", data);
+    // console.log("subsubmenu --", subsubmenu);
+  };
   return (
     <div>
       <Row>
@@ -234,24 +223,34 @@ function Navbar({ t }) {
           </Form.Select>
         </Col>
         <Col className="text-start">
-          <Link to={submenu.path1} className="m-0 p-0">
-            <button className="headerButton mx-2">
+          <Link className="m-0 p-0">
+            <button
+              className="headerButton mx-2"
+              value="20"
+              onClick={() => handleSubSubMenu(submenu.title1)}
+            >
               {submenu.logo1}
               <small className="text-black m-0 p-0 mx-1 mr-5">
                 {submenu.title1}
               </small>
             </button>
           </Link>
-          <Link to={submenu.path2}>
-            <button className="headerButton mx-2">
+          <Link>
+            <button
+              className="headerButton mx-2"
+              onClick={() => handleSubSubMenu(submenu.title2)}
+            >
               {submenu.logo2}
               <small className="text-black m-0 p-0 mx-1 mr-5">
                 {submenu.title2}
               </small>
             </button>
           </Link>
-          <Link to={submenu.path3}>
-            <button className="headerButton mx-2">
+          <Link>
+            <button
+              className="headerButton mx-2"
+              onClick={() => handleSubSubMenu(submenu.title3)}
+            >
               {submenu.logo3}
               <small className="text-black m-0 p-0 mx-1 mr-5">
                 {submenu.title3}

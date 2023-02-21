@@ -11,6 +11,7 @@ import { withNamespaces } from "react-i18next";
 import Dashboard from "./pages/Dashboard";
 import HRM from ".//pages/HRM";
 import Account from ".//pages/Account";
+import PreOrder from "./components/dashboard/PreOrder";
 
 function App({ t }) {
   return (
@@ -20,6 +21,8 @@ function App({ t }) {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/preorder" element={<PreOrder />} />
+
           <Route path="/sales" element={<Sales />} />
           <Route path="/inventory" element={<InventoryPage />} />
           <Route path="/hrm" element={<HRM />} />

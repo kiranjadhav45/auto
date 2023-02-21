@@ -4,6 +4,7 @@ import Pagination from "./Pagination";
 import Navbar from "../components/common/Navbar";
 import { withNamespaces } from "react-i18next";
 import Footer from "../components/common/Footer";
+import { useSelector } from "react-redux";
 
 import {
   Button,
@@ -169,6 +170,11 @@ function Sales({ t }) {
     index.push(i);
   }
 
+  const message = useSelector((state) => state.messageReducer.message);
+  console.log("message ===", message);
+  useEffect(() => {
+    console.log("message use ===", message);
+  }, []);
   return (
     <Container fluid className="bg-white font-ubu">
       <Row className="bg-white border-bottom p-1">
@@ -259,6 +265,7 @@ function Sales({ t }) {
               </tbody>
             </table>
           </div>
+
           <Pagination
             pageSize={pageSize}
             pagination={pagination}
