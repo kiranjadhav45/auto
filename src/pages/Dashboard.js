@@ -12,8 +12,10 @@ import PendingSettlement from "../components/dashboard/PendingSettlement";
 import { TbTruckDelivery } from "react-icons/tb";
 import { RiCustomerService2Fill } from "react-icons/ri";
 import { MdPendingActions } from "react-icons/md";
+import Nav2 from "../components/common/Nav2";
 
 function Dashboard() {
+  const [subMenu, setSubMenu] = useState("Pre-Order");
   const message = useSelector((state) => state.messageReducer.message);
   const iconSize = 15;
 
@@ -29,11 +31,50 @@ function Dashboard() {
     logo3: <MdPendingActions size={iconSize} color="black" />,
   };
 
+  const handleSubSubMenu = (data) => {
+    setSubMenu(data);
+  };
+
   return (
     <Container fluid className="bg-white font-ubu">
       <Row>
-        <Col className="mt-1">
+        <Col className="mt-1 col-4">
           <Navbar dashboardData={dashboardData} />
+        </Col>
+        <Col>
+          <button
+            className="headerButton mx-2"
+            value="20"
+            onClick={() => handleSubSubMenu(dashboardData.title1)}
+          >
+            {dashboardData.logo1}
+            <small className="text-black m-0 p-0 mx-1 mr-5">
+              {dashboardData.title1}
+            </small>
+          </button>
+          <button
+            className="headerButton mx-2"
+            value="20"
+            onClick={() => handleSubSubMenu(dashboardData.title2)}
+          >
+            {dashboardData.logo2}
+            <small className="text-black m-0 p-0 mx-1 mr-5">
+              {dashboardData.title2}
+            </small>
+          </button>
+          <button
+            className="headerButton mx-2"
+            value="20"
+            onClick={() => handleSubSubMenu(dashboardData.title3)}
+          >
+            {dashboardData.logo3}
+            <small className="text-black m-0 p-0 mx-1 mr-5">
+              {dashboardData.title3}
+            </small>
+          </button>
+        </Col>
+        <Col className="col-6">
+          <Nav2 />
         </Col>
       </Row>
       <Row className="border-top">
@@ -41,9 +82,9 @@ function Dashboard() {
           <SideMenu />
         </Col>
         <Col className="col-18">
-          {message && message === "Pre-Order" ? <PreOrder /> : ""}
-          {message && message === "Service" ? <Service /> : ""}
-          {message && message === "pending settlements" ? (
+          {subMenu && subMenu === "Pre-Order" ? <PreOrder /> : ""}
+          {subMenu && subMenu === "Service" ? <Service /> : ""}
+          {subMenu && subMenu === "pending settlements" ? (
             <PendingSettlement />
           ) : (
             ""

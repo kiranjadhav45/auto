@@ -46,6 +46,7 @@ function Navbar({
     logo5: "",
     logo6: "",
   });
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -76,10 +77,10 @@ function Navbar({
   return (
     <div>
       <Row>
-        <Col className="col-1">
+        <Col>
           <strong>Auto</strong>
         </Col>
-        <Col className="col-2 mx-1">
+        <Col>
           <Form.Select
             size="sm"
             className="Form-select-main formSelect-Navbar"

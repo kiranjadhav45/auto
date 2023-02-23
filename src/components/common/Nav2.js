@@ -24,7 +24,7 @@ function Nav2({ t }) {
   const changeLanguage = (lng) => {
     console.log(lng);
     // i18n.changeLanguage(lng);
-    //   setLanguage(false);
+    setLanguage(false);
   };
   const handleOnProfile = (value) => {
     updateIsOpen(false);

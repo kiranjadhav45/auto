@@ -163,8 +163,12 @@ table caption {
   position: absolute;
   right: 0;
 }
-/* .formSelect-Navbar {
-  border: 0 !important;
+.formSelect-Navbar {
+  /* border: 0 !important;
   border: none !important;
   outline: 0 !important; */
-/* } */
+  position: absolute !important;
+  left: 50px;
+  height: 15px !important;
+  top: 7px;
+}

@@ -47,6 +47,7 @@ function Sales({ t }) {
   const [pageSize, setPageSize] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchRes, setSearchRes] = useState([]);
+  const [subMenu, setSubMenu] = useState("Sales");
   const [itemList, setItemList] = useState([
     {
       itemName: "Product One",
@@ -191,10 +192,12 @@ function Sales({ t }) {
     logo3: <GrVmMaintenance size={iconSixe} color="black" />,
   };
 
-  const handleSubSubMenu = () => {};
+  const handleSubSubMenu = (data) => {
+    setSubMenu(data);
+  };
   return (
     <Container fluid className="bg-white font-ubu">
-      <Row className="bg-white border-bottom p-1">
+      <Row className="bg-white border-bottom ">
         <Col className="col-4">
           <Navbar />
         </Col>
@@ -240,7 +243,7 @@ function Sales({ t }) {
         </Col>
 
         <Col className="col-18 bg-white">
-          {message && message === "" ? (
+          {subMenu && subMenu === "main" ? (
             <Col className="col-18 bg-white">
               <Row className="mt-2">
                 <Col>
@@ -346,7 +349,7 @@ function Sales({ t }) {
             ""
           )}
 
-          {message && message === "Sales" ? (
+          {subMenu && subMenu === "Sales" ? (
             <Col className="col-18 bg-white">
               <SalesComponet />
             </Col>
@@ -354,7 +357,7 @@ function Sales({ t }) {
             ""
           )}
 
-          {message && message === "Total Sales" ? (
+          {subMenu && subMenu === "Total Sales" ? (
             <Col className="col-18 bg-white">
               <TotalSales />
             </Col>
@@ -362,7 +365,7 @@ function Sales({ t }) {
             ""
           )}
 
-          {message && message === "Maintenance" ? (
+          {subMenu && subMenu === "Maintenance" ? (
             <Col className="col-18 bg-white">
               <Maintenance />
             </Col>

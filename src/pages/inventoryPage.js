@@ -40,6 +40,12 @@ import CustomModal from "../components/ui/modal";
 import SideMenu from "../components/ui/sideMenu";
 import { withNamespaces } from "react-i18next";
 import Navbar from "../components/common/Navbar";
+import Nav2 from "../components/common/Nav2";
+import MostSold from "../components/inventory/MostSold";
+import ExpManagment from "../components/inventory/ExpManagment";
+import RackManagment from "../components/inventory/RackManagment";
+import DeadStock from "../components/inventory/DeadStock";
+import Return from "../components/inventory/Return";
 
 function InventoryPage({ t }) {
   const [allMasters, setAllMasters] = useState();
@@ -47,7 +53,7 @@ function InventoryPage({ t }) {
   const [activeSubMenu, setActiveSubMenu] = useState("Most Sold");
   const [currentSubMenu, setCurrentSubMenu] = useState();
   const [showModal, setShowModal] = useState(false);
-
+  const [subMenu, setSubMenu] = useState("Most Sold");
   const iconSixe = 15;
   let inventoryData = {
     title1: "Most Sold",
@@ -64,7 +70,9 @@ function InventoryPage({ t }) {
     logo4: <HiArrowSmDown size={iconSixe} color="black" />,
     logo5: <TbTruckReturn size={iconSixe} color="black" />,
   };
-
+  const handleSubSubMenu = (data) => {
+    setSubMenu(data);
+  };
   useEffect(() => {
     // const getMaster = async () => {
     //   const findUser = isUser();
@@ -95,83 +103,64 @@ function InventoryPage({ t }) {
 
   return (
     <Container fluid className="bg-white font-ubu">
-      <Row className="bg-white border-bottom p-1">
-        <Col className="">
-          <Navbar inventoryData={inventoryData} />
-          {/* <strong size="sm" className="mx-2">
-            N
-          </strong>
-
-          <button class="headerButton mx-2">
-            <CiBellOn size={20} color="black" />
-            <strong className="text-blue m-0 p-0 mx-1 mr-5">
-              {t("Inventory Management")}
-            </strong>
+      <Row className="border-bottom">
+        <Col className="mt-1 col-4">
+          <Navbar />
+        </Col>
+        <Col>
+          <button
+            className="headerButton mx-2"
+            value="20"
+            onClick={() => handleSubSubMenu(inventoryData.title1)}
+          >
+            {inventoryData.logo1}
+            <small className="text-black m-0 p-0 mx-1 mr-5">
+              {inventoryData.title1}
+            </small>
           </button>
-
-          <button class="headerButton ">
-            <CiImport size={16} color="black" />{" "}
-            <small className="text-dark m-0 p-0 mx-1">{t("Import")}</small>
+          <button
+            className="headerButton mx-2"
+            value="20"
+            onClick={() => handleSubSubMenu(inventoryData.title2)}
+          >
+            {inventoryData.logo2}
+            <small className="text-black m-0 p-0 mx-1 mr-5">
+              {inventoryData.title2}
+            </small>
           </button>
-          <button class="headerButton ">
-            <CiExport size={16} color="black" />{" "}
-            <small className="text-dark m-0 p-0 mx-1">{t("Export")}</small>
+          <button
+            className="headerButton mx-2"
+            value="20"
+            onClick={() => handleSubSubMenu(inventoryData.title3)}
+          >
+            {inventoryData.logo3}
+            <small className="text-black m-0 p-0 mx-1 mr-5">
+              {inventoryData.title3}
+            </small>
           </button>
-
-          <button class="headerButton">
-            <CiSettings size={20} color="black" />
-            <small className="text-dark m-0 p-0 mx-1">
-              {t("Settings")}
-            </small>{" "}
+          <button
+            className="headerButton mx-2"
+            value="20"
+            onClick={() => handleSubSubMenu(inventoryData.title4)}
+          >
+            {inventoryData.logo4}
+            <small className="text-black m-0 p-0 mx-1 mr-5">
+              {inventoryData.title4}
+            </small>
+          </button>
+          <button
+            className="headerButton mx-2"
+            value="20"
+            onClick={() => handleSubSubMenu(inventoryData.title5)}
+          >
+            {inventoryData.logo5}
+            <small className="text-black m-0 p-0 mx-1 mr-5">
+              {inventoryData.title5}
+            </small>
           </button>
         </Col>
-        <Col className="text-end">
-          <button class="headerButton">
-            <CiBellOn size={20} color="orange" />
-            <small className="text-dark m-0 p-0 mx-1">2000</small>
-          </button>
-          <button class="headerButton">
-            <CiStar size={20} color="dodgerblue" />
-            <small className="text-dark m-0 p-0 mx-1">120</small>
-          </button> */}
-          {/* <button class="headerButton position-relative">
-            <CiTrophy size={20} color="green" />
-            <small className="text-dark m-0 p-0 mx-1">200</small> */}
-          {/* <ListGroup className="onClickMenuBottom">
-              <ListGroup.Item>Cras justo odio</ListGroup.Item>
-              <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-              <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-              <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-              <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-            </ListGroup> */}
-          {/* </button> */}
-          {/* <button
-            class="headerButton profile-inventory position-relative"
-            // onClick={updateIsOpen(true)}
-            onMouseOver={() => updateIsOpen(true)}
-            // onFocus={() => updateIsOpen(true)}
-            onMouseLeave={() => updateIsOpen(false)}
-            // onBlur={() => updateIsOpen(false)}
-            // toggle={() => updateIsOpen(!isOpen)}
-            // isOpen={isOpen}
-          >
-            <CgProfile size={20} color="green" />
-            <small className="text-dark m-0 p-0 mx-1">Kiran</small>
-            {isOpen === true ? (
-              <ListGroup
-                className="onClickMenuBottom profile-inventory-items  "
-                // value={isOpen}
-              >
-                <ListGroup.Item to="#">{t("My Profiles")}</ListGroup.Item>
-                <ListGroup.Item>{t("Orders")}</ListGroup.Item>
-                <ListGroup.Item>{t("Watchlist")}</ListGroup.Item>
-                <ListGroup.Item>{t("Notification")}</ListGroup.Item>
-                <ListGroup.Item>{t("Logout")}</ListGroup.Item>
-              </ListGroup>
-            ) : (
-              ""
-            )}
-          </button> */}
+        <Col className="col-6">
+          <Nav2 />
         </Col>
       </Row>
 
@@ -179,9 +168,16 @@ function InventoryPage({ t }) {
         <Col className="col-1 bg-white  border-end">
           <SideMenu />
         </Col>
-        <Col className="col-18 bg-white ">
-          <Row className="mt-2">
-            <Col className="col-16">
+        <Col className=" col-18 bg-white">
+          {subMenu && subMenu === "Most Sold" ? <MostSold /> : ""}
+          {subMenu && subMenu === "Exp Managment" ? <ExpManagment /> : ""}
+          {subMenu && subMenu === "Rack Managment" ? <RackManagment /> : ""}
+          {subMenu && subMenu === "Dead Stocks" ? <DeadStock /> : ""}
+          {subMenu && subMenu === "Returns" ? <Return /> : ""}
+        </Col>
+        {/* <Col className="col-18 bg-white "> */}
+        {/* <Row className="mt-2"> */}
+        {/* <Col className="col-16">
               <ButtonGroup className="">
                 <div className="mr-1">
                   <Form.Select
@@ -220,9 +216,9 @@ function InventoryPage({ t }) {
                   <CiSettings size={16} color="black" />
                   <small className="text-dark m-0 p-0 mx-1">Settings</small>
                 </button> */}
-              </ButtonGroup>
-            </Col>
-            <Col>
+        {/* </ButtonGroup> */}
+        {/* </Col> */}
+        {/* <Col>
               <ButtonGroup className=" float-end">
                 <button class="menuButton ">
                   <CiSearch size={16} color="black" />
@@ -242,9 +238,9 @@ function InventoryPage({ t }) {
                   </Form.Select>
                 </div>
               </ButtonGroup>
-            </Col>
-          </Row>
-          <div
+            </Col> */}
+        {/* </Row> */}
+        {/* <div
             className="mt-2 table-responsive"
             data-pattern="priority-columns"
           >
@@ -258,12 +254,12 @@ function InventoryPage({ t }) {
                   {currentTableHeaders &&
                     currentTableHeaders.map((i) => <th>{i.title}</th>)}
                 </tr>
-                {/* <tr>
+                <tr>
                   <th data-priority="1">Languages</th>
                   <th data-priority="2">Population</th>
                   <th data-priority="3">Median Age</th>
                   <th data-priority="4">Area (Km²)</th>
-                </tr> */}
+                </tr>
               </thead>
               <tbody>
                 <tr>
@@ -344,12 +340,12 @@ function InventoryPage({ t }) {
                 </tr>
               </tbody>
             </table>
-          </div>
-          <Pagination className="float-end" size="sm">
+          </div> */}
+        {/* <Pagination className="float-end" size="sm">
             {items}
-          </Pagination>
-        </Col>
-        {/* <Col className="col-4 bg-veryLight border-end">Nikhil</Col>
+          </Pagination> */}
+        {/* </Col> */}
+        <Col className="col-4 bg-veryLight border-end">Nikhil</Col>
         <Col className="bg-veryLight col-1 ">
           <ButtonGroup vertical className="p-1">
             <div className="p-0 m-0 sideMenuIcon">
@@ -375,7 +371,7 @@ function InventoryPage({ t }) {
               <CiSettings size={20} className=" my-2" />
             </div>
           </ButtonGroup>
-        </Col> */}
+        </Col>
       </Row>
     </Container>
   );

@@ -34,7 +34,7 @@ function MostSold({ t }) {
   return (
     <div>
       <Row>
-        <Col className="col-18 bg-white ">
+        <Col className=" bg-white ">
           <Row className="mt-2">
             <Col className="col-16">
               <ButtonGroup className="">
@@ -113,12 +113,12 @@ function MostSold({ t }) {
                   {/* {currentTableHeaders &&
                     currentTableHeaders.map((i) => <th>{i.title}</th>)} */}
                 </tr>
-                {/* <tr>
+                <tr>
                   <th data-priority="1">Languages</th>
                   <th data-priority="2">Population</th>
                   <th data-priority="3">Median Age</th>
                   <th data-priority="4">Area (Km²)</th>
-                </tr> */}
+                </tr>
               </thead>
               <tbody>
                 <tr>
