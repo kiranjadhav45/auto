@@ -172,3 +172,9 @@ table caption {
   height: 15px !important;
   top: 7px;
 }
+.FliterMonths {
+  border: 0 !important;
+  border: none !important;
+  outline: 0 !important;
+  /* position: relative !important; */
+}

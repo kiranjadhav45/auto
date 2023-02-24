@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { withNamespaces } from "react-i18next";
 import {
   Button,
@@ -14,11 +14,25 @@ import { GrLanguage } from "react-icons/gr";
 import { CgProfile } from "react-icons/cg";
 import { CiTrophy } from "react-icons/ci";
 import { CiStar, CiBellOn } from "react-icons/ci";
+// import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Profile from "../ui/Profile";
 
 function Nav2({ t }) {
   const [isOpen, updateIsOpen] = useState(false);
   const [language, setLanguage] = useState(false);
   const [profileDropDwon, setProfileDropDwon] = useState("");
+  const [showProfile, setShowProfile] = useState(false);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setShow(false);
+  };
+
+  const handleShow = () => {
+    setShow(true);
+  };
 
   const iconSixe = 15;
   const changeLanguage = (lng) => {
@@ -29,6 +43,7 @@ function Nav2({ t }) {
   const handleOnProfile = (value) => {
     updateIsOpen(false);
     console.log(value);
+    setShowProfile(true);
   };
 
   return (
@@ -66,22 +81,19 @@ function Nav2({ t }) {
               onClick={(e) => setProfileDropDwon(e.target.value)}
               // value={isOpen}
             >
-              <ListGroup.Item
-                to="#"
-                onClick={(e) => handleOnProfile(e.target.value)}
-              >
+              <ListGroup.Item to="#" onClick={handleShow}>
                 {t("My Profiles")}
               </ListGroup.Item>
-              <ListGroup.Item onClick={(e) => handleOnProfile(e.target.value)}>
+              {/* <ListGroup.Item onClick={(e) => handleOnProfile()}>
                 {t("Orders")}
-              </ListGroup.Item>
-              <ListGroup.Item onClick={(e) => handleOnProfile(e.target.value)}>
+              </ListGroup.Item> */}
+              {/* <ListGroup.Item onClick={(e) => handleOnProfile(e.target.value)}>
                 {t("Watchlist")}
-              </ListGroup.Item>
-              <ListGroup.Item onClick={(e) => handleOnProfile(e.target.value)}>
+              </ListGroup.Item> */}
+              <ListGroup.Item onClick={(e) => handleOnProfile("Notification")}>
                 {t("Notification")}
               </ListGroup.Item>
-              <ListGroup.Item onClick={(e) => handleOnProfile(e.target.value)}>
+              <ListGroup.Item onClick={(e) => handleOnProfile("Logout")}>
                 {t("Logout")}
               </ListGroup.Item>
             </ListGroup>
@@ -119,6 +131,22 @@ function Nav2({ t }) {
           )}
         </button>
       </Col>
+      <div>
+        <Modal show={show} onHide={handleClose} animation={false}>
+          <Modal.Header closeButton>
+            <Modal.Title>Profile</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{<Profile />}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     </div>
   );
 }

@@ -169,7 +169,7 @@ function InventoryPage({ t }) {
           <SideMenu />
         </Col>
         <Col className=" col-18 bg-white">
-          {subMenu && subMenu === "Most Sold" ? <MostSold /> : ""}
+          {subMenu && subMenu === "Most Sold" ? <MostSold items={items} /> : ""}
           {subMenu && subMenu === "Exp Managment" ? <ExpManagment /> : ""}
           {subMenu && subMenu === "Rack Managment" ? <RackManagment /> : ""}
           {subMenu && subMenu === "Dead Stocks" ? <DeadStock /> : ""}

@@ -11,6 +11,7 @@ import {
   Row,
   NavDropdown,
   ListGroup,
+  FormSelect,
 } from "react-bootstrap";
 import {
   CiBatteryCharging,
@@ -30,31 +31,34 @@ import {
   CiUser,
   CiViewTimeline,
 } from "react-icons/ci";
-function MostSold({ t }) {
+import { RiArrowUpDownFill } from "react-icons/ri";
+import Pagination from "react-bootstrap/Pagination";
+
+function MostSold({ t, items }) {
   return (
     <div>
       <Row>
         <Col className=" bg-white ">
           <Row className="mt-2">
-            <Col className="col-16">
+            <Col className="col-7">
               <ButtonGroup className="">
                 <div className="mr-1">
-                  <Form.Select
+                  {/* <Form.Select
                     size="sm"
                     // onChange={(e) => setActiveSubMenu(e.target.value)}
                     aria-label="Default select example"
-                  >
-                    {/* {currentSubMenu &&
+                  > */}
+                  {/* {currentSubMenu &&
                       currentSubMenu.subMenu.map((i) => (
                         <option value={i.title}>{i.title} 2</option>
                       ))} */}
-                    {/* <option value={10}>{t("Types")}</option>
+                  {/* <option value={10}>{t("Types")}</option>
                     <option value={10}>{t("Most Sold")}</option>
                     <option value={20}>{t("Exp Managment")}</option>
                     <option value={20}>{t("Rack Managment")}</option>
                     <option value={20}>{t("Dead Stock")}</option>
                     <option value={20}>{t("Return")}</option> */}
-                  </Form.Select>
+                  {/* </Form.Select> */}
                 </div>
 
                 <button class="menuButton mx-2">
@@ -77,6 +81,11 @@ function MostSold({ t }) {
                 </button> */}
               </ButtonGroup>
             </Col>
+            <Col className="col-4 float-end">
+              <Form.Control size="sm" type="text" placeholder="Search" />
+            </Col>
+            <Col className=""></Col>
+
             <Col>
               <ButtonGroup className=" float-end">
                 <button class="menuButton ">
@@ -109,15 +118,26 @@ function MostSold({ t }) {
             >
               {" "}
               <thead>
+                {/* <tr>
+                  {currentTableHeaders &&
+                    currentTableHeaders.map((i) => <th>{i.title}</th>)}
+                </tr> */}
                 <tr>
-                  {/* {currentTableHeaders &&
-                    currentTableHeaders.map((i) => <th>{i.title}</th>)} */}
-                </tr>
-                <tr>
-                  <th data-priority="1">Languages</th>
-                  <th data-priority="2">Population</th>
-                  <th data-priority="3">Median Age</th>
-                  <th data-priority="4">Area (Km²)</th>
+                  <th data-priority="1">Sr No</th>
+                  <th data-priority="2">Product Name</th>
+                  <th data-priority="3">
+                    Sold Quantity{" "}
+                    <button className="headerButton mx-2">
+                      <RiArrowUpDownFill size={17} />
+                    </button>
+                  </th>
+                  <th data-priority="4">Price</th>
+                  <th data-priority="4">
+                    Total Amount Sold{" "}
+                    <button className="headerButton mx-2">
+                      <RiArrowUpDownFill size={17} />
+                    </button>
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -200,9 +220,9 @@ function MostSold({ t }) {
               </tbody>
             </table>
           </div>
-          {/* <Pagination className="float-end" size="sm">
+          <Pagination className="float-end" size="sm">
             {items}
-          </Pagination> */}
+          </Pagination>
         </Col>
       </Row>
     </div>

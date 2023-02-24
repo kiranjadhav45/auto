@@ -42,6 +42,7 @@ import {
 import { FcSalesPerformance } from "react-icons/fc";
 import { BiTrendingUp } from "react-icons/bi";
 import { GrVmMaintenance } from "react-icons/gr";
+import Profile from "../components/ui/Profile";
 
 function Sales({ t }) {
   const [pageSize, setPageSize] = useState(10);

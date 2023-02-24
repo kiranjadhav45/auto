@@ -18,9 +18,11 @@ function SideMenu() {
 
   return (
     <ButtonGroup vertical className="p-1">
-      <div className="p-0 m-0 menuIcon">
-        <CiGrid31 size={25} className="my-2" />
-      </div>
+      <Link to="/dashboard">
+        <div className="p-0 m-0 menuIcon">
+          <CiGrid31 size={25} className="my-2" />
+        </div>
+      </Link>
 
       <Link to="/sales">
         <div className="p-0 m-0 menuIcon">
@@ -28,11 +30,11 @@ function SideMenu() {
         </div>
       </Link>
 
-      <Link to="/items">
-        <div className="p-0 m-0 menuIcon">
-          <CiBarcode size={25} className="my-2" />
-        </div>
-      </Link>
+      {/* <Link to="/items"> */}
+      <div className="p-0 m-0 menuIcon">
+        <CiBarcode size={25} className="my-2" />
+      </div>
+      {/* </Link> */}
 
       <Link to="/inventory">
         <div className="p-0 m-0 menuIcon">
@@ -40,13 +42,17 @@ function SideMenu() {
         </div>
       </Link>
 
-      <div className="p-0 m-0 menuIcon">
-        <CiUnlock size={25} className="my-2" />
-      </div>
+      <Link to="/hrm">
+        <div className="p-0 m-0 menuIcon">
+          <CiUnlock size={25} className="my-2" />
+        </div>
+      </Link>
 
-      <div className="p-0 m-0 menuIcon">
-        <CiUser size={25} className="my-2" />
-      </div>
+      <Link to="/account">
+        <div className="p-0 m-0 menuIcon">
+          <CiUser size={25} className="my-2" />
+        </div>
+      </Link>
 
       <Link to="/masters">
         <div className="p-0 m-0 menuIcon">
