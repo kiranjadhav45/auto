@@ -4,7 +4,7 @@ import { Row, Col, Form, ButtonGroup } from "react-bootstrap";
 import { CiSquarePlus, CiPlay1, CiFilter, CiSearch } from "react-icons/ci";
 import { RiArrowUpDownFill } from "react-icons/ri";
 
-function ReturnedProducts({ t }) {
+function UnSoldStock({ t }) {
   return (
     <div>
       <Row className="mt-2  ">
@@ -168,126 +168,8 @@ function ReturnedProducts({ t }) {
           </tbody>
         </table>
       </div>
-
-      <Row>
-        <Col className="text-center">
-          <h4>Recent Returns</h4>
-        </Col>
-      </Row>
-
-      <Row className="mx-4 mt-4">
-        <Col className="col-10 p-4  rounded bg-lighttblue">
-          <Row>
-            <Col>Name :</Col>
-            <Col>Kiran Jadhav</Col>
-          </Row>
-          <Row>
-            <Col>Address :</Col>
-            <Col>Ap karad maharashtra</Col>
-          </Row>
-          <Row>
-            <Col>Pin :</Col>
-            <Col>415110</Col>
-          </Row>
-          <Row>
-            <Col>Reason For Return :</Col>
-            <Col> ...</Col>
-          </Row>
-          <Row>
-            <Col>Product Name</Col>
-            <Col> ...</Col>
-          </Row>
-          <Row>
-            <Col>Quantity :</Col>
-            <Col> ...</Col>
-          </Row>
-        </Col>
-        <Col className="col-4 "></Col>
-        <Col className="col-10 p-4 rounded bg-lighttblue">
-          <Row>
-            <Col>Name :</Col>
-            <Col>Kiran Jadhav</Col>
-          </Row>
-          <Row>
-            <Col>Address :</Col>
-            <Col>Ap karad maharashtra</Col>
-          </Row>
-          <Row>
-            <Col>Pin :</Col>
-            <Col>415110</Col>
-          </Row>
-          <Row>
-            <Col>Reason For Return :</Col>
-            <Col> ...</Col>
-          </Row>
-          <Row>
-            <Col>Product Name</Col>
-            <Col> ...</Col>
-          </Row>
-          <Row>
-            <Col>Quantity :</Col>
-            <Col> ...</Col>
-          </Row>
-        </Col>
-      </Row>
-
-      <Row className="mx-4 mt-4">
-        <Col className="col-10 p-4 rounded bg-lighttblue">
-          <Row>
-            <Col>Name :</Col>
-            <Col>Kiran Jadhav</Col>
-          </Row>
-          <Row>
-            <Col>Address :</Col>
-            <Col>Ap karad maharashtra</Col>
-          </Row>
-          <Row>
-            <Col>Pin :</Col>
-            <Col>415110</Col>
-          </Row>
-          <Row>
-            <Col>Reason For Return :</Col>
-            <Col> ...</Col>
-          </Row>
-          <Row>
-            <Col>Product Name</Col>
-            <Col> ...</Col>
-          </Row>
-          <Row>
-            <Col>Quantity :</Col>
-            <Col> ...</Col>
-          </Row>
-        </Col>
-        <Col className="col-4"></Col>
-        <Col className="col-10 p-4 rounded bg-lighttblue">
-          <Row>
-            <Col>Name :</Col>
-            <Col>Kiran Jadhav</Col>
-          </Row>
-          <Row>
-            <Col>Address :</Col>
-            <Col>Ap karad maharashtra</Col>
-          </Row>
-          <Row>
-            <Col>Pin :</Col>
-            <Col>415110</Col>
-          </Row>
-          <Row>
-            <Col>Reason For Return :</Col>
-            <Col> ...</Col>
-          </Row>
-          <Row>
-            <Col>Product Name</Col>
-            <Col> ...</Col>
-          </Row>
-          <Row>
-            <Col>Quantity :</Col>
-            <Col> ...</Col>
-          </Row>
-        </Col>
-      </Row>
     </div>
   );
 }
 
-export default withNamespaces()(ReturnedProducts);
+export default withNamespaces()(UnSoldStock);

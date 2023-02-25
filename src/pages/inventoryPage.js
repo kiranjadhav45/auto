@@ -34,6 +34,7 @@ import { FcExpired } from "react-icons/fc";
 import { TbTruckReturn } from "react-icons/tb";
 import { HiArrowSmDown } from "react-icons/hi";
 import { BsHddRackFill } from "react-icons/bs";
+import { IoWarning } from "react-icons/io5";
 
 import { isUser } from "../components/localStore/getCurrentUser";
 import CustomModal from "../components/ui/modal";
@@ -46,6 +47,7 @@ import ExpManagment from "../components/inventory/ExpManagment";
 import RackManagment from "../components/inventory/RackManagment";
 import DeadStock from "../components/inventory/DeadStock";
 import Return from "../components/inventory/Return";
+import UnSoldStock from "../components/inventory/UnSoldStock";
 
 function InventoryPage({ t }) {
   const [allMasters, setAllMasters] = useState();
@@ -60,7 +62,8 @@ function InventoryPage({ t }) {
     title2: "Exp Managment",
     title3: "Rack Managment",
     title4: "Dead Stocks",
-    title5: "Returns",
+    title5: "UnSold Stock",
+    title6: "Returns",
     path1: "/subReports",
     path2: "/totalSales",
     path3: "/Maintainance",
@@ -68,28 +71,29 @@ function InventoryPage({ t }) {
     logo2: <FcExpired size={iconSixe} color="black" />,
     logo3: <BsHddRackFill size={iconSixe} color="black" />,
     logo4: <HiArrowSmDown size={iconSixe} color="black" />,
-    logo5: <TbTruckReturn size={iconSixe} color="black" />,
+    logo5: <IoWarning size={iconSixe} color="black" />,
+    logo6: <TbTruckReturn size={iconSixe} color="black" />,
   };
   const handleSubSubMenu = (data) => {
     setSubMenu(data);
   };
-  useEffect(() => {
-    // const getMaster = async () => {
-    //   const findUser = isUser();
-    //   let res = await getMasterPerUser(findUser._id);
-    //   setAllMasters(res.data.ack[0]);
-    //   let currentMenu = res.data.ack[0].menu.filter(
-    //     (i) => i.title === "Inventory"
-    //   );
-    //   setCurrentSubMenu(currentMenu[0]);
-    //   let test = currentMenu[0].subMenu.filter(
-    //     (i) => i.title === activeSubMenu
-    //   );
-    //   console.log("Fields", test[0].fields);
-    //   setCurrentTableHeaders(test[0].fields);
-    // };
-    // getMaster();
-  }, [activeSubMenu]);
+  // useEffect(() => {
+  // const getMaster = async () => {
+  //   const findUser = isUser();
+  //   let res = await getMasterPerUser(findUser._id);
+  //   setAllMasters(res.data.ack[0]);
+  //   let currentMenu = res.data.ack[0].menu.filter(
+  //     (i) => i.title === "Inventory"
+  //   );
+  //   setCurrentSubMenu(currentMenu[0]);
+  //   let test = currentMenu[0].subMenu.filter(
+  //     (i) => i.title === activeSubMenu
+  //   );
+  //   console.log("Fields", test[0].fields);
+  //   setCurrentTableHeaders(test[0].fields);
+  // };
+  // getMaster();
+  // }, [activeSubMenu]);
 
   let active = 2;
   let items = [];
@@ -100,6 +104,99 @@ function InventoryPage({ t }) {
       </Pagination.Item>
     );
   }
+
+  const [currentFullInvoice, setCurrentFullInvoice] = useState([
+    {
+      productName: "Product One",
+      companyName: "Cipla",
+      quantity: 100,
+      expDate: "feb 25",
+      price: 258,
+      rackNo: 1001,
+      Id: 2,
+    },
+    {
+      productName: "Product Two",
+      companyName: "Cadila",
+      quantity: 254,
+      expDate: "march 25",
+      price: 32,
+      rackNo: 1002,
+      Id: 2,
+    },
+    {
+      productName: "Product Three",
+      companyName: "Zydus",
+      quantity: 69,
+      expDate: "feb 25",
+      price: 91,
+      rackNo: 1001,
+      Id: 3,
+    },
+    {
+      productName: "Product Four",
+      companyName: "Cipla",
+      quantity: 49,
+      expDate: "feb 25",
+      price: 34,
+      rackNo: 1001,
+      Id: 4,
+    },
+    {
+      productName: "Product Five",
+      companyName: "Arti Drugs",
+      quantity: 45,
+      expDate: "feb 25",
+      price: 89,
+      rackNo: 1001,
+      Id: 5,
+    },
+    {
+      productName: "Product Six",
+      companyName: "Cipla",
+      quantity: 78,
+      expDate: "feb 25",
+      price: 25,
+      rackNo: 1001,
+      Id: 6,
+    },
+    {
+      productName: "Product Seven",
+      companyName: "Lupin",
+      quantity: 31,
+      expDate: "feb 25",
+      price: 89,
+      rackNo: 1001,
+      Id: 7,
+    },
+    {
+      productName: "Product Eight",
+      companyName: "Trigen",
+      quantity: 89,
+      expDate: "feb 25",
+      price: 98,
+      rackNo: 1001,
+      Id: 8,
+    },
+    {
+      productName: "Product Nine",
+      companyName: "Cipla",
+      quantity: 325,
+      expDate: "feb 25",
+      price: 85,
+      rackNo: 1001,
+      Id: 9,
+    },
+    {
+      productName: "Product Ten",
+      companyName: "sun Pharma",
+      quantity: 66,
+      expDate: "feb 25",
+      price: 123,
+      rackNo: 1001,
+      Id: 10,
+    },
+  ]);
 
   return (
     <Container fluid className="bg-white font-ubu">
@@ -158,6 +255,16 @@ function InventoryPage({ t }) {
               {inventoryData.title5}
             </small>
           </button>
+          <button
+            className="headerButton mx-2"
+            value="20"
+            onClick={() => handleSubSubMenu(inventoryData.title6)}
+          >
+            {inventoryData.logo6}
+            <small className="text-black m-0 p-0 mx-1 mr-5">
+              {inventoryData.title6}
+            </small>
+          </button>
         </Col>
         <Col className="col-6">
           <Nav2 />
@@ -169,10 +276,19 @@ function InventoryPage({ t }) {
           <SideMenu />
         </Col>
         <Col className=" col-18 bg-white">
-          {subMenu && subMenu === "Most Sold" ? <MostSold items={items} /> : ""}
-          {subMenu && subMenu === "Exp Managment" ? <ExpManagment /> : ""}
+          {subMenu && subMenu === "Most Sold" ? (
+            <MostSold currentFullInvoice={currentFullInvoice} items={items} />
+          ) : (
+            ""
+          )}
+          {subMenu && subMenu === "Exp Managment" ? (
+            <ExpManagment currentFullInvoice={currentFullInvoice} />
+          ) : (
+            ""
+          )}
           {subMenu && subMenu === "Rack Managment" ? <RackManagment /> : ""}
           {subMenu && subMenu === "Dead Stocks" ? <DeadStock /> : ""}
+          {subMenu && subMenu === "UnSold Stock" ? <UnSoldStock /> : ""}
           {subMenu && subMenu === "Returns" ? <Return /> : ""}
         </Col>
         {/* <Col className="col-18 bg-white "> */}

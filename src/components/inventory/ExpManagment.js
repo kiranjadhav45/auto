@@ -4,7 +4,8 @@ import { Row, Col, Form, ButtonGroup } from "react-bootstrap";
 import { CiSquarePlus, CiPlay1, CiFilter, CiSearch } from "react-icons/ci";
 import { RiArrowUpDownFill } from "react-icons/ri";
 
-function ExpManagment({ t }) {
+function ExpManagment({ t, currentFullInvoice }) {
+  const data = [...currentFullInvoice];
   return (
     <div>
       <Row className="mt-2  ">
@@ -73,23 +74,11 @@ function ExpManagment({ t }) {
                   <RiArrowUpDownFill size={17} />
                 </button>
               </th>
-              <th data-priority="4">Price</th>
-              <th data-priority="4">
-                Rack No{" "}
-                {/* <button className="headerButton mx-2">
-                  <RiArrowUpDownFill size={17} />
-                </button> */}
-              </th>
+              <th data-priority="4">Quantity</th>
+              <th data-priority="4">Rack No </th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Greece</td>
-              <td>Greek 99% (official), English, French</td>
-              <td>11,128,404</td>
-              <td>43.2</td>
-              <td>131,956</td>
-            </tr>
             <tr>
               <td>Luxembourg</td>
               <td>
@@ -156,7 +145,7 @@ function ExpManagment({ t }) {
               <td>9,631,261</td>
               <td>41.1</td>
               <td>449,954</td>
-            </tr>
+            </tr>{" "}
           </tbody>
         </table>
       </div>

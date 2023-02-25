@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withNamespaces } from "react-i18next";
 
 import {
@@ -33,8 +33,50 @@ import {
 } from "react-icons/ci";
 import { RiArrowUpDownFill } from "react-icons/ri";
 import Pagination from "react-bootstrap/Pagination";
+import { setMessage } from "../../redux/slices/navslice";
 
-function MostSold({ t, items }) {
+function MostSold({ t, items, currentFullInvoice }) {
+  const [data, setData] = useState(currentFullInvoice);
+  const [order, setOrder] = useState("ASC");
+  useEffect(() => {
+    let currInv = [...currentFullInvoice];
+    console.log("crr", currInv);
+  }, [currentFullInvoice]);
+
+  const handleSortData = (col) => {
+    if (col === "Quantity") {
+      if (order === "ASC") {
+        const sorted = [...data];
+        let result = sorted.sort((a, b) => (a.quantity > b.quantity ? 1 : -1));
+        setOrder("DES");
+        setData(result);
+      }
+      if (order === "DES") {
+        const sorted = [...data];
+        let result = sorted.sort((a, b) => (a.quantity < b.quantity ? 1 : -1));
+        setOrder("ASC");
+        setData(result);
+      }
+    }
+    if (col === "Total Amount") {
+      if (order === "ASC") {
+        const sorted = [...data];
+        let result = sorted.sort((a, b) =>
+          a.quantity * a.price > b.quantity * b.price ? 1 : -1
+        );
+        setOrder("DES");
+        setData(result);
+      }
+      if (order === "DES") {
+        const sorted = [...data];
+        let result = sorted.sort((a, b) =>
+          a.quantity * a.price < b.quantity * b.price ? 1 : -1
+        );
+        setOrder("ASC");
+        setData(result);
+      }
+    }
+  };
   return (
     <div>
       <Row>
@@ -47,18 +89,18 @@ function MostSold({ t, items }) {
                     size="sm"
                     // onChange={(e) => setActiveSubMenu(e.target.value)}
                     aria-label="Default select example"
-                  > */}
-                  {/* {currentSubMenu &&
+                  >
+                  {currentSubMenu &&
                       currentSubMenu.subMenu.map((i) => (
                         <option value={i.title}>{i.title} 2</option>
-                      ))} */}
-                  {/* <option value={10}>{t("Types")}</option>
+                      ))}
+                  <option value={10}>{t("Types")}</option>
                     <option value={10}>{t("Most Sold")}</option>
                     <option value={20}>{t("Exp Managment")}</option>
                     <option value={20}>{t("Rack Managment")}</option>
                     <option value={20}>{t("Dead Stock")}</option>
-                    <option value={20}>{t("Return")}</option> */}
-                  {/* </Form.Select> */}
+                    <option value={20}>{t("Return")}</option>
+                  </Form.Select> */}
                 </div>
 
                 <button class="menuButton mx-2">
@@ -97,6 +139,17 @@ function MostSold({ t, items }) {
                     {t("Filters")}
                   </small>
                 </button>
+                <Form.Select
+                  className="FliterMonths mx-1"
+                  size="sm"
+                  style={{ width: "10px" }}
+                  onChange={(e) => console.log(e.target.value)}
+                  aria-label="Default select example"
+                >
+                  <option value={"This Month"}>{t("This Month")}</option>
+                  <option value={"This Quarter"}>{t("This Quarter")}</option>
+                  <option value={"This Year"}>{t("This Year")}</option>
+                </Form.Select>
                 <div>
                   <Form.Select size="sm" aria-label="Default select example">
                     <option>10</option>
@@ -118,105 +171,47 @@ function MostSold({ t, items }) {
             >
               {" "}
               <thead>
-                {/* <tr>
-                  {currentTableHeaders &&
-                    currentTableHeaders.map((i) => <th>{i.title}</th>)}
-                </tr> */}
                 <tr>
                   <th data-priority="1">Sr No</th>
                   <th data-priority="2">Product Name</th>
                   <th data-priority="3">
                     Sold Quantity{" "}
-                    <button className="headerButton mx-2">
+                    <button
+                      className="headerButton mx-2"
+                      onClick={() => {
+                        handleSortData("Quantity");
+                      }}
+                    >
                       <RiArrowUpDownFill size={17} />
                     </button>
                   </th>
                   <th data-priority="4">Price</th>
                   <th data-priority="4">
                     Total Amount Sold{" "}
-                    <button className="headerButton mx-2">
+                    <button
+                      className="headerButton mx-2"
+                      onClick={() => {
+                        handleSortData("Total Amount");
+                      }}
+                    >
                       <RiArrowUpDownFill size={17} />
                     </button>
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Greece</td>
-                  <td>Greek 99% (official), English, French</td>
-                  <td>11,128,404</td>
-                  <td>43.2</td>
-                  <td>131,956</td>
-                </tr>
-                <tr>
-                  <td>Luxembourg</td>
-                  <td>
-                    Luxermbourgish (national) French, German (both
-                    administrative)
-                  </td>
-                  <td>536,761</td>
-                  <td>39.1</td>
-                  <td>2,586</td>
-                </tr>
-                <tr>
-                  <td>Russia</td>
-                  <td>Russian, others</td>
-                  <td>142,467,651</td>
-                  <td>38.4</td>
-                  <td>17,076,310</td>
-                </tr>
-                <tr>
-                  <td>Sweden</td>
-                  <td>Swedish, small Sami- and Finnish-speaking minorities</td>
-                  <td>9,631,261</td>
-                  <td>41.1</td>
-                  <td>449,954</td>
-                </tr>
-                <tr>
-                  <td>Argentina</td>
-                  <td>Spanish (official), English, Italian, German, French</td>
-                  <td>41,803,125</td>
-                  <td>31.3</td>
-                  <td>2,780,387</td>
-                </tr>
-                <tr>
-                  <td>Australia</td>
-                  <td>English 79%, native and other languages</td>
-                  <td>23,630,169</td>
-                  <td>37.3</td>
-                  <td>7,739,983</td>
-                </tr>
-                <tr>
-                  <td>Greece</td>
-                  <td>Greek 99% (official), English, French</td>
-                  <td>11,128,404</td>
-                  <td>43.2</td>
-                  <td>131,956</td>
-                </tr>
-                <tr>
-                  <td>Luxembourg</td>
-                  <td>
-                    Luxermbourgish (national) French, German (both
-                    administrative)
-                  </td>
-                  <td>536,761</td>
-                  <td>39.1</td>
-                  <td>2,586</td>
-                </tr>
-                <tr>
-                  <td>Russia</td>
-                  <td>Russian, others</td>
-                  <td>142,467,651</td>
-                  <td>38.4</td>
-                  <td>17,076,310</td>
-                </tr>
-                <tr>
-                  <td>Sweden</td>
-                  <td>Swedish, small Sami- and Finnish-speaking minorities</td>
-                  <td>9,631,261</td>
-                  <td>41.1</td>
-                  <td>449,954</td>
-                </tr>
+                {data &&
+                  data.map((item, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{item.productName}</td>
+                        <td>{item.quantity}</td>
+                        <td>{item.price}</td>
+                        <td>{item.quantity * item.price}</td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </div>
