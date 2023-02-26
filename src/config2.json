@@ -9,6 +9,7 @@
               "title": "Previous Orders",
               "path": "/lastOrders",
               "status": "active",
+              "logo":"<CiFilter size={16} color={logoColor} />",
               "lastsubmenu": [
                 {
                     "title": "sub Total Sales",

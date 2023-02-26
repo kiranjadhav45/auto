@@ -26,6 +26,7 @@ function RegisterPage({ t }) {
     confirmPassword: Joi.string().required(),
     businessType: Joi.string().required(),
   };
+
   const [errors, setErrors] = useState();
   const validate = () => {
     const result = Joi.validate(registerForm, schema, { abortEarly: false });
@@ -68,7 +69,7 @@ function RegisterPage({ t }) {
       newForm.name = newForm.firstName + " " + newForm.lastName;
       delete newForm.firstName;
       delete newForm.lastName;
-
+      console.log("FORM2", newForm);
       // let response = await createUserAccount(newForm);
       // if (response.data.status === "success") {
       //   console.log("Account Created Successfully");
@@ -77,6 +78,7 @@ function RegisterPage({ t }) {
       // }
     }
   };
+
   return (
     <Container className="font-ubu">
       <Row>

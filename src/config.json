@@ -243,7 +243,7 @@
       ]
     }
   ],
-  "clothingShop": [
+  "medical": [
     {
       "title": "Dashboard",
       "path": "/dashboard",
