@@ -9,6 +9,7 @@ import Maintenance from "../components/sales/Maintenance";
 import SalesComponet from "../components/sales/SalesComp";
 import TotalSales from "../components/sales/TotalSales";
 import Nav2 from "../components/common/Nav2";
+import jwtDecode from "jwt-decode";
 
 import {
   Button,
@@ -19,22 +20,13 @@ import {
   ListGroup,
   Row,
 } from "react-bootstrap";
-// import Pagination from "react-bootstrap/Pagination";
 
 import {
   CiBatteryCharging,
-  CiBellOn,
   CiCircleList,
-  CiExport,
   CiFilter,
   CiGrid31,
-  CiImport,
-  CiPlay1,
-  CiSearch,
   CiSettings,
-  CiSquarePlus,
-  CiStar,
-  CiTrophy,
   CiUnlock,
   CiUser,
   CiViewTimeline,
@@ -42,9 +34,14 @@ import {
 import { FcSalesPerformance } from "react-icons/fc";
 import { BiTrendingUp } from "react-icons/bi";
 import { GrVmMaintenance } from "react-icons/gr";
-import Profile from "../components/ui/Profile";
 
-function Sales({ t }) {
+const Sales = ({ t }) => {
+  const iconSixe = 15;
+  let token = localStorage.getItem("auth");
+  let decoded = jwtDecode(token);
+  let salesSubmenu = decoded.bundle[1].subMenu;
+  let logo = decoded.bundle[1];
+
   const [pageSize, setPageSize] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchRes, setSearchRes] = useState([]);
@@ -161,7 +158,14 @@ function Sales({ t }) {
       itemInvoice: 45845,
     },
   ]);
-
+  const [salesData, setSalesData] = useState({
+    title1: salesSubmenu[0].title,
+    title2: salesSubmenu[1].title,
+    title3: salesSubmenu[2].title,
+    logo1: <FcSalesPerformance size={iconSixe} color="black" />,
+    logo2: <BiTrendingUp size={iconSixe} color="black" />,
+    logo3: <GrVmMaintenance size={iconSixe} color="black" />,
+  });
   const searchHandle = (e) => {
     let test = itemList.filter((a) => a.itemName === e.target.value);
     setSearchRes(test);
@@ -181,21 +185,12 @@ function Sales({ t }) {
 
   const message = useSelector((state) => state.messageReducer.message);
 
-  console.log("message ===", message);
-
-  const iconSixe = 15;
-  let salesData = {
-    title1: "Sales",
-    title2: "Total Sales",
-    title3: "Maintenance",
-    logo1: <FcSalesPerformance size={iconSixe} color="black" />,
-    logo2: <BiTrendingUp size={iconSixe} color="black" />,
-    logo3: <GrVmMaintenance size={iconSixe} color="black" />,
-  };
+  // console.log("states message=", message);
 
   const handleSubSubMenu = (data) => {
     setSubMenu(data);
   };
+
   return (
     <Container fluid className="bg-white font-ubu">
       <Row className="bg-white border-bottom ">
@@ -358,7 +353,7 @@ function Sales({ t }) {
             ""
           )}
 
-          {subMenu && subMenu === "Total Sales" ? (
+          {subMenu && subMenu === "Service" ? (
             <Col className="col-18 bg-white">
               <TotalSales />
             </Col>
@@ -366,7 +361,7 @@ function Sales({ t }) {
             ""
           )}
 
-          {subMenu && subMenu === "Maintenance" ? (
+          {subMenu && subMenu === "Maintainance" ? (
             <Col className="col-18 bg-white">
               <Maintenance />
             </Col>
@@ -440,6 +435,6 @@ function Sales({ t }) {
       <Footer />
     </Container>
   );
-}
+};
 
 export default withNamespaces()(Sales);

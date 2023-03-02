@@ -178,3 +178,11 @@ table caption {
   outline: 0 !important;
   /* position: relative !important; */
 }
+.profilephoto {
+  position: relative !important;
+  top: -80px !important;
+}
+.profileSection {
+  position: relative !important;
+  top: 544px !important;
+}

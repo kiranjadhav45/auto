@@ -16,30 +16,49 @@ import { BsFillCreditCard2FrontFill } from "react-icons/bs";
 import { AiOutlineTransaction } from "react-icons/ai";
 import { RiBillFill } from "react-icons/ri";
 
+let p = localStorage.getItem("account");
+let accountMenu = JSON.parse(p);
+
 function Dashboard() {
   const [subMenu, setSubMenu] = useState("Settle Bill");
   const iconSixe = 15;
-  let accountsData = {
-    title1: "Settle Bill",
-    title2: "Transaction",
-    title3: "Credit",
-    title4: "Debit",
-    title5: "Report",
-    path1: "/lastOrders",
-    path2: "/totalSales",
-    path3: "/Maintainance",
-    logo1: <RiBillFill size={iconSixe} color="black" />,
-    logo2: <AiOutlineTransaction size={iconSixe} color="black" />,
-    logo3: <BsFillCreditCard2FrontFill size={iconSixe} color="black" />,
-    logo4: <BsFillCreditCard2FrontFill size={iconSixe} color="black" />,
-    logo5: <TbReportAnalytics size={iconSixe} color="black" />,
-  };
+  let accountsData = [
+    {
+      title: "Settle Bill",
+      path: "/lastOrders",
+      logo: <RiBillFill size={iconSixe} color="black" />,
+      showButton: true,
+    },
+    {
+      title: "Transaction",
+      path: "/totalSales",
+      logo: <AiOutlineTransaction size={iconSixe} color="black" />,
+      showButton: accountMenu.transactionChecked,
+    },
+    {
+      title: "Credit",
+      path: "/Maintainance",
+      logo: <BsFillCreditCard2FrontFill size={iconSixe} color="black" />,
+      showButton: accountMenu.creditChecked,
+    },
+    {
+      title: "Debit",
+      path: "/lastOrders",
+      logo: <BsFillCreditCard2FrontFill size={iconSixe} color="black" />,
+      showButton: accountMenu.debitChecked,
+    },
+    {
+      title: "Report",
+      path: "/lastOrders",
+      logo: <TbReportAnalytics size={iconSixe} color="black" />,
+      showButton: accountMenu.reportChecked,
+    },
+  ];
 
   const handleSubSubMenu = (data) => {
     setSubMenu(data);
   };
-  // let data = localStorage.getItem("data");
-  // console.log(data);
+
   return (
     <Container fluid className="bg-white font-ubu">
       <Row>
@@ -47,56 +66,27 @@ function Dashboard() {
           <Navbar />
         </Col>
         <Col className="float-start col-15">
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(accountsData.title1)}
-          >
-            {accountsData.logo1}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {accountsData.title1}
-            </small>
-          </button>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(accountsData.title2)}
-          >
-            {accountsData.logo2}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {accountsData.title2}
-            </small>
-          </button>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(accountsData.title3)}
-          >
-            {accountsData.logo3}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {accountsData.title3}
-            </small>
-          </button>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(accountsData.title4)}
-          >
-            {accountsData.logo4}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {accountsData.title4}
-            </small>
-          </button>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(accountsData.title5)}
-          >
-            {accountsData.logo5}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {accountsData.title5}
-            </small>
-          </button>
+          {accountsData &&
+            accountsData.map((i, index) => {
+              if (i.showButton !== true) {
+              } else {
+                return (
+                  <>
+                    <button
+                      key={index}
+                      className="headerButton mx-2"
+                      value="20"
+                      onClick={() => handleSubSubMenu(i.title)}
+                    >
+                      {i.logo}
+                      <small className="text-black m-0 p-0 mx-1 mr-5">
+                        {i.title}
+                      </small>
+                    </button>
+                  </>
+                );
+              }
+            })}
         </Col>
         <Col className="col-6">
           <Nav2 />

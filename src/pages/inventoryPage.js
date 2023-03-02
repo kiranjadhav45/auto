@@ -57,23 +57,46 @@ function InventoryPage({ t }) {
   const [showModal, setShowModal] = useState(false);
   const [subMenu, setSubMenu] = useState("Most Sold");
   const iconSixe = 15;
-  let inventoryData = {
-    title1: "Most Sold",
-    title2: "Exp Managment",
-    title3: "Rack Managment",
-    title4: "Dead Stocks",
-    title5: "UnSold Stock",
-    title6: "Returns",
-    path1: "/subReports",
-    path2: "/totalSales",
-    path3: "/Maintainance",
-    logo1: <BiTrendingUp size={iconSixe} color="black" />,
-    logo2: <FcExpired size={iconSixe} color="black" />,
-    logo3: <BsHddRackFill size={iconSixe} color="black" />,
-    logo4: <HiArrowSmDown size={iconSixe} color="black" />,
-    logo5: <IoWarning size={iconSixe} color="black" />,
-    logo6: <TbTruckReturn size={iconSixe} color="black" />,
-  };
+  let p = localStorage.getItem("inventory");
+  let inventoryMenu = JSON.parse(p);
+  let inventoryData = [
+    {
+      title: "Most Sold",
+      path: "/subReports",
+      logo: <BiTrendingUp size={iconSixe} color="black" />,
+      showButton: true,
+    },
+    {
+      title: "Exp Managment",
+      path: "/subReports",
+      logo: <FcExpired size={iconSixe} color="black" />,
+      showButton: inventoryMenu.ExpManagmentChecked,
+    },
+    {
+      title: "Rack Managment",
+      path: "/totalSales",
+      logo: <BsHddRackFill size={iconSixe} color="black" />,
+      showButton: inventoryMenu.RackManagmentChecked,
+    },
+    {
+      title: "Dead Stocks",
+      path: "/Maintainance",
+      logo: <HiArrowSmDown size={iconSixe} color="black" />,
+      showButton: inventoryMenu.DeadStocksChecked,
+    },
+    {
+      title: "UnSold Stock",
+      path: "/Maintainance",
+      logo: <IoWarning size={iconSixe} color="black" />,
+      showButton: inventoryMenu.UnSoldStockChecked,
+    },
+    {
+      title: "Returns",
+      path: "/Maintainance",
+      logo: <TbTruckReturn size={iconSixe} color="black" />,
+      showButton: inventoryMenu.ReturnsChecked,
+    },
+  ];
   const handleSubSubMenu = (data) => {
     setSubMenu(data);
   };
@@ -205,66 +228,27 @@ function InventoryPage({ t }) {
           <Navbar />
         </Col>
         <Col>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(inventoryData.title1)}
-          >
-            {inventoryData.logo1}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {inventoryData.title1}
-            </small>
-          </button>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(inventoryData.title2)}
-          >
-            {inventoryData.logo2}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {inventoryData.title2}
-            </small>
-          </button>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(inventoryData.title3)}
-          >
-            {inventoryData.logo3}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {inventoryData.title3}
-            </small>
-          </button>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(inventoryData.title4)}
-          >
-            {inventoryData.logo4}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {inventoryData.title4}
-            </small>
-          </button>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(inventoryData.title5)}
-          >
-            {inventoryData.logo5}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {inventoryData.title5}
-            </small>
-          </button>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(inventoryData.title6)}
-          >
-            {inventoryData.logo6}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {inventoryData.title6}
-            </small>
-          </button>
+          {inventoryData &&
+            inventoryData.map((i, index) => {
+              if (i.showButton !== true) {
+              } else {
+                return (
+                  <>
+                    <button
+                      key={index}
+                      className="headerButton mx-2"
+                      value="20"
+                      onClick={() => handleSubSubMenu(i.title)}
+                    >
+                      {i.logo}
+                      <small className="text-black m-0 p-0 mx-1 mr-5">
+                        {i.title}
+                      </small>
+                    </button>
+                  </>
+                );
+              }
+            })}
         </Col>
         <Col className="col-6">
           <Nav2 />

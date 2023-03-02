@@ -4,6 +4,8 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { withNamespaces } from "react-i18next";
 
 import config from "../config.json";
+import axios from "axios";
+import createUserAccount from ".././services/authService";
 function RegisterPage({ t }) {
   const [registerForm, setRegisterForm] = useState({
     firstName: "",
@@ -22,8 +24,8 @@ function RegisterPage({ t }) {
     mobile: Joi.string().required(),
     email: Joi.string().required(),
     userName: Joi.string().required(),
-    password: Joi.string().required(),
-    confirmPassword: Joi.string().required(),
+    password: Joi.string().min(8).required(),
+    confirmPassword: Joi.string().valid(Joi.ref("password")).required(),
     businessType: Joi.string().required(),
   };
 
@@ -70,12 +72,13 @@ function RegisterPage({ t }) {
       delete newForm.firstName;
       delete newForm.lastName;
       console.log("FORM2", newForm);
-      // let response = await createUserAccount(newForm);
-      // if (response.data.status === "success") {
-      //   console.log("Account Created Successfully");
-      // } else {
-      //   console.log(response.data.ack);
-      // }
+
+      let response = await createUserAccount(newForm);
+      if (response.data.status === "success") {
+        console.log("Account Created Successfully");
+      } else {
+        console.log(response.data.ack);
+      }
     }
   };
 

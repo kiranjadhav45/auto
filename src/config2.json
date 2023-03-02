@@ -9,7 +9,7 @@
               "title": "Previous Orders",
               "path": "/lastOrders",
               "status": "active",
-              "logo":"<CiFilter size={16} color={logoColor} />",
+              "logo":"<CiFilter size={16} color={iconColor} />",
               "lastsubmenu": [
                 {
                     "title": "sub Total Sales",
@@ -20,11 +20,13 @@
                     "title": "subTotal Sales",
                     "path": "/subtotalSales",
                     "status": "active"
+                   
                   },
                   {
                     "title": "subTotal Sales",
                     "path": "/subtotalSales",
                     "status": "active"
+                   
                   }
             ]
             },
@@ -32,21 +34,25 @@
               "title": "Total Sales",
               "path": "/totalSales",
               "status": "active",
+              "logo":"<RiCustomerService2Fill size={iconSixe} color={iconColor} />",
               "lastsubmenu": [
                 {
                     "title": "sub Total Sales",
                     "path": "/subtotalSales",
                     "status": "active"
+                   
                   },
                   {
                     "title": "subTotal Sales",
                     "path": "/subtotalSales",
                     "status": "active"
+                   
                   },
                   {
                     "title": "subTotal Sales",
                     "path": "/subtotalSales",
                     "status": "active"
+                   
                   }
             ]
             },
@@ -54,6 +60,7 @@
               "title": "Pending Settlements",
               "path": "/pendingBills",
               "status": "active",
+              "logo":"<MdPendingActions size={iconSixe} color={iconColor} />",
               "lastsubmenu": [
                 {
                     "title": "sub Total Sales",
@@ -82,17 +89,20 @@
             {
               "title": "Sales",
               "path": "/lastOrders",
-              "status": "active"
+              "status": "active",
+              "logo":"<FcSalesPerformance size={iconSixe} color={iconColor} />"
             },
             {
               "title": "Service",
               "path": "/totalSales",
-              "status": "active"
+              "status": "active",
+              "logo":"<BiTrendingUp size={iconSixe} color={iconColor} />"
             },
             {
               "title": "Maintainance",
               "path": "/totalSales",
-              "status": "active"
+              "status": "active",
+              "logo":"<GrVmMaintenance size={iconSixe} color={iconColor} />"
             }
           ]
         },
@@ -105,6 +115,7 @@
               "title": "Most Sold",
               "path": "/subReports",
               "status": "active",
+              "logo":"<BiTrendingUp size={iconSixe} color={iconColor} />",
               "fields": [
                 { "title": "Item Name", "path": "itemName" },
                 { "title": "Qty Sold", "path": "soldQty" },
@@ -115,6 +126,7 @@
               "title": "Expiry Management",
               "path": "/subReports",
               "status": "active",
+              "logo":"<FcExpired size={iconSixe} color={iconColor} />",
               "fields": [
                 { "title": "Item Name", "path": "itemName" },
                 { "title": "Expire On", "path": "expiry" },
@@ -125,6 +137,7 @@
               "title": "Rack Management",
               "path": "/subReports",
               "status": "active",
+              "logo":"<BsHddRackFill size={iconSixe} color={iconColor} />",
               "fields": [
                 { "title": "Item Name", "path": "itemName" },
                 { "title": "Placement", "path": "placement" },
@@ -135,6 +148,7 @@
               "title": "Dead Stock",
               "path": "/subReports",
               "status": "active",
+              "logo":"<HiArrowSmDown size={iconSixe} color={iconColor} />",
               "fields": [
                 { "title": "Item Name", "path": "itemName" },
                 { "title": "Qty Sold", "path": "soldQty" },
@@ -143,9 +157,23 @@
               ]
             },
             {
+              "title": "Unsold",
+              "path": "/subReports",
+              "status": "active",
+              "logo":"<IoWarning size={iconSixe} color={iconColor} />",
+              "fields": [
+                { "title": "Item Name", "path": "itemName" },
+                { "title": "Company", "path": "soldQty" },
+                { "title": "Qty Remained", "path": "qtyInStock" },
+                { "title": "Capial Invested", "path": "qtyInStock" },
+                { "title": "Rack No", "path": "qtyInStock" }
+              ]
+            },
+            {
               "title": "Return",
               "path": "/subReports",
               "status": "active",
+              "logo":"<TbTruckReturn size={iconSixe} color={iconColor} />",
               "fields": [
                 { "title": "Item Name", "path": "itemName" },
                 { "title": "Return Qty", "path": "returnQty" },
@@ -238,6 +266,7 @@
               "title": "Customers",
               "path": "/subReports",
               "status": "active",
+              "logo":"<ImProfile size={iconSixe} color={iconColor} />",
               "fields": [
                 { "title": "Customer Name", "path": "customerName" },
                 { "title": "Mobile", "path": "customerMobile" },
@@ -248,6 +277,7 @@
               "title": "Suppliers",
               "path": "/subReports",
               "status": "active",
+              "logo":"<FaTruckMoving size={iconSixe} color={iconColor} />",
               "fields": [
                 { "title": "Supplier Name", "path": "supplierName" },
                 { "title": "Mobile", "path": "supplierMobile" },
@@ -259,6 +289,7 @@
               "title": "Staff",
               "path": "/subReports",
               "status": "active",
+              "logo":"<RiTeamFill size={iconSixe} color={iconColor} />",
               "fields": [
                 { "title": "Staff Name", "path": "staffName" },
                 { "title": "Mobile", "path": "staffMobile" },
@@ -274,11 +305,40 @@
           "path": "/accounts",
           "status": "active",
           "subMenu": [
-            { "title": "Settle Bills", "path": "/subReports", "status": "active" },
-            { "title": "Transactions", "path": "/subReports", "status": "active" },
-            { "title": "Credits", "path": "/subReports", "status": "active" },
-            { "title": "Debits", "path": "/subReports", "status": "active" },
-            { "title": "Reports", "path": "/subReports", "status": "active" }
+            { 
+              "title": "Settle Bills",
+              "path": "/subReports", 
+              "status": "active",
+              "logo":"<RiBillFill size={iconSixe} color={iconColor} />"
+             },
+
+            {
+            "title": "Transactions", 
+            "path": "/subReports",
+            "status": "active",
+            "logo":"<AiOutlineTransaction size={iconSixe} color={iconColor} />" 
+          },
+
+          { 
+            "title": "Credits", 
+            "path": "/subReports", 
+            "status": "active" ,
+            "logo":"<BsFillCreditCard2FrontFill size={iconSixe} color={iconColor} />"
+          },
+           
+            {
+            "title": "Debits", 
+            "path": "/subReports", 
+            "status": "active" ,
+            "logo":"<BsFillCreditCard2FrontFill size={iconSixe} color={iconColor} />"
+          },
+            
+            
+            {
+            "title": "Reports", 
+            "path": "/subReports", 
+            "status": "active" ,
+            "logo":"<TbReportAnalytics size={iconSixe} color={iconColor} />"}
           ]
         },
         {
@@ -286,12 +346,47 @@
           "path": "/masters",
           "status": "active",
           "subMenu": [
-            { "title": "Menu Master", "path": "/subReports", "status": "active" },
-            { "title": "Sell Units", "path": "/subReports", "status": "active" },
-            { "title": "Invoices", "path": "/subReports", "status": "active" },
-            { "title": "Printers", "path": "/subReports", "status": "active" },
-            { "title": "Tax Slab", "path": "/subReports", "status": "active" },
-            { "title": "View Master", "path": "/subReports", "status": "active" }
+            { 
+              "title": "Menu Master", 
+              "path": "/subReports", 
+              "status": "active" ,
+              "logo":"<GiHamburgerMenu size={iconSixe} color={iconColor} />"
+            },
+
+            {
+               "title": "Sell Units", 
+               "path": "/subReports", 
+               "status": "active" ,
+               "logo":"<RiNumbersFill size={iconSixe} color={iconColor} />"
+
+            },
+            { 
+              "title": "Invoices", 
+              "path": "/subReports", 
+              "status": "active" ,
+              "logo":"<MdPendingActions size={iconSixe} color={iconColor} />"
+            },
+
+            {
+               "title": "Printers", 
+               "path": "/subReports", 
+               "status": "active" ,
+               "logo":"<BsFillPrinterFill size={iconSixe} color={iconColor} />"
+            },
+
+            {
+               "title": "Tax Slab", 
+               "path": "/subReports", 
+               "status": "active" ,
+               "logo":"<TbReceiptTax size={iconSixe} color={iconColor} />"
+            },
+
+            {
+               "title": "View Master", 
+               "path": "/subReports", 
+               "status": "active",
+               "logo":"<HiViewGrid size={iconSixe} color={iconColor} />"
+            }
           ]
         }
       ]

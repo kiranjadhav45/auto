@@ -41,36 +41,62 @@ import Printers from "../components/masters/Printers";
 import SellUnit from "../components/masters/SellUnit";
 import TaxSlab from "../components/masters/TaxSlab";
 import ViewMaster from "../components/masters/ViewMaster";
+import { useSelector } from "react-redux";
 
 function MastersPage({ t }) {
   const [allMasters, setAllMasters] = useState();
   const [currentTableHeaders, setCurrentTableHeaders] = useState();
-  const [activeSubMenu, setActiveSubMenu] = useState("Sell Unit");
+  const [activeSubMenu, setActiveSubMenu] = useState("View Master");
   const [currentSubMenu, setCurrentSubMenu] = useState();
   const [showModal, setShowModal] = useState(false);
-  // const [menuMaster, setMenuMaster] = useState();
   const [invMaster, setInvMaster] = useState({ start: "", end: "" });
   const [itemMasters, setItemMasters] = useState();
   const [runEffect, setRunEffect] = useState(0);
   const [findUser, setFindUser] = useState();
 
   const iconSixe = 15;
-  let mastersData = {
-    title1: "Menu Master",
-    title2: "Sell Unit",
-    title3: "Invoice",
-    title4: "Printers",
-    title5: "Tax Slab",
-    title6: "View Master",
-    title7: "Items",
-    logo1: <GiHamburgerMenu size={iconSixe} color="black" />,
-    logo2: <RiNumbersFill size={iconSixe} color="black" />,
-    logo3: <MdPendingActions size={iconSixe} color="black" />,
-    logo4: <BsFillPrinterFill size={iconSixe} color="black" />,
-    logo5: <TbReceiptTax size={iconSixe} color="black" />,
-    logo6: <HiViewGrid size={iconSixe} color="black" />,
-    logo7: <HiTemplate size={iconSixe} color="black" />,
-  };
+
+  let p = localStorage.getItem("masters");
+  let mastersMenu = JSON.parse(p);
+  // console.log("object", mastersMenu);
+  let mastersData = [
+    {
+      title: "Menu Master",
+      logo: <GiHamburgerMenu size={iconSixe} color="black" />,
+      showButton: mastersMenu.menuMasterChecked,
+    },
+    {
+      title: "Sell Unit",
+      logo: <RiNumbersFill size={iconSixe} color="black" />,
+      showButton: mastersMenu.sellUnitChecked,
+    },
+    {
+      title: "Invoice",
+      logo: <MdPendingActions size={iconSixe} color="black" />,
+      showButton: mastersMenu.invoiceChecked,
+    },
+    {
+      title: "Printers",
+      logo: <BsFillPrinterFill size={iconSixe} color="black" />,
+      showButton: mastersMenu.printersChecked,
+    },
+    {
+      title: "Tax Slab",
+      logo: <TbReceiptTax size={iconSixe} color="black" />,
+      showButton: mastersMenu.taxSlabChecked,
+    },
+    {
+      title: "View Master",
+      logo: <HiViewGrid size={iconSixe} color="black" />,
+      showButton: true,
+    },
+    {
+      title: "Items",
+      logo: <HiTemplate size={iconSixe} color="black" />,
+      showButton: mastersMenu.itemsChecked,
+    },
+  ];
+
   const handleTopicChange = async (index) => {
     // const temp = [...menuMaster];
     const temp = [];
@@ -164,6 +190,9 @@ function MastersPage({ t }) {
     // console.log("MSG", test.data);
   };
 
+  // const message = useSelector((state) => state.messageReducer.message);
+  // console.log("states message=", message);
+
   return (
     <Container fluid className="bg-white font-ubu">
       <Row className="border-bottom">
@@ -171,16 +200,29 @@ function MastersPage({ t }) {
           <Navbar />
         </Col>
         <Col>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(mastersData.title1)}
-          >
-            {mastersData.logo1}
-            <small className="text-black m-0 p-0 mx-1 mr-5 text-info">
-              {mastersData.title1}
-            </small>
-          </button>
+          {mastersData &&
+            mastersData.map((i, index) => {
+              if (i.showButton !== true) {
+              } else {
+                return (
+                  <>
+                    <button
+                      key={index}
+                      className="headerButton mx-2"
+                      value="20"
+                      onClick={() => handleSubSubMenu(i.title)}
+                    >
+                      {i.logo}
+                      <small className="text-black m-0 p-0 mx-1 mr-5 text-info">
+                        {i.title}
+                      </small>
+                    </button>
+                  </>
+                );
+              }
+            })}
+
+          {/*           
           <button
             className="headerButton mx-2"
             value="20"
@@ -240,7 +282,7 @@ function MastersPage({ t }) {
             <small className="text-black m-0 p-0 mx-1 mr-5">
               {mastersData.title7}
             </small>
-          </button>
+          </button> */}
         </Col>
         <Col className="col-6">
           <Nav2 />

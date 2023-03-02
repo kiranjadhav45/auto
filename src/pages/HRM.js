@@ -14,18 +14,31 @@ import { FaTruckMoving } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 function Dashboard() {
   const [submenu, setSubMenu] = useState("Customer");
+
   const iconSixe = 15;
-  let hrmData = {
-    title1: "Customer",
-    title2: "Supplier",
-    title3: "Staff",
-    path1: "/lastOrders",
-    path2: "/totalSales",
-    path3: "/Maintainance",
-    logo1: <ImProfile size={iconSixe} color="black" />,
-    logo2: <FaTruckMoving size={iconSixe} color="black" />,
-    logo3: <RiTeamFill size={iconSixe} color="black" />,
-  };
+  let p = localStorage.getItem("HRM");
+  let hrmMenu = JSON.parse(p);
+
+  let hrmData = [
+    {
+      title: "Customer",
+      path: "/lastOrders",
+      logo: <ImProfile size={iconSixe} color="black" />,
+      showButton: true,
+    },
+    {
+      title: "Supplier",
+      path: "/totalSales",
+      logo: <FaTruckMoving size={iconSixe} color="black" />,
+      showButton: hrmMenu.SupplierChecked,
+    },
+    {
+      title: "Staff",
+      path: "/Maintainance",
+      logo: <RiTeamFill size={iconSixe} color="black" />,
+      showButton: hrmMenu.StaffChecked,
+    },
+  ];
   const handleSubSubMenu = (data) => {
     setSubMenu(data);
   };
@@ -36,36 +49,27 @@ function Dashboard() {
           <Navbar />
         </Col>
         <Col>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(hrmData.title1)}
-          >
-            {hrmData.logo1}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {hrmData.title1}
-            </small>
-          </button>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(hrmData.title2)}
-          >
-            {hrmData.logo2}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {hrmData.title2}
-            </small>
-          </button>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(hrmData.title3)}
-          >
-            {hrmData.logo3}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {hrmData.title3}
-            </small>
-          </button>
+          {hrmData &&
+            hrmData.map((i, index) => {
+              if (i.showButton !== true) {
+              } else {
+                return (
+                  <>
+                    <button
+                      key={index}
+                      className="headerButton mx-2"
+                      value="20"
+                      onClick={() => handleSubSubMenu(i.title)}
+                    >
+                      {i.logo}
+                      <small className="text-black m-0 p-0 mx-1 mr-5">
+                        {i.title}
+                      </small>
+                    </button>
+                  </>
+                );
+              }
+            })}
         </Col>
         <Col className="col-6">
           <Nav2 />
