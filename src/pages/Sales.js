@@ -37,15 +37,21 @@ import { GrVmMaintenance } from "react-icons/gr";
 
 const Sales = ({ t }) => {
   const iconSixe = 15;
-  let token = localStorage.getItem("auth");
-  let decoded = jwtDecode(token);
-  let salesSubmenu = decoded.bundle[1].subMenu;
-  let logo = decoded.bundle[1];
+  let token = localStorage.getItem("auth")
+    ? localStorage.getItem("auth")
+    : "auth token not found in sales page";
+  let decoded = jwtDecode(token)
+    ? jwtDecode(token)
+    : "can`t decode jwt in sales page";
+  let salesSubmenu = decoded.bundle[1].subMenu
+    ? decoded.bundle[1].subMenu
+    : "can`t find salesSubmenu in sales page";
 
   const [pageSize, setPageSize] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchRes, setSearchRes] = useState([]);
   const [subMenu, setSubMenu] = useState("Sales");
+  const [salesMenu, setSalesMenu] = useState("");
   const [itemList, setItemList] = useState([
     {
       itemName: "Product One",
@@ -158,14 +164,37 @@ const Sales = ({ t }) => {
       itemInvoice: 45845,
     },
   ]);
-  const [salesData, setSalesData] = useState({
-    title1: salesSubmenu[0].title,
-    title2: salesSubmenu[1].title,
-    title3: salesSubmenu[2].title,
-    logo1: <FcSalesPerformance size={iconSixe} color="black" />,
-    logo2: <BiTrendingUp size={iconSixe} color="black" />,
-    logo3: <GrVmMaintenance size={iconSixe} color="black" />,
-  });
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("sales") === undefined ||
+      localStorage.getItem("sales") === null
+    ) {
+      console.log("Local Storage value is undefined or null in Sales page ");
+    } else {
+      let p = localStorage.getItem("sales");
+      let z = JSON.parse(p);
+      setSalesMenu(z);
+      console.log(z);
+    }
+  }, []);
+  let salesData = [
+    {
+      title: salesSubmenu[0].title,
+      logo: <FcSalesPerformance size={iconSixe} color="black" />,
+      showButton: true,
+    },
+    {
+      title: salesSubmenu[1].title,
+      logo: <BiTrendingUp size={iconSixe} color="black" />,
+      showButton: salesMenu.ServiceChecked,
+    },
+    {
+      title: salesSubmenu[2].title,
+      logo: <GrVmMaintenance size={iconSixe} color="black" />,
+      showButton: salesMenu.maintainanceChecked,
+    },
+  ];
   const searchHandle = (e) => {
     let test = itemList.filter((a) => a.itemName === e.target.value);
     setSearchRes(test);
@@ -198,36 +227,27 @@ const Sales = ({ t }) => {
           <Navbar />
         </Col>
         <Col>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(salesData.title1)}
-          >
-            {salesData.logo1}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {salesData.title1}
-            </small>
-          </button>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(salesData.title2)}
-          >
-            {salesData.logo2}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {salesData.title2}
-            </small>
-          </button>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(salesData.title3)}
-          >
-            {salesData.logo3}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {salesData.title3}
-            </small>
-          </button>
+          {salesData &&
+            salesData.map((i, index) => {
+              if (i.showButton !== true) {
+              } else {
+                return (
+                  <>
+                    <button
+                      key={index}
+                      className="headerButton mx-2"
+                      value="20"
+                      onClick={() => handleSubSubMenu(i.title)}
+                    >
+                      {i.logo}
+                      <small className="text-black m-0 p-0 mx-1 mr-5">
+                        {i.title}
+                      </small>
+                    </button>
+                  </>
+                );
+              }
+            })}
         </Col>
         <Col className="col-6">
           <Nav2 />

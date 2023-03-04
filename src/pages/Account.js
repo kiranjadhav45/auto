@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Footer from "../components/common/Footer";
 import Navbar from "../components/common/Navbar";
@@ -10,45 +10,70 @@ import Debit from "../components/account/Debit";
 import Report from "../components/account/Report";
 import SettleBill from "../components/account/SettleBill";
 import Transaction from "../components/account/Transaction";
+import jwtDecode from "jwt-decode";
 
 import { TbReportAnalytics } from "react-icons/tb";
 import { BsFillCreditCard2FrontFill } from "react-icons/bs";
 import { AiOutlineTransaction } from "react-icons/ai";
 import { RiBillFill } from "react-icons/ri";
 
-let p = localStorage.getItem("account");
-let accountMenu = JSON.parse(p);
-
 function Dashboard() {
+  const [accountMenu, setAccountMenu] = useState("");
+
+  let token = localStorage.getItem("auth")
+    ? localStorage.getItem("auth")
+    : "auth token not found in account page";
+  let decoded = jwtDecode(token)
+    ? jwtDecode(token)
+    : "can`t decode jwt in account page";
+  let accountitle = decoded.bundle[5].subMenu
+    ? decoded.bundle[5].subMenu
+    : "can`t resolve accountTitle";
+  // console.log(accountitle);
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("account") === undefined ||
+      localStorage.getItem("account") === null
+    ) {
+      console.log("token undefined or null in account page");
+    } else {
+      let p = localStorage.getItem("account");
+      let z = JSON.parse(p);
+      setAccountMenu(z);
+      // console.log("account Menu", accountMenu);
+    }
+  }, []);
+
   const [subMenu, setSubMenu] = useState("Settle Bill");
   const iconSixe = 15;
   let accountsData = [
     {
-      title: "Settle Bill",
+      title: accountitle[0].title ? accountitle[0].title : "Settle Bill",
       path: "/lastOrders",
       logo: <RiBillFill size={iconSixe} color="black" />,
       showButton: true,
     },
     {
-      title: "Transaction",
+      title: accountitle[1].title ? accountitle[1].title : "Transaction",
       path: "/totalSales",
       logo: <AiOutlineTransaction size={iconSixe} color="black" />,
       showButton: accountMenu.transactionChecked,
     },
     {
-      title: "Credit",
+      title: accountitle[2].title ? accountitle[2].title : "Credit",
       path: "/Maintainance",
       logo: <BsFillCreditCard2FrontFill size={iconSixe} color="black" />,
       showButton: accountMenu.creditChecked,
     },
     {
-      title: "Debit",
+      title: accountitle[3].title ? accountitle[3].title : "Debit",
       path: "/lastOrders",
       logo: <BsFillCreditCard2FrontFill size={iconSixe} color="black" />,
       showButton: accountMenu.debitChecked,
     },
     {
-      title: "Report",
+      title: accountitle[4].title ? accountitle[4].title : "Report",
       path: "/lastOrders",
       logo: <TbReportAnalytics size={iconSixe} color="black" />,
       showButton: accountMenu.reportChecked,

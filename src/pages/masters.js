@@ -42,6 +42,7 @@ import SellUnit from "../components/masters/SellUnit";
 import TaxSlab from "../components/masters/TaxSlab";
 import ViewMaster from "../components/masters/ViewMaster";
 import { useSelector } from "react-redux";
+import jwtDecode from "jwt-decode";
 
 function MastersPage({ t }) {
   const [allMasters, setAllMasters] = useState();
@@ -53,40 +54,61 @@ function MastersPage({ t }) {
   const [itemMasters, setItemMasters] = useState();
   const [runEffect, setRunEffect] = useState(0);
   const [findUser, setFindUser] = useState();
-
+  const [mastersMenu, setMastersMenu] = useState("");
   const iconSixe = 15;
 
-  let p = localStorage.getItem("masters");
-  let mastersMenu = JSON.parse(p);
-  // console.log("object", mastersMenu);
+  let token = localStorage.getItem("auth")
+    ? localStorage.getItem("auth")
+    : "auth token not found in masters page";
+  let decoded = jwtDecode(token)
+    ? jwtDecode(token)
+    : "can`t decode jwt in masters page";
+  let mastersTitle = decoded.bundle[6].subMenu
+    ? decoded.bundle[6].subMenu
+    : "can`t resolve masters title";
+  // console.log(mastersTitle[0].title);
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("masters") === undefined ||
+      localStorage.getItem("masters") === null
+    ) {
+      console.log("local storage value is undefined or null in masters page");
+    } else {
+      let p = localStorage.getItem("masters");
+      let z = JSON.parse(p);
+      setMastersMenu(z);
+    }
+  }, []);
+
   let mastersData = [
     {
-      title: "Menu Master",
+      title: mastersTitle[0].title ? mastersTitle[0].title : "Menu Master",
       logo: <GiHamburgerMenu size={iconSixe} color="black" />,
       showButton: mastersMenu.menuMasterChecked,
     },
     {
-      title: "Sell Unit",
+      title: mastersTitle[1].title ? mastersTitle[1].title : "Sell Unit",
       logo: <RiNumbersFill size={iconSixe} color="black" />,
       showButton: mastersMenu.sellUnitChecked,
     },
     {
-      title: "Invoice",
+      title: mastersTitle[2].title ? mastersTitle[2].title : "Invoice",
       logo: <MdPendingActions size={iconSixe} color="black" />,
       showButton: mastersMenu.invoiceChecked,
     },
     {
-      title: "Printers",
+      title: mastersTitle[3].title ? mastersTitle[3].title : "Printers",
       logo: <BsFillPrinterFill size={iconSixe} color="black" />,
       showButton: mastersMenu.printersChecked,
     },
     {
-      title: "Tax Slab",
+      title: mastersTitle[4].title ? mastersTitle[4].title : "Tax Slab",
       logo: <TbReceiptTax size={iconSixe} color="black" />,
       showButton: mastersMenu.taxSlabChecked,
     },
     {
-      title: "View Master",
+      title: mastersTitle[5].title ? mastersTitle[5].title : "View Master",
       logo: <HiViewGrid size={iconSixe} color="black" />,
       showButton: true,
     },

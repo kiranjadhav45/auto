@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Footer from "../components/common/Footer";
 import Navbar from "../components/common/Navbar";
@@ -8,32 +8,55 @@ import Nav2 from "../components/common/Nav2";
 import Customer from "../components/HRM/Customer";
 import Staff from "../components/HRM/Staff";
 import Supplier from "../components/HRM/Supplier";
+import jwtDecode from "jwt-decode";
 
 import { RiTeamFill } from "react-icons/ri";
 import { FaTruckMoving } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 function Dashboard() {
   const [submenu, setSubMenu] = useState("Customer");
-
+  const [hrmMenu, setHrmMenu] = useState("");
   const iconSixe = 15;
-  let p = localStorage.getItem("HRM");
-  let hrmMenu = JSON.parse(p);
+
+  let token = localStorage.getItem("auth")
+    ? localStorage.getItem("auth")
+    : "auth token not found in HRM page";
+  let decoded = jwtDecode(token)
+    ? jwtDecode(token)
+    : "can`t decode jwt in HRM page";
+  let HRMTitle = decoded.bundle[4].subMenu
+    ? decoded.bundle[4].subMenu
+    : "can`t resolve HRMTitle";
+  console.log(HRMTitle);
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("HRM") === undefined ||
+      localStorage.getItem("HRM") === null
+    ) {
+      console.log("local storage value is undefined or null in HRM page");
+    } else {
+      let p = localStorage.getItem("HRM");
+      let z = JSON.parse(p);
+      setHrmMenu(z);
+    }
+  }, []);
 
   let hrmData = [
     {
-      title: "Customer",
+      title: HRMTitle[0].title ? HRMTitle[0].title : "Customer",
       path: "/lastOrders",
       logo: <ImProfile size={iconSixe} color="black" />,
       showButton: true,
     },
     {
-      title: "Supplier",
+      title: HRMTitle[1].title ? HRMTitle[1].title : "Supplier",
       path: "/totalSales",
       logo: <FaTruckMoving size={iconSixe} color="black" />,
       showButton: hrmMenu.SupplierChecked,
     },
     {
-      title: "Staff",
+      title: HRMTitle[2].title ? HRMTitle[2].title : "Staff",
       path: "/Maintainance",
       logo: <RiTeamFill size={iconSixe} color="black" />,
       showButton: hrmMenu.StaffChecked,

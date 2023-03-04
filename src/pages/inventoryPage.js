@@ -48,6 +48,7 @@ import RackManagment from "../components/inventory/RackManagment";
 import DeadStock from "../components/inventory/DeadStock";
 import Return from "../components/inventory/Return";
 import UnSoldStock from "../components/inventory/UnSoldStock";
+import jwtDecode from "jwt-decode";
 
 function InventoryPage({ t }) {
   const [allMasters, setAllMasters] = useState();
@@ -56,42 +57,67 @@ function InventoryPage({ t }) {
   const [currentSubMenu, setCurrentSubMenu] = useState();
   const [showModal, setShowModal] = useState(false);
   const [subMenu, setSubMenu] = useState("Most Sold");
+  const [inventoryMenu, setInventoryMenu] = useState("");
   const iconSixe = 15;
-  let p = localStorage.getItem("inventory");
-  let inventoryMenu = JSON.parse(p);
+
+  let token = localStorage.getItem("auth")
+    ? localStorage.getItem("auth")
+    : "auth token not found in inventory page";
+  let decoded = jwtDecode(token)
+    ? jwtDecode(token)
+    : "can`t decode jwt in inventory page";
+  let salesSubmenu = decoded.bundle[2].subMenu
+    ? decoded.bundle[2].subMenu
+    : "can`t find inventorySubmenu in inventory page";
+  console.log(salesSubmenu);
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("inventory") === undefined ||
+      localStorage.getItem("inventory") === null
+    ) {
+      console.log("local storage undefined or null in inventory page");
+    } else {
+      let p = localStorage.getItem("inventory");
+      let z = JSON.parse(p);
+      setInventoryMenu(z);
+      // console.log("invent", inventoryMenu);
+    }
+  }, []);
+
   let inventoryData = [
     {
-      title: "Most Sold",
+      title: salesSubmenu[0].title ? salesSubmenu[0].title : "Most Sold",
       path: "/subReports",
       logo: <BiTrendingUp size={iconSixe} color="black" />,
       showButton: true,
     },
     {
-      title: "Exp Managment",
+      title: salesSubmenu[1].title ? salesSubmenu[1].title : "Exp Managment",
       path: "/subReports",
       logo: <FcExpired size={iconSixe} color="black" />,
       showButton: inventoryMenu.ExpManagmentChecked,
     },
     {
-      title: "Rack Managment",
+      title: salesSubmenu[2].title ? salesSubmenu[2].title : "Rack Managment",
       path: "/totalSales",
       logo: <BsHddRackFill size={iconSixe} color="black" />,
       showButton: inventoryMenu.RackManagmentChecked,
     },
     {
-      title: "Dead Stocks",
+      title: salesSubmenu[3].title ? salesSubmenu[3].title : "Dead Stocks",
       path: "/Maintainance",
       logo: <HiArrowSmDown size={iconSixe} color="black" />,
       showButton: inventoryMenu.DeadStocksChecked,
     },
     {
-      title: "UnSold Stock",
+      title: salesSubmenu[4].title ? salesSubmenu[4].title : "UnSold Stock",
       path: "/Maintainance",
       logo: <IoWarning size={iconSixe} color="black" />,
       showButton: inventoryMenu.UnSoldStockChecked,
     },
     {
-      title: "Returns",
+      title: salesSubmenu[5].title ? salesSubmenu[5].title : "Returns",
       path: "/Maintainance",
       logo: <TbTruckReturn size={iconSixe} color="black" />,
       showButton: inventoryMenu.ReturnsChecked,

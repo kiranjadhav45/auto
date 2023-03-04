@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Footer from "../components/common/Footer";
@@ -8,28 +8,64 @@ import SideMenu from "../components/ui/sideMenu";
 import PreOrder from "../components/dashboard/PreOrder";
 import Service from "../components/dashboard/Service";
 import PendingSettlement from "../components/dashboard/PendingSettlement";
-
+import jwtDecode from "jwt-decode";
 import { TbTruckDelivery } from "react-icons/tb";
 import { RiCustomerService2Fill } from "react-icons/ri";
 import { MdPendingActions } from "react-icons/md";
 import Nav2 from "../components/common/Nav2";
 
 function Dashboard() {
+  let token = localStorage.getItem("auth")
+    ? localStorage.getItem("auth")
+    : "auth token not found in dashboard page";
+  let decoded = jwtDecode(token)
+    ? jwtDecode(token)
+    : "can`t decode jwt in dashboard page";
+  let dashboardTitle = decoded.bundle[0].subMenu
+    ? decoded.bundle[0].subMenu
+    : "can`t resolve dashboardTitle";
+
   const [subMenu, setSubMenu] = useState("Pre-Order");
+  const [dashboardMenu, setDashboardMenu] = useState("");
   const message = useSelector((state) => state.messageReducer.message);
   const iconSize = 15;
 
-  let dashboardData = {
-    title1: "Pre-Order",
-    title2: "Service",
-    title3: "pending settlements",
-    path1: "/lastOrders",
-    path2: "/totalSales",
-    path3: "/Maintainance",
-    logo1: <TbTruckDelivery size={iconSize} color="black" />,
-    logo2: <RiCustomerService2Fill size={iconSize} color="black" />,
-    logo3: <MdPendingActions size={iconSize} color="black" />,
-  };
+  useEffect(() => {
+    if (
+      localStorage.getItem("dashboard") === undefined ||
+      localStorage.getItem("dashboard") === null
+    ) {
+      console.log("local Storage value is null or undefined in Dashboard page");
+    } else {
+      let p = localStorage.getItem("dashboard");
+      let z = JSON.parse(p);
+      console.log(z);
+      setDashboardMenu(z);
+    }
+  }, []);
+
+  let dashboardData = [
+    {
+      title: dashboardTitle[0].title ? dashboardTitle[0].title : "Pre-Order",
+      path: "/lastOrders",
+      logo: <TbTruckDelivery size={iconSize} color="black" />,
+      showButton: true,
+    },
+    {
+      title: dashboardTitle[1].title ? dashboardTitle[1].title : "Service",
+      path: "/totalSales",
+      logo: <RiCustomerService2Fill size={iconSize} color="black" />,
+      showButton: dashboardMenu.ServiceDashChecked,
+    },
+    {
+      title: dashboardTitle[2].title
+        ? dashboardTitle[2].title
+        : "pending settlements",
+      path: "/Maintainance",
+      logo: <MdPendingActions size={iconSize} color="black" />,
+      showButton: dashboardMenu.pendingsettlementsChecked,
+    },
+  ];
 
   const handleSubSubMenu = (data) => {
     setSubMenu(data);
@@ -42,36 +78,27 @@ function Dashboard() {
           <Navbar dashboardData={dashboardData} />
         </Col>
         <Col>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(dashboardData.title1)}
-          >
-            {dashboardData.logo1}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {dashboardData.title1}
-            </small>
-          </button>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(dashboardData.title2)}
-          >
-            {dashboardData.logo2}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {dashboardData.title2}
-            </small>
-          </button>
-          <button
-            className="headerButton mx-2"
-            value="20"
-            onClick={() => handleSubSubMenu(dashboardData.title3)}
-          >
-            {dashboardData.logo3}
-            <small className="text-black m-0 p-0 mx-1 mr-5">
-              {dashboardData.title3}
-            </small>
-          </button>
+          {dashboardData &&
+            dashboardData.map((i, index) => {
+              if (i.showButton !== true) {
+              } else {
+                return (
+                  <>
+                    <button
+                      key={index}
+                      className="headerButton mx-2"
+                      value="20"
+                      onClick={() => handleSubSubMenu(i.title)}
+                    >
+                      {i.logo}
+                      <small className="text-black m-0 p-0 mx-1 mr-5">
+                        {i.title}
+                      </small>
+                    </button>
+                  </>
+                );
+              }
+            })}
         </Col>
         <Col className="col-6">
           <Nav2 />
