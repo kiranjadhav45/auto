@@ -38,11 +38,8 @@ import { setMessage } from "../../redux/slices/navslice";
 function MostSold({ t, items, currentFullInvoice }) {
   const [data, setData] = useState(currentFullInvoice);
   const [order, setOrder] = useState("ASC");
-  useEffect(() => {
-    let currInv = [...currentFullInvoice];
-    console.log("crr", currInv);
-  }, [currentFullInvoice]);
 
+  // sorting function
   const handleSortData = (col) => {
     if (col === "Quantity") {
       if (order === "ASC") {
@@ -84,24 +81,7 @@ function MostSold({ t, items, currentFullInvoice }) {
           <Row className="mt-2">
             <Col className="col-7">
               <ButtonGroup className="">
-                <div className="mr-1">
-                  {/* <Form.Select
-                    size="sm"
-                    // onChange={(e) => setActiveSubMenu(e.target.value)}
-                    aria-label="Default select example"
-                  >
-                  {currentSubMenu &&
-                      currentSubMenu.subMenu.map((i) => (
-                        <option value={i.title}>{i.title} 2</option>
-                      ))}
-                  <option value={10}>{t("Types")}</option>
-                    <option value={10}>{t("Most Sold")}</option>
-                    <option value={20}>{t("Exp Managment")}</option>
-                    <option value={20}>{t("Rack Managment")}</option>
-                    <option value={20}>{t("Dead Stock")}</option>
-                    <option value={20}>{t("Return")}</option>
-                  </Form.Select> */}
-                </div>
+                <div className="mr-1"></div>
 
                 <button class="menuButton mx-2">
                   <CiPlay1 size={16} color="black" />
@@ -116,11 +96,6 @@ function MostSold({ t, items, currentFullInvoice }) {
                     {t("Add New")}
                   </small>
                 </button>
-
-                {/* <button class="menuButton">
-                  <CiSettings size={16} color="black" />
-                  <small className="text-dark m-0 p-0 mx-1">Settings</small>
-                </button> */}
               </ButtonGroup>
             </Col>
             <Col className="col-4 float-end">

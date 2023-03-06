@@ -66,7 +66,6 @@ function MastersPage({ t }) {
   let mastersTitle = decoded.bundle[6].subMenu
     ? decoded.bundle[6].subMenu
     : "can`t resolve masters title";
-  // console.log(mastersTitle[0].title);
 
   useEffect(() => {
     if (
@@ -80,7 +79,7 @@ function MastersPage({ t }) {
       setMastersMenu(z);
     }
   }, []);
-
+  // button array
   let mastersData = [
     {
       title: mastersTitle[0].title ? mastersTitle[0].title : "Menu Master",
@@ -151,9 +150,9 @@ function MastersPage({ t }) {
     setItemMasters(temp[idn]);
   };
 
-  const handleSubSubMenu = (data) => {
-    setActiveSubMenu(data);
-  };
+  // const handleSubSubMenu = (data) => {
+  //   setActiveSubMenu(data);
+  // };
   useEffect(() => {
     const getMaster = async () => {
       const test = isUser();
@@ -215,6 +214,7 @@ function MastersPage({ t }) {
   // const message = useSelector((state) => state.messageReducer.message);
   // console.log("states message=", message);
 
+  console.log(activeSubMenu);
   return (
     <Container fluid className="bg-white font-ubu">
       <Row className="border-bottom">
@@ -232,7 +232,7 @@ function MastersPage({ t }) {
                       key={index}
                       className="headerButton mx-2"
                       value="20"
-                      onClick={() => handleSubSubMenu(i.title)}
+                      onClick={() => setActiveSubMenu(i.title)}
                     >
                       {i.logo}
                       <small className="text-black m-0 p-0 mx-1 mr-5 text-info">
@@ -324,7 +324,7 @@ function MastersPage({ t }) {
                 ""
               )} */}
 
-              {activeSubMenu && activeSubMenu === "Sell Unit" ? (
+              {activeSubMenu && activeSubMenu === "Sell Units" ? (
                 <SellUnit />
               ) : (
                 ""

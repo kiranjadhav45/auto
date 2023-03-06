@@ -15,6 +15,7 @@ import { MdPendingActions } from "react-icons/md";
 import Nav2 from "../components/common/Nav2";
 
 function Dashboard() {
+  //get local storage data
   let token = localStorage.getItem("auth")
     ? localStorage.getItem("auth")
     : "auth token not found in dashboard page";
@@ -25,7 +26,7 @@ function Dashboard() {
     ? decoded.bundle[0].subMenu
     : "can`t resolve dashboardTitle";
 
-  const [subMenu, setSubMenu] = useState("Pre-Order");
+  const [subMenu, setSubMenu] = useState("Previous Orders");
   const [dashboardMenu, setDashboardMenu] = useState("");
   const message = useSelector((state) => state.messageReducer.message);
   const iconSize = 15;
@@ -44,6 +45,7 @@ function Dashboard() {
     }
   }, []);
 
+  // button array
   let dashboardData = [
     {
       title: dashboardTitle[0].title ? dashboardTitle[0].title : "Pre-Order",
@@ -67,10 +69,6 @@ function Dashboard() {
     },
   ];
 
-  const handleSubSubMenu = (data) => {
-    setSubMenu(data);
-  };
-
   return (
     <Container fluid className="bg-white font-ubu">
       <Row>
@@ -88,7 +86,7 @@ function Dashboard() {
                       key={index}
                       className="headerButton mx-2"
                       value="20"
-                      onClick={() => handleSubSubMenu(i.title)}
+                      onClick={() => setSubMenu(i.title)}
                     >
                       {i.logo}
                       <small className="text-black m-0 p-0 mx-1 mr-5">
@@ -109,9 +107,9 @@ function Dashboard() {
           <SideMenu />
         </Col>
         <Col className="col-18">
-          {subMenu && subMenu === "Pre-Order" ? <PreOrder /> : ""}
-          {subMenu && subMenu === "Service" ? <Service /> : ""}
-          {subMenu && subMenu === "pending settlements" ? (
+          {subMenu && subMenu === "Previous Orders" ? <PreOrder /> : ""}
+          {subMenu && subMenu === "Total Sales" ? <Service /> : ""}
+          {subMenu && subMenu === "Pending Settlements" ? (
             <PendingSettlement />
           ) : (
             ""

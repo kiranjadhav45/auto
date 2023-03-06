@@ -7,7 +7,6 @@ import RegisterPage from "./pages/registerPage";
 import Sales from "./pages/Sales";
 import Sales2 from "./pages/Sales2";
 import { withNamespaces } from "react-i18next";
-// import MostSold from "./components/inventory/MostSold";
 import Dashboard from "./pages/Dashboard";
 import HRM from ".//pages/HRM";
 import Account from ".//pages/Account";
@@ -37,4 +36,3 @@ function App({ t }) {
   );
 }
 export default withNamespaces()(App);
-// export default App;

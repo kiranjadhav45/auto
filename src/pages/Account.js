@@ -19,6 +19,7 @@ import { RiBillFill } from "react-icons/ri";
 
 function Dashboard() {
   const [accountMenu, setAccountMenu] = useState("");
+  const [subMenu, setSubMenu] = useState("Settle Bills");
 
   let token = localStorage.getItem("auth")
     ? localStorage.getItem("auth")
@@ -29,7 +30,6 @@ function Dashboard() {
   let accountitle = decoded.bundle[5].subMenu
     ? decoded.bundle[5].subMenu
     : "can`t resolve accountTitle";
-  // console.log(accountitle);
 
   useEffect(() => {
     if (
@@ -41,12 +41,11 @@ function Dashboard() {
       let p = localStorage.getItem("account");
       let z = JSON.parse(p);
       setAccountMenu(z);
-      // console.log("account Menu", accountMenu);
     }
   }, []);
 
-  const [subMenu, setSubMenu] = useState("Settle Bill");
   const iconSixe = 15;
+  //button Array
   let accountsData = [
     {
       title: accountitle[0].title ? accountitle[0].title : "Settle Bill",
@@ -80,10 +79,6 @@ function Dashboard() {
     },
   ];
 
-  const handleSubSubMenu = (data) => {
-    setSubMenu(data);
-  };
-
   return (
     <Container fluid className="bg-white font-ubu">
       <Row>
@@ -101,7 +96,7 @@ function Dashboard() {
                       key={index}
                       className="headerButton mx-2"
                       value="20"
-                      onClick={() => handleSubSubMenu(i.title)}
+                      onClick={() => setSubMenu(i.title)}
                     >
                       {i.logo}
                       <small className="text-black m-0 p-0 mx-1 mr-5">
@@ -122,11 +117,11 @@ function Dashboard() {
           <SideMenu />
         </Col>
         <Col className="col-18">
-          {subMenu && subMenu === "Settle Bill" ? <SettleBill /> : ""}
-          {subMenu && subMenu === "Transaction" ? <Transaction /> : ""}
-          {subMenu && subMenu === "Credit" ? <Credit /> : ""}
-          {subMenu && subMenu === "Debit" ? <Debit /> : ""}
-          {subMenu && subMenu === "Report" ? <Report /> : ""}
+          {subMenu && subMenu === "Settle Bills" ? <SettleBill /> : ""}
+          {subMenu && subMenu === "Transactions" ? <Transaction /> : ""}
+          {subMenu && subMenu === "Credits" ? <Credit /> : ""}
+          {subMenu && subMenu === "Debits" ? <Debit /> : ""}
+          {subMenu && subMenu === "Reports" ? <Report /> : ""}
         </Col>
         <Col>
           <Rightsidemenu />

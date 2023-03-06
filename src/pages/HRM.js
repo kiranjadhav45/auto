@@ -14,7 +14,7 @@ import { RiTeamFill } from "react-icons/ri";
 import { FaTruckMoving } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 function Dashboard() {
-  const [submenu, setSubMenu] = useState("Customer");
+  const [subMenu, setSubMenu] = useState("Customers");
   const [hrmMenu, setHrmMenu] = useState("");
   const iconSixe = 15;
 
@@ -62,9 +62,7 @@ function Dashboard() {
       showButton: hrmMenu.StaffChecked,
     },
   ];
-  const handleSubSubMenu = (data) => {
-    setSubMenu(data);
-  };
+  console.log(subMenu);
   return (
     <Container fluid className="bg-white font-ubu">
       <Row>
@@ -82,7 +80,7 @@ function Dashboard() {
                       key={index}
                       className="headerButton mx-2"
                       value="20"
-                      onClick={() => handleSubSubMenu(i.title)}
+                      onClick={() => setSubMenu(i.title)}
                     >
                       {i.logo}
                       <small className="text-black m-0 p-0 mx-1 mr-5">
@@ -103,9 +101,9 @@ function Dashboard() {
           <SideMenu />
         </Col>
         <Col className="col-18">
-          {submenu && submenu === "Customer" ? <Customer /> : ""}
-          {submenu && submenu === "Supplier" ? <Supplier /> : ""}
-          {submenu && submenu === "Staff" ? <Staff /> : ""}
+          {subMenu && subMenu === "Customers" ? <Customer /> : ""}
+          {subMenu && subMenu === "Suppliers" ? <Supplier /> : ""}
+          {subMenu && subMenu === "Staff" ? <Staff /> : ""}
         </Col>
         <Col>
           <Rightsidemenu />

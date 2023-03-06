@@ -102,17 +102,6 @@ function ViewMaster() {
     // console.log("inventory data", inventoryData);
   };
 
-  // useEffect(() => {
-  //   let p = localStorage.getItem("masters");
-  //   let z = JSON.parse(p);
-  //   masters[0].checked = z.menuMasterChecked;
-  //   masters[1].checked = z.sellUnitChecked;
-  //   masters[2].checked = z.invoiceChecked;
-  //   masters[3].checked = z.printersChecked;
-  //   masters[4].checked = z.taxSlabChecked;
-  //   masters[5].checked = z.itemsChecked;
-  // }, []);
-
   const dashboard = [
     { title: "Pre-Order", checked: "" },
     { title: "DashBoard Service", checked: "" },
