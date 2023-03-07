@@ -175,7 +175,7 @@ const Sales = ({ t }) => {
       let p = localStorage.getItem("sales");
       let z = JSON.parse(p);
       setSalesMenu(z);
-      console.log(z);
+      // console.log(z);
     }
   }, []);
   let salesData = [

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { use } from "i18next";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   ButtonGroup,
@@ -17,6 +18,7 @@ import {
 } from "react-bootstrap";
 
 function Sales() {
+  const [orderType, setOrderType] = useState("customer");
   const [searchProduct, setSearchProduct] = useState("");
   const [product, setProducts] = useState([
     {
@@ -25,6 +27,9 @@ function Sales() {
       quantity: 100,
       expDate: "feb 25",
       price: 258,
+      wRate: 200,
+      cRate: 225,
+      bRate: 150,
       rackNo: 1001,
       Id: 2,
     },
@@ -33,7 +38,10 @@ function Sales() {
       companyName: "Cadila",
       quantity: 254,
       expDate: "march 25",
-      price: 32,
+      price: 320,
+      wRate: 200,
+      cRate: 250,
+      bRate: 165,
       rackNo: 1002,
       Id: 2,
     },
@@ -42,7 +50,10 @@ function Sales() {
       companyName: "Zydus",
       quantity: 69,
       expDate: "feb 25",
-      price: 91,
+      price: 191,
+      wRate: 180,
+      cRate: 189,
+      bRate: 150,
       rackNo: 1001,
       Id: 3,
     },
@@ -51,7 +62,10 @@ function Sales() {
       companyName: "Cipla",
       quantity: 49,
       expDate: "feb 25",
-      price: 34,
+      price: 340,
+      wRate: 250,
+      cRate: 300,
+      bRate: 200,
       rackNo: 1001,
       Id: 4,
     },
@@ -61,6 +75,9 @@ function Sales() {
       quantity: 45,
       expDate: "feb 25",
       price: 89,
+      wRate: 50,
+      cRate: 75,
+      bRate: 50,
       rackNo: 1001,
       Id: 5,
     },
@@ -70,6 +87,9 @@ function Sales() {
       quantity: 78,
       expDate: "feb 25",
       price: 25,
+      wRate: 20,
+      cRate: 22,
+      bRate: 15,
       rackNo: 1001,
       Id: 6,
     },
@@ -78,7 +98,10 @@ function Sales() {
       companyName: "Lupin",
       quantity: 31,
       expDate: "feb 25",
-      price: 89,
+      price: 890,
+      wRate: 600,
+      cRate: 750,
+      bRate: 500,
       rackNo: 1001,
       Id: 7,
     },
@@ -87,7 +110,10 @@ function Sales() {
       companyName: "Trigen",
       quantity: 89,
       expDate: "feb 25",
-      price: 98,
+      price: 198,
+      wRate: 170,
+      cRate: 180,
+      bRate: 148,
       rackNo: 1001,
       Id: 8,
     },
@@ -96,7 +122,10 @@ function Sales() {
       companyName: "Cipla",
       quantity: 325,
       expDate: "feb 25",
-      price: 85,
+      price: 850,
+      wRate: 605,
+      cRate: 775,
+      bRate: 498,
       rackNo: 1001,
       Id: 9,
     },
@@ -106,10 +135,18 @@ function Sales() {
       quantity: 66,
       expDate: "feb 25",
       price: 123,
+      wRate: 100,
+      cRate: 110,
+      bRate: 78,
       rackNo: 1001,
       Id: 10,
     },
   ]);
+  const [currentFullInvoice, setCurrentFullInvoice] = useState({});
+  useEffect(() => {
+    const searchProduct = () => {};
+    searchProduct();
+  });
 
   const currentOrders = (food) => {
     setSearchProduct("");
@@ -130,11 +167,10 @@ function Sales() {
                 aria-label="Default select example"
                 size="sm"
                 className="borderInput border-0 bg-warning text-darker"
-                // onChange={(e) => changeType(e)}
+                onChange={(e) => setOrderType(e.target.value)}
               >
                 <option value="customer"> Customer Type</option>
                 <option value="wholesaler">Wholesaler</option>
-                <option value="parlour">Parlour</option>
                 <option value="customer">Customer</option>
               </Form.Select>
             </Navbar.Text>

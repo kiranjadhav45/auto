@@ -2,6 +2,7 @@ html,
 body {
   margin: 0px;
   height: 100%;
+  box-sizing: border-box;
 }
 @font-face {
   font-family: "UbuntuRegular";
@@ -185,4 +186,26 @@ table caption {
 .profileSection {
   position: relative !important;
   top: 544px !important;
+}
+
+.dashboard-box1 {
+  border: 1px solid rgb(199, 223, 255) !important;
+  height: 135px !important;
+  box-shadow: 10px 10px 10px rgb(229, 240, 255);
+  background-color: rgb(216, 231, 250);
+  border-radius: 10px;
+}
+.dashboard-box2 {
+  border: 1px solid rgb(199, 223, 255) !important;
+  height: 325px !important;
+  box-shadow: 10px 10px 10px rgb(229, 240, 255);
+  background-color: rgb(216, 231, 250);
+  border-radius: 10px;
+}
+.dashboard-box3 {
+  border: 1px solid rgb(199, 223, 255) !important;
+  height: 500px !important;
+  box-shadow: 10px 10px 10px rgb(229, 240, 255);
+  background-color: rgb(216, 231, 250);
+  border-radius: 10px;
 }
