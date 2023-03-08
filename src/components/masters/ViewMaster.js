@@ -2,13 +2,38 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { setMessage } from "../../redux/slices/navslice";
+import jwtDecode from "jwt-decode";
+import { FaAngleDown } from "react-icons/fa";
 
 function ViewMaster() {
+  let token = localStorage.getItem("auth")
+    ? localStorage.getItem("auth")
+    : "auth token not found";
+  let decoded = jwtDecode(token) ? jwtDecode(token) : "can`t decode jwt";
+  let accountitle = decoded.bundle[5].subMenu
+    ? decoded.bundle[5].subMenu
+    : "can`t resolve accountTitle";
+  let dashboardtitle = decoded.bundle[0].subMenu
+    ? decoded.bundle[5].subMenu
+    : "can`t resolve accountTitle";
+
+  let getInventoryData = decoded.bundle[2].subMenu
+    ? decoded.bundle[2].subMenu
+    : "can`t resolve accountTitle";
+
+  let setInventoryData = [...getInventoryData];
+
+  console.log("getInventoryData", getInventoryData);
+
+  const [showSubMenu, setShowSubMenu] = useState(false);
+  const [preOrder, setPreOrder] = useState("");
+  const [dashboardMenu, setDashboardMenu] = useState("");
   const [stateDashboard, setStateDashboard] = useState({
     PreOrderChecked: false,
     ServiceDashChecked: false,
     pendingsettlementsChecked: false,
   });
+
   const [statesale, setStatesale] = useState({
     salesChecked: false,
     ServiceChecked: false,
@@ -163,30 +188,114 @@ function ViewMaster() {
     localStorage.setItem("inventory", JSON.stringify(inventory));
     alert("Saved Successfully");
   };
+  const pendingSettlements = [
+    {
+      title: 1,
+      path: "/path1",
+    },
+    {
+      title: 2,
+      path: "/path1",
+    },
+    {
+      title: 3,
+      path: "/path1",
+    },
+  ];
+  const handleMapOnChange = (e) => {
+    const value = e.target.value;
+    const checked = e.target.checked;
+    let data = {};
+    data[value] = checked;
+
+    // let z = { status: checked, name: value };
+    // console.log("z", z);
+    // let data = [...z];
+
+    console.log("data", data);
+  };
 
   return (
     <div>
       <Row className="m-4">
         <Col className="text-start col-12">
-          <h6>Dashboard Setting</h6>
           <div>
-            {dashboard &&
-              dashboard.map((i, index) => {
-                return (
-                  <div key={index}>
-                    <input
-                      // checked={i.checked}
-                      className="mx-2"
-                      type="checkbox"
-                      onChange={handleOnChange}
-                      value={i.title}
-                    />
-                    <label>{i.title}</label>
-                    <br />
-                  </div>
-                );
-              })}
+            <input
+              // checked={i.checked}
+              className="mx-2"
+              type="checkbox"
+              onChange={(e) => {
+                setDashboardMenu(e.target.checked);
+              }}
+              value="Dashboard"
+            />
+            <label>
+              <strong>Dashboard Setting</strong>
+            </label>
           </div>
+          {dashboardMenu && dashboardMenu === true ? (
+            <div className="mx-4">
+              <div>
+                {" "}
+                <input
+                  // checked={i.checked}
+                  className="mx-2"
+                  type="checkbox"
+                  onChange={(e) => {
+                    setPreOrder(e.target.checked);
+                  }}
+                  value="PreOrder"
+                />
+                <label>pending Settlements</label>
+                <br />
+                <div className="mx-4">
+                  {preOrder === true
+                    ? pendingSettlements &&
+                      pendingSettlements.map((i, index) => {
+                        return (
+                          <div key={index}>
+                            <input
+                              className="mx-2"
+                              type="checkbox"
+                              value="PreOrder"
+                            />
+                            <label>{i.title}</label>
+                            <br />
+                          </div>
+                        );
+                      })
+                    : ""}
+                </div>
+              </div>
+
+              <div>
+                {" "}
+                <input
+                  // checked={i.checked}
+                  className="mx-2"
+                  type="checkbox"
+                  onChange={handleOnChange}
+                  value="dfg"
+                />
+                <label>DashBoard Service</label>
+                <br />
+              </div>
+              <div>
+                {" "}
+                <input
+                  // checked={i.checked}
+                  className="mx-2"
+                  type="checkbox"
+                  onChange={handleOnChange}
+                  value="dfg"
+                />
+                <label>Pending Settlements</label>
+                <br />
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
         </Col>
         <Col className="text-start col-12">
           <h6>Sales Setting</h6>
@@ -297,6 +406,39 @@ function ViewMaster() {
       <Button size="sm" onClick={onSubmit}>
         Submit
       </Button>
+
+      <div>
+        {setInventoryData &&
+          setInventoryData.map((i, index) => {
+            return (
+              <>
+                <div key={index}>
+                  <input
+                    type="checkbox"
+                    value={i.title}
+                    onChange={handleMapOnChange}
+                  />
+                  <label className="mx-2">{i.title}</label>
+                  <FaAngleDown className="m-1" />
+
+                  <br />
+                </div>
+                <div>
+                  {i.fields &&
+                    i.fields.map((z, p) => {
+                      return (
+                        <div key={p} className="mx-4">
+                          <input type="checkbox" />
+                          <label className="mx-2">{z.title}</label>
+                          <br />
+                        </div>
+                      );
+                    })}
+                </div>
+              </>
+            );
+          })}
+      </div>
     </div>
   );
 }
