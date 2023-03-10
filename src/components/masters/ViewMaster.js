@@ -10,436 +10,686 @@ function ViewMaster() {
     ? localStorage.getItem("auth")
     : "auth token not found";
   let decoded = jwtDecode(token) ? jwtDecode(token) : "can`t decode jwt";
-  let accountitle = decoded.bundle[5].subMenu
-    ? decoded.bundle[5].subMenu
-    : "can`t resolve accountTitle";
+
   let dashboardtitle = decoded.bundle[0].subMenu
-    ? decoded.bundle[5].subMenu
+    ? decoded.bundle[0].subMenu
+    : "can`t resolve accountTitle";
+
+  let salestitle = decoded.bundle[1].subMenu
+    ? decoded.bundle[1].subMenu
     : "can`t resolve accountTitle";
 
   let getInventoryData = decoded.bundle[2].subMenu
     ? decoded.bundle[2].subMenu
     : "can`t resolve accountTitle";
 
-  let setInventoryData = [...getInventoryData];
+  // console.log("getInventoryData", getInventoryData);
 
-  console.log("getInventoryData", getInventoryData);
+  const [inventoryMenuCheaked, setInventoryMenuCheaked] = useState("");
+  useEffect(() => {
+    if (
+      localStorage.getItem("inventory_Menu") === undefined ||
+      localStorage.getItem("inventory_Menu") === null
+    ) {
+      console.log("local storage undefined or null in inventory page");
+    } else {
+      let p = localStorage.getItem("inventory_Menu");
+      let z = JSON.parse(p);
+      setInventoryMenuCheaked(z);
+      console.log("z", z);
+    }
+  }, []);
 
+  const [pagesStatus, setPagesStatus] = useState({
+    Dashboard: "",
+    Sales: "",
+    Inventory: "",
+    items: "",
+    HRM: "",
+    Accounts: "",
+    Masters: "",
+  });
+
+  const [inSubMenuMostSold, setInSubMenuMostSold] = useState({
+    ItemName: false,
+    QtySold: false,
+    QtyRemained: false,
+  });
+  const [inSubMenuExpManage, setInSubMenuExpManage] = useState({
+    ItemName: false,
+    ExpireOn: false,
+    QtyRemained: false,
+  });
+
+  const [showAlert, setShowAlert] = useState(false);
   const [showSubMenu, setShowSubMenu] = useState(false);
+  const [checkedItems, setCheckedItems] = useState({});
   const [preOrder, setPreOrder] = useState("");
   const [dashboardMenu, setDashboardMenu] = useState("");
+
   const [stateDashboard, setStateDashboard] = useState({
-    PreOrderChecked: false,
-    ServiceDashChecked: false,
-    pendingsettlementsChecked: false,
+    PreOrder: false,
+    Service: false,
+    pendingsettlements: false,
   });
 
-  const [statesale, setStatesale] = useState({
-    salesChecked: false,
-    ServiceChecked: false,
-    maintainanceChecked: false,
+  const [salesState, setSalesState] = useState({
+    Sales: false,
+    Service: false,
+    Maintainance: false,
   });
-  const [stateMaster, setStateMaster] = useState({
-    menuMasterChecked: false,
-    sellUnitChecked: false,
-    invoiceChecked: false,
-    printersChecked: false,
-    taxSlabChecked: false,
-    itemsChecked: false,
-  });
-  const [stateAccount, setStateAccount] = useState({
-    settleBillChecked: false,
-    transactionChecked: false,
-    creditChecked: false,
-    debitChecked: false,
-    reportChecked: false,
-  });
-  const [stateHRM, setStateHRM] = useState({
-    CustomerChecked: false,
-    SupplierChecked: false,
-    StaffChecked: false,
-  });
+
   const [stateInventory, setStateInventory] = useState({
-    MostSoldChecked: false,
-    ExpManagmentChecked: false,
-    RackManagmentChecked: false,
-    DeadStocksChecked: false,
-    UnSoldStockChecked: false,
-    ReturnsChecked: false,
+    MostSold: false,
+    ExpiryManagement: false,
+    RackManagement: false,
+    DeadStock: false,
+    Unsold: false,
+    Return: false,
   });
+  // console.log("salesState", salesState);
+  // const handleMapOnChange = (e) => {
+  //   const value = e.target.value;
+  //   const checked = e.target.checked;
+  //   const prevCheckedItems = { ...checkedItems };
+  //   setCheckedItems({ ...checkedItems, [value]: checked });
+  //   console.log("checkedItems", checkedItems);
 
-  const handleOnChange = (e) => {
+  //   if (!checked && prevCheckedItems[value]) {
+  //     setCheckedItems((prevState) => {
+  //       const newState = { ...prevState };
+  //       const childItems = setInventoryData.find((i) => i.id === value)?.fields;
+  //       if (childItems) {
+  //         childItems.forEach((item) => {
+  //           newState[item.id] = false;
+  //         });
+  //       }
+  //       return newState;
+  //     });
+  //   }
+  // };
+
+  //👇👇👇👇👇 Pages function start 👇👇👇👇👇
+
+  const handleOnPagesChange = (e) => {
+    const value = e.target.value;
+    const checked = e.target.checked;
+
+    let data = { ...pagesStatus };
+    if (value === "Dashboard") data.Dashboard = checked;
+    if (value === "Sales") data.Sales = checked;
+    if (value === "Inventory") data.Inventory = checked;
+    if (value === "items") data.items = checked;
+    if (value === "HRM") data.HRM = checked;
+    if (value === "Accounts") data.Accounts = checked;
+    if (value === "Masters") data.Masters = checked;
+    setPagesStatus(data);
+  };
+
+  //👇👇👇👇👇 Dashboard functions start 👇👇👇👇👇
+
+  const handleOnDashboardMenuChange = (e) => {
+    const value = e.target.value;
+    const checked = e.target.checked;
+    let data = { ...stateDashboard };
+    if (value === "Previous Orders") data.PreOrder = checked;
+    if (value === "Total Sales") data.Service = checked;
+    if (value === "Pending Settlements") data.pendingsettlements = checked;
+    setStateDashboard(data);
+  };
+  const onDashboardSubmit = () => {
+    let dashboard = { ...stateDashboard };
+    localStorage.setItem("dashboard_Menu", JSON.stringify(dashboard));
+    setShowAlert(true);
+    hideAlertAfterDelay(2000);
+    let data = { ...pagesStatus };
+    data.Dashboard = false;
+    setPagesStatus(data);
+  };
+
+  //👇👇👇👇👇 sales function start 👇👇👇👇👇
+
+  const handleOnSalesMenuChange = (e) => {
+    const value = e.target.value;
+    const checked = e.target.checked;
+    let data = { ...salesState };
+
+    if (value === "Sales") data.Sales = checked;
+    if (value === "Service") data.Service = checked;
+    if (value === "Maintainance") data.Maintainance = checked;
+    setSalesState(data);
+  };
+
+  const onSalesSubmit = () => {
+    let ddsales = { ...salesState };
+    console.log("ddsales", ddsales);
+    localStorage.setItem("sales_Menu", JSON.stringify(ddsales));
+    setShowAlert(true);
+    hideAlertAfterDelay(2000);
+  };
+
+  // 👇👇👇👇👇 Inventory functions start 👇👇👇👇👇
+
+  const handleOnInventoryMenuChange = (e) => {
+    const value = e.target.value;
+    const checked = e.target.checked;
+
+    let data = { ...stateInventory };
+    if (value === "Most Sold") data.MostSold = checked;
+    if (value === "Expiry Management") data.ExpiryManagement = checked;
+    if (value === "Rack Management") data.RackManagement = checked;
+    if (value === "Dead Stock") data.DeadStock = checked;
+    if (value === "Unsold") data.Unsold = checked;
+    if (value === "Return") data.Return = checked;
+    setStateInventory(data);
+  };
+
+  const onInventorySubmit = () => {
+    let inventory = { ...stateInventory };
+    localStorage.setItem("inventory_Menu", JSON.stringify(inventory));
+
+    let mostSold = { ...inSubMenuMostSold };
+    localStorage.setItem("most_Sold", JSON.stringify(mostSold));
+
+    setShowAlert(true);
+    hideAlertAfterDelay(2000);
+  };
+
+  const handleOnMostSold = (e) => {
     const value = e.target.value;
     const checked = e.target.checked;
     console.log(value, checked);
-    //Dashboard Data
-    let dashboardData = { ...stateDashboard };
-    if (value === "Pre-Order") dashboardData.PreOrderChecked = checked;
-    if (value === "DashBoard Service")
-      dashboardData.ServiceDashChecked = checked;
-    if (value === "pending Settlements")
-      dashboardData.pendingsettlementsChecked = checked;
-    setStateDashboard(dashboardData);
-    //Sales Data
-    let salesData = { ...statesale };
-    if (value === "sales") salesData.salesChecked = checked;
-    if (value === "Sales Service") salesData.ServiceChecked = checked;
-    if (value === "maintainance") salesData.maintainanceChecked = checked;
-    setStatesale(salesData);
-    //masters Data
-    let masterData = { ...stateMaster };
-    if (value === "menuMaster") masterData.menuMasterChecked = checked;
-    if (value === "sellUnit") masterData.sellUnitChecked = checked;
-    if (value === "invoice") masterData.invoiceChecked = checked;
-    if (value === "printers") masterData.printersChecked = checked;
-    if (value === "TaxSlab") masterData.taxSlabChecked = checked;
-    if (value === "Items") masterData.itemsChecked = checked;
-    // console.log("onchange", masterData);
-    setStateMaster(masterData);
-
-    //Account Data
-    let accountData = { ...stateAccount };
-    if (value === "settleBill") accountData.settleBillChecked = checked;
-    if (value === "transaction") accountData.transactionChecked = checked;
-    if (value === "credit") accountData.creditChecked = checked;
-    if (value === "debit") accountData.debitChecked = checked;
-    if (value === "report") accountData.reportChecked = checked;
-    // console.log("accountdata", accountData);
-    setStateAccount(accountData);
-
-    // HRM data
-    let HRMData = { ...stateHRM };
-    if (value === "Customer") HRMData.CustomerChecked = checked;
-    if (value === "Supplier") HRMData.SupplierChecked = checked;
-    if (value === "Staff") HRMData.StaffChecked = checked;
-    setStateHRM(HRMData);
-    // console.log("hrm data", HRMData);
-
-    //Inventory Data
-    let inventoryData = { ...stateInventory };
-    if (value === "MostSold") inventoryData.MostSoldChecked = checked;
-    if (value === "ExpManagment") inventoryData.ExpManagmentChecked = checked;
-    if (value === "RackManagment") inventoryData.RackManagmentChecked = checked;
-    if (value === "DeadStocks") inventoryData.DeadStocksChecked = checked;
-    if (value === "UnSoldStock") inventoryData.UnSoldStockChecked = checked;
-    if (value === "Returns") inventoryData.ReturnsChecked = checked;
-    setStateInventory(inventoryData);
-    // console.log("inventory data", inventoryData);
+    let data = { ...inSubMenuMostSold };
+    if (value === "Item Name") data.ItemName = checked;
+    if (value === "Qty Sold") data.QtySold = checked;
+    if (value === "Qty Remained") data.QtyRemained = checked;
+    setInSubMenuMostSold(data);
   };
 
-  const dashboard = [
-    { title: "Pre-Order", checked: "" },
-    { title: "DashBoard Service", checked: "" },
-    { title: "pending Settlements", checked: "" },
-  ];
-  const sales = [
-    { title: "sales", checked: "" },
-    { title: "Sales Service", checked: "" },
-    { title: "maintainance", checked: "" },
-  ];
-  const masters = [
-    { title: "menuMaster", checked: "" },
-    { title: "sellUnit", checked: "" },
-    { title: "invoice", checked: "" },
-    { title: "printers", checked: "" },
-    { title: "TaxSlab", checked: "" },
-    { title: "Items", checked: "" },
-  ];
-  const account = [
-    { value: "settleBill" },
-    { value: "transaction" },
-    { value: "credit" },
-    { value: "debit" },
-    { value: "report" },
-  ];
-  const HRM = [
-    { value: "Customer" },
-    { value: "Supplier" },
-    { value: "Staff" },
-  ];
-  const inventory = [
-    { value: "MostSold" },
-    { value: "ExpManagment" },
-    { value: "RackManagment" },
-    { value: "DeadStocks" },
-    { value: "UnSoldStock" },
-    { value: "Returns" },
-  ];
-  const onSubmit = () => {
-    // Dashboard setting local Storage  data
-    let dashboard = { ...stateDashboard };
-    localStorage.setItem("dashboard", JSON.stringify(dashboard));
-    console.log("dashboard", dashboard);
-    // Sales setting local Storage data
-    let sales = { ...statesale };
-    localStorage.setItem("sales", JSON.stringify(sales));
-    console.log("sales", sales);
-    // Masters setting local Storage data
-    let master = { ...stateMaster };
-    localStorage.setItem("masters", JSON.stringify(master));
-    // Account setting local Storage data
-    let account = { ...stateAccount };
-    localStorage.setItem("account", JSON.stringify(account));
-    // HRM setting local Storage data
-    let HRM = { ...stateHRM };
-    localStorage.setItem("HRM", JSON.stringify(HRM));
-    // Inventory setting local Storage data
-    let inventory = { ...stateInventory };
-    localStorage.setItem("inventory", JSON.stringify(inventory));
-    alert("Saved Successfully");
+  // 👇👇👇👇👇 Alert timeOut function start 👇👇👇👇👇
+  const hideAlertAfterDelay = (delay) => {
+    setTimeout(() => {
+      setShowAlert(false);
+    }, delay);
   };
-  const pendingSettlements = [
-    {
-      title: 1,
-      path: "/path1",
-    },
-    {
-      title: 2,
-      path: "/path1",
-    },
-    {
-      title: 3,
-      path: "/path1",
-    },
-  ];
-  const handleMapOnChange = (e) => {
-    const value = e.target.value;
-    const checked = e.target.checked;
-    let data = {};
-    data[value] = checked;
-
-    // let z = { status: checked, name: value };
-    // console.log("z", z);
-    // let data = [...z];
-
-    console.log("data", data);
-  };
-
   return (
-    <div>
-      <Row className="m-4">
-        <Col className="text-start col-12">
-          <div>
-            <input
-              // checked={i.checked}
-              className="mx-2"
-              type="checkbox"
-              onChange={(e) => {
-                setDashboardMenu(e.target.checked);
-              }}
-              value="Dashboard"
-            />
-            <label>
-              <strong>Dashboard Setting</strong>
-            </label>
-          </div>
-          {dashboardMenu && dashboardMenu === true ? (
-            <div className="mx-4">
-              <div>
-                {" "}
-                <input
-                  // checked={i.checked}
-                  className="mx-2"
-                  type="checkbox"
-                  onChange={(e) => {
-                    setPreOrder(e.target.checked);
-                  }}
-                  value="PreOrder"
-                />
-                <label>pending Settlements</label>
-                <br />
-                <div className="mx-4">
-                  {preOrder === true
-                    ? pendingSettlements &&
-                      pendingSettlements.map((i, index) => {
-                        return (
-                          <div key={index}>
-                            <input
-                              className="mx-2"
-                              type="checkbox"
-                              value="PreOrder"
-                            />
-                            <label>{i.title}</label>
-                            <br />
-                          </div>
-                        );
-                      })
-                    : ""}
-                </div>
-              </div>
-
-              <div>
-                {" "}
-                <input
-                  // checked={i.checked}
-                  className="mx-2"
-                  type="checkbox"
-                  onChange={handleOnChange}
-                  value="dfg"
-                />
-                <label>DashBoard Service</label>
-                <br />
-              </div>
-              <div>
-                {" "}
-                <input
-                  // checked={i.checked}
-                  className="mx-2"
-                  type="checkbox"
-                  onChange={handleOnChange}
-                  value="dfg"
-                />
-                <label>Pending Settlements</label>
-                <br />
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
-        </Col>
-        <Col className="text-start col-12">
-          <h6>Sales Setting</h6>
-          <div>
-            {sales &&
-              sales.map((i, index) => {
-                return (
-                  <div key={index}>
-                    <input
-                      className="mx-2"
-                      type="checkbox"
-                      onChange={handleOnChange}
-                      value={i.title}
-                    />
-                    <label>{i.title}</label>
-                    <br />
-                  </div>
-                );
-              })}
-          </div>
-        </Col>
-      </Row>
-      <Row className="m-4">
-        <Col className="text-start col-12">
-          <h6>Masters Setting</h6>
-          <div>
-            {masters &&
-              masters.map((i, index) => {
-                return (
-                  <div key={index}>
-                    <input
-                      // checked={i.checked}
-                      className="mx-2"
-                      type="checkbox"
-                      onChange={handleOnChange}
-                      value={i.title}
-                    />
-                    <label>{i.title}</label>
-                    <br />
-                  </div>
-                );
-              })}
-          </div>
-        </Col>
-        <Col className="text-start col-12">
-          <h6>Account Setting</h6>
-          <div>
-            {account &&
-              account.map((i, index) => {
-                return (
-                  <div key={index}>
-                    <input
-                      className="mx-2"
-                      type="checkbox"
-                      onChange={handleOnChange}
-                      value={i.value}
-                    />
-                    <label>{i.value}</label>
-                    <br />
-                  </div>
-                );
-              })}
-          </div>
-        </Col>
-      </Row>
-      <Row className="m-4">
-        <Col className="text-start col-12">
-          <h6>HRM</h6>
-          <div>
-            {HRM &&
-              HRM.map((i, index) => {
-                return (
-                  <div key={index}>
-                    <input
-                      className="mx-2"
-                      type="checkbox"
-                      onChange={handleOnChange}
-                      value={i.value}
-                    />
-                    <label>{i.value}</label>
-                    <br />
-                  </div>
-                );
-              })}
-          </div>
-        </Col>
-        <Col className="text-start col-12">
-          <h6>Inventory</h6>
-          <div>
-            {inventory &&
-              inventory.map((i, index) => {
-                return (
-                  <div key={index}>
-                    <input
-                      className="mx-2"
-                      type="checkbox"
-                      onChange={handleOnChange}
-                      value={i.value}
-                    />
-                    <label>{i.value}</label>
-                    <br />
-                  </div>
-                );
-              })}
-          </div>
-        </Col>
-      </Row>
-      <Button size="sm" onClick={onSubmit}>
-        Submit
-      </Button>
-
+    <>
       <div>
-        {setInventoryData &&
-          setInventoryData.map((i, index) => {
-            return (
-              <>
-                <div key={index}>
+        <Row>
+          <Col>
+            <div className="mx-2">
+              <input
+                className="mx-2"
+                type="checkbox"
+                onChange={handleOnPagesChange}
+                value="Dashboard"
+              />
+              <label>
+                <strong>Dashboard</strong>
+              </label>
+            </div>
+            {pagesStatus.Dashboard === true ? (
+              <div className="mx-4">
+                <div>
                   <input
+                    className="mx-2"
                     type="checkbox"
-                    value={i.title}
-                    onChange={handleMapOnChange}
+                    onChange={handleOnDashboardMenuChange}
+                    value={dashboardtitle[0].title}
                   />
-                  <label className="mx-2">{i.title}</label>
-                  <FaAngleDown className="m-1" />
-
-                  <br />
+                  <label>{dashboardtitle[0].title}</label>
                 </div>
                 <div>
-                  {i.fields &&
-                    i.fields.map((z, p) => {
-                      return (
-                        <div key={p} className="mx-4">
-                          <input type="checkbox" />
-                          <label className="mx-2">{z.title}</label>
-                          <br />
-                        </div>
-                      );
-                    })}
+                  <input
+                    className="mx-2"
+                    type="checkbox"
+                    onChange={handleOnDashboardMenuChange}
+                    value={dashboardtitle[1].title}
+                  />
+                  <label>{dashboardtitle[1].title}</label>
                 </div>
-              </>
-            );
-          })}
+                <div>
+                  <input
+                    className="mx-2"
+                    type="checkbox"
+                    onChange={handleOnDashboardMenuChange}
+                    value={dashboardtitle[2].title}
+                  />
+                  <label>{dashboardtitle[2].title}</label>
+                </div>
+                <Button size="sm" onClick={onDashboardSubmit}>
+                  Save & Close
+                </Button>
+              </div>
+            ) : (
+              ""
+            )}
+          </Col>
+          <Col>
+            <div className="mx-2">
+              <input
+                className="mx-2"
+                type="checkbox"
+                onChange={handleOnPagesChange}
+                value="Sales"
+              />
+              <label>
+                <strong>Sales</strong>
+              </label>
+            </div>
+            {pagesStatus.Sales === true ? (
+              <div className="mx-4">
+                <div>
+                  <input
+                    className="mx-2"
+                    type="checkbox"
+                    onChange={handleOnSalesMenuChange}
+                    value={salestitle[0].title}
+                  />
+                  <label>{salestitle[0].title}</label>
+                </div>
+                <div>
+                  <input
+                    className="mx-2"
+                    type="checkbox"
+                    onChange={handleOnSalesMenuChange}
+                    value={salestitle[1].title}
+                  />
+                  <label>{salestitle[1].title}</label>
+                </div>
+                <div>
+                  <input
+                    className="mx-2"
+                    type="checkbox"
+                    onChange={handleOnSalesMenuChange}
+                    value={salestitle[2].title}
+                  />
+                  <label>{salestitle[2].title}</label>
+                </div>
+                <Button size="sm" onClick={onSalesSubmit}>
+                  Save
+                </Button>
+              </div>
+            ) : (
+              ""
+            )}
+          </Col>
+          <Col>
+            <div className="mx-2">
+              <input
+                className="mx-2"
+                type="checkbox"
+                onChange={handleOnPagesChange}
+                value="Inventory"
+              />
+              <label>
+                <strong>Inventory</strong>
+              </label>
+            </div>
+            {pagesStatus.Inventory === true ? (
+              <div className="mx-4">
+                <div>
+                  <input
+                    className="mx-2"
+                    type="checkbox"
+                    // checked={inventoryMenuCheaked}
+                    onChange={handleOnInventoryMenuChange}
+                    value={getInventoryData[0].title}
+                  />
+                  <label>{getInventoryData[0].title}</label>
+                  {/* 😍😍😍😍😍 inventory sub menu 👉👉👉"MostSold"👈👈👈  😍😍😍😍😍 */}
+                  {stateInventory && stateInventory.MostSold === true ? (
+                    <div className="mx-4">
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnMostSold}
+                          value={getInventoryData[0].fields[0].title}
+                        />
+                        <label>{getInventoryData[0].fields[0].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnMostSold}
+                          value={getInventoryData[0].fields[1].title}
+                        />
+                        <label>{getInventoryData[0].fields[1].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnMostSold}
+                          value={getInventoryData[0].fields[2].title}
+                        />
+                        <label>{getInventoryData[0].fields[2].title}</label>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+
+                <div>
+                  <input
+                    className="mx-2"
+                    type="checkbox"
+                    onChange={handleOnInventoryMenuChange}
+                    value={getInventoryData[1].title}
+                  />
+                  <label>{getInventoryData[1].title}</label>
+                  {/*😍😍😍😍😍 inventory sub menu 👉👉👉"ExpiryManagement"👈👈👈😍😍😍😍 */}
+                  {stateInventory &&
+                  stateInventory.ExpiryManagement === true ? (
+                    <div className="mx-4">
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          // onChange={handleOnInSubMenuChange}
+                          value={getInventoryData[1].fields[0].title}
+                        />
+                        <label>{getInventoryData[1].fields[0].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          // onChange={handleOnInSubMenuChange}
+                          value={getInventoryData[1].fields[1].title}
+                        />
+                        <label>{getInventoryData[1].fields[1].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          // onChange={handleOnInSubMenuChange}
+                          value={getInventoryData[1].fields[2].title}
+                        />
+                        <label>{getInventoryData[1].fields[2].title}</label>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div>
+                  <input
+                    className="mx-2"
+                    type="checkbox"
+                    onChange={handleOnInventoryMenuChange}
+                    value={getInventoryData[2].title}
+                  />
+                  <label>{getInventoryData[2].title}</label>
+                  {/*😍😍😍😍😍 inventory sub menu 3😍😍😍😍 */}
+                  {stateInventory && stateInventory.RackManagement === true ? (
+                    <div className="mx-4">
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[2].fields[0].title}
+                        />
+                        <label>{getInventoryData[2].fields[0].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[2].fields[1].title}
+                        />
+                        <label>{getInventoryData[2].fields[1].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[2].fields[2].title}
+                        />
+                        <label>{getInventoryData[2].fields[2].title}</label>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div>
+                  <input
+                    className="mx-2"
+                    type="checkbox"
+                    onChange={handleOnInventoryMenuChange}
+                    value={getInventoryData[3].title}
+                  />
+                  <label>{getInventoryData[3].title}</label>
+                  {/*😍😍😍😍😍 inventory sub menu 4😍😍😍😍 */}
+                  {stateInventory && stateInventory.DeadStock === true ? (
+                    <div className="mx-4">
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[3].fields[0].title}
+                        />
+                        <label>{getInventoryData[3].fields[0].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[3].fields[1].title}
+                        />
+                        <label>{getInventoryData[3].fields[1].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[3].fields[2].title}
+                        />
+                        <label>{getInventoryData[3].fields[2].title}</label>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div>
+                  <input
+                    className="mx-2"
+                    type="checkbox"
+                    onChange={handleOnInventoryMenuChange}
+                    value={getInventoryData[4].title}
+                  />
+                  <label>{getInventoryData[4].title}</label>
+                  {/*😍😍😍😍😍 inventory sub menu 5😍😍😍😍 */}
+                  {stateInventory && stateInventory.Unsold === true ? (
+                    <div className="mx-4">
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[4].fields[0].title}
+                        />
+                        <label>{getInventoryData[4].fields[0].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[4].fields[1].title}
+                        />
+                        <label>{getInventoryData[4].fields[1].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[4].fields[2].title}
+                        />
+                        <label>{getInventoryData[4].fields[2].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[4].fields[3].title}
+                        />
+                        <label>{getInventoryData[4].fields[3].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[4].fields[4].title}
+                        />
+                        <label>{getInventoryData[4].fields[4].title}</label>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div>
+                  <input
+                    className="mx-2"
+                    type="checkbox"
+                    onChange={handleOnInventoryMenuChange}
+                    value={getInventoryData[5].title}
+                  />
+                  <label>{getInventoryData[5].title}</label>
+                  {/*😍😍😍😍😍 inventory sub menu 6😍😍😍😍 */}
+                  {stateInventory && stateInventory.Return === true ? (
+                    <div className="mx-4">
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[5].fields[0].title}
+                        />
+                        <label>{getInventoryData[5].fields[0].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[5].fields[1].title}
+                        />
+                        <label>{getInventoryData[5].fields[1].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[5].fields[2].title}
+                        />
+                        <label>{getInventoryData[5].fields[2].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[5].fields[3].title}
+                        />
+                        <label>{getInventoryData[5].fields[3].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[5].fields[4].title}
+                        />
+                        <label>{getInventoryData[5].fields[4].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[5].fields[5].title}
+                        />
+                        <label>{getInventoryData[5].fields[5].title}</label>
+                      </div>
+                      <div>
+                        {" "}
+                        <input
+                          className="mx-2"
+                          type="checkbox"
+                          onChange={handleOnSalesMenuChange}
+                          value={getInventoryData[5].fields[6].title}
+                        />
+                        <label>{getInventoryData[5].fields[6].title}</label>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <Button size="sm" onClick={onInventorySubmit}>
+                  Save
+                </Button>
+              </div>
+            ) : (
+              ""
+            )}
+          </Col>
+        </Row>
+        <Row>
+          <Col></Col>
+          <Col></Col>
+          <Col></Col>
+        </Row>
       </div>
-    </div>
+      {showAlert && showAlert === true ? (
+        <div class="alert alert-success fixed-bottom" role="alert">
+          Saved successfully
+        </div>
+      ) : (
+        ""
+      )}
+    </>
   );
 }
 

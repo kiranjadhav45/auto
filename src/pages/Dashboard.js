@@ -33,12 +33,12 @@ function Dashboard() {
 
   useEffect(() => {
     if (
-      localStorage.getItem("dashboard") === undefined ||
-      localStorage.getItem("dashboard") === null
+      localStorage.getItem("dashboard_Menu") === undefined ||
+      localStorage.getItem("dashboard_Menu") === null
     ) {
       console.log("local Storage value is null or undefined in Dashboard page");
     } else {
-      let p = localStorage.getItem("dashboard");
+      let p = localStorage.getItem("dashboard_Menu");
       let z = JSON.parse(p);
       console.log(z);
       setDashboardMenu(z);
@@ -57,7 +57,7 @@ function Dashboard() {
       title: dashboardTitle[1].title ? dashboardTitle[1].title : "Service",
       path: "/totalSales",
       logo: <RiCustomerService2Fill size={iconSize} color="black" />,
-      showButton: dashboardMenu.ServiceDashChecked,
+      showButton: dashboardMenu.Service,
     },
     {
       title: dashboardTitle[2].title
@@ -65,7 +65,7 @@ function Dashboard() {
         : "pending settlements",
       path: "/Maintainance",
       logo: <MdPendingActions size={iconSize} color="black" />,
-      showButton: dashboardMenu.pendingsettlementsChecked,
+      showButton: dashboardMenu.pendingsettlements,
     },
   ];
 

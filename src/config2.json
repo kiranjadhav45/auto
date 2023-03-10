@@ -1,28 +1,28 @@
 {
     "shop": [
-        {
+        {"id":1,
           "title": "Dashboard",
           "path": "/dashboard",
           "status": "active",
           "subMenu": [
-            {
+            {"id":101,
               "title": "Previous Orders",
               "path": "/lastOrders",
               "status": "active",
               "logo":"<CiFilter size={16} color={iconColor} />",
               "lastsubmenu": [
-                {
+                {"id":1001,
                     "title": "sub Total Sales",
                     "path": "/subtotalSales",
                     "status": "active"
                   },
-                  {
+                  {"id":1002,
                     "title": "subTotal Sales",
                     "path": "/subtotalSales",
                     "status": "active"
                    
                   },
-                  {
+                  {"id":1003,
                     "title": "subTotal Sales",
                     "path": "/subtotalSales",
                     "status": "active"
@@ -30,25 +30,25 @@
                   }
             ]
             },
-            {
+            {"id":102,
               "title": "Total Sales",
               "path": "/totalSales",
               "status": "active",
               "logo":"<RiCustomerService2Fill size={iconSixe} color={iconColor} />",
               "lastsubmenu": [
-                {
+                {"id":1004,
                     "title": "sub Total Sales",
                     "path": "/subtotalSales",
                     "status": "active"
                    
                   },
-                  {
+                  {"id":1005,
                     "title": "subTotal Sales",
                     "path": "/subtotalSales",
                     "status": "active"
                    
                   },
-                  {
+                  {"id":1006,
                     "title": "subTotal Sales",
                     "path": "/subtotalSales",
                     "status": "active"
@@ -56,23 +56,23 @@
                   }
             ]
             },
-            {
+            {"id":103,
               "title": "Pending Settlements",
               "path": "/pendingBills",
               "status": "active",
               "logo":"<MdPendingActions size={iconSixe} color={iconColor} />",
               "lastsubmenu": [
-                {
+                {"id":1007,
                     "title": "sub Total Sales",
                     "path": "/subtotalSales",
                     "status": "active"
                   },
-                  {
+                  {"id":1008,
                     "title": "subTotal Sales",
                     "path": "/subtotalSales",
                     "status": "active"
                   },
-                  {
+                  {"id":1009,
                     "title": "subTotal Sales",
                     "path": "/subtotalSales",
                     "status": "active"
@@ -81,24 +81,24 @@
             }
           ]
         },
-        {
+        {"id":2,
           "title": "Sales",
           "path": "/sales",
           "status": "active",
           "subMenu": [
-            {
+            {"id":104,
               "title": "Sales",
               "path": "/lastOrders",
               "status": "active",
               "logo":"<FcSalesPerformance size={iconSixe} color={iconColor} />"
             },
-            {
+            {"id":105,
               "title": "Service",
               "path": "/totalSales",
               "status": "active",
               "logo":"<BiTrendingUp size={iconSixe} color={iconColor} />"
             },
-            {
+            {"id":106,
               "title": "Maintainance",
               "path": "/totalSales",
               "status": "active",
@@ -106,87 +106,87 @@
             }
           ]
         },
-        {
+        {"id":3,
           "title": "Inventory",
           "path": "/inventory",
           "status": "active",
           "subMenu": [
-            {
+            {"id":107,
               "title": "Most Sold",
               "path": "/subReports",
               "status": "active",
               "logo":"<BiTrendingUp size={iconSixe} color={iconColor} />",
               "fields": [
-                { "title": "Item Name", "path": "itemName" },
-                { "title": "Qty Sold", "path": "soldQty" },
-                { "title": "Qty Remained", "path": "qtyInStock" }
+                { "id":1010,"title": "Item Name", "path": "itemName" },
+                { "id":1011,"title": "Qty Sold", "path": "soldQty" },
+                {"id":1012, "title": "Qty Remained", "path": "qtyInStock" }
               ]
             },
-            {
+            {"id":108,
               "title": "Expiry Management",
               "path": "/subReports",
               "status": "active",
               "logo":"<FcExpired size={iconSixe} color={iconColor} />",
               "fields": [
-                { "title": "Item Name", "path": "itemName" },
-                { "title": "Expire On", "path": "expiry" },
-                { "title": "Qty Remained", "path": "qtyInStock" }
+                { "id":1013,"title": "Item Name", "path": "itemName" },
+                {"id":1014, "title": "Expire On", "path": "expiry" },
+                { "id":1015,"title": "Qty Remained", "path": "qtyInStock" }
               ]
             },
-            {
+            {"id":109,
               "title": "Rack Management",
               "path": "/subReports",
               "status": "active",
               "logo":"<BsHddRackFill size={iconSixe} color={iconColor} />",
               "fields": [
-                { "title": "Item Name", "path": "itemName" },
-                { "title": "Placement", "path": "placement" },
-                { "title": "Qty Remained", "path": "qtyInStock" }
+                {"id":1016, "title": "Item Name", "path": "itemName" },
+                { "id":1017,"title": "Placement", "path": "placement" },
+                { "id":1018,"title": "Qty Remained", "path": "qtyInStock" }
               ]
             },
-            {
+            {"id":110,
               "title": "Dead Stock",
               "path": "/subReports",
               "status": "active",
               "logo":"<HiArrowSmDown size={iconSixe} color={iconColor} />",
               "fields": [
-                { "title": "Item Name", "path": "itemName" },
-                { "title": "Qty Sold", "path": "soldQty" },
-                { "title": "Qty Remained", "path": "qtyInStock" },
-                { "title": "Capial Invested", "path": "qtyInStock" }
+                { "id":1019,"title": "Item Name", "path": "itemName" },
+                {"id":1020, "title": "Qty Sold", "path": "soldQty" },
+                {"id":1021, "title": "Qty Remained", "path": "qtyInStock" },
+                {"id":1022, "title": "Capial Invested", "path": "qtyInStock" }
               ]
             },
-            {
+            {"id":111,
               "title": "Unsold",
               "path": "/subReports",
               "status": "active",
               "logo":"<IoWarning size={iconSixe} color={iconColor} />",
               "fields": [
-                { "title": "Item Name", "path": "itemName" },
-                { "title": "Company", "path": "soldQty" },
-                { "title": "Qty Remained", "path": "qtyInStock" },
-                { "title": "Capial Invested", "path": "qtyInStock" },
-                { "title": "Rack No", "path": "qtyInStock" }
+                { "id":1023,"title": "Item Name", "path": "itemName" },
+                {"id":1024, "title": "Company", "path": "soldQty" },
+                {"id":1025, "title": "Qty Remained", "path": "qtyInStock" },
+                { "id":1026,"title": "Capial Invested", "path": "qtyInStock" },
+                {"id":1027, "title": "Rack No", "path": "qtyInStock" }
               ]
             },
-            {
+            {"id":112,
               "title": "Return",
               "path": "/subReports",
               "status": "active",
               "logo":"<TbTruckReturn size={iconSixe} color={iconColor} />",
               "fields": [
-                { "title": "Item Name", "path": "itemName" },
-                { "title": "Return Qty", "path": "returnQty" },
-                { "title": "Qty Remained", "path": "qtyInStock" },
-                { "title": "Buy Price", "path": "qtyInStock" },
-                { "title": "Selling Price", "path": "qtyInStock" },
-                { "title": "Capial Invested", "path": "qtyInStock" },
-                { "title": "Statment", "path": "LossOrProfit" }
+                { "id":1029,"title": "Item Name", "path": "itemName" },
+                {"id":1030, "title": "Return Qty", "path": "returnQty" },
+                { "id":1031,"title": "Qty Remained", "path": "qtyInStock" },
+                {"id":1032, "title": "Buy Price", "path": "qtyInStock" },
+                { "id":1033,"title": "Selling Price", "path": "qtyInStock" },
+                { "id":1034,"title": "Capial Invested", "path": "qtyInStock" },
+                {"id":1035, "title": "Statment", "path": "LossOrProfit" }
               ]
             }
           ]
         },
-        {
+        {"id":4,
           "title": "items",
           "path": "/items",
           "status": "active",
@@ -199,134 +199,134 @@
           "category": [{ "title": "general", "subCategory": ["Sub Category"] }],
           "units": [{ "name": "piece" }],
           "subMenu": [
-            {
+            {"id":113,
               "title": "Most Sold",
               "path": "/subReports",
               "status": "active",
               "fields": [
-                { "title": "Item Name", "path": "itemName" },
-                { "title": "Qty Sold", "path": "soldQty" },
-                { "title": "Qty Remained", "path": "qtyInStock" }
+                {"id":1036, "title": "Item Name", "path": "itemName" },
+                { "id":1037,"title": "Qty Sold", "path": "soldQty" },
+                {"id":1038, "title": "Qty Remained", "path": "qtyInStock" }
               ]
             },
-            {
+            {"id":114,
               "title": "Expiry Management",
               "path": "/subReports",
               "status": "active",
               "fields": [
-                { "title": "Item Name", "path": "itemName" },
-                { "title": "Expire On", "path": "expiry" },
-                { "title": "Qty Remained", "path": "qtyInStock" }
+                {"id":1039, "title": "Item Name", "path": "itemName" },
+                {"id":1040, "title": "Expire On", "path": "expiry" },
+                {"id":1041, "title": "Qty Remained", "path": "qtyInStock" }
               ]
             },
-            {
+            {"id":115,
               "title": "Rack Management",
               "path": "/subReports",
               "status": "active",
               "fields": [
-                { "title": "Item Name", "path": "itemName" },
-                { "title": "Placement", "path": "placement" },
-                { "title": "Qty Remained", "path": "qtyInStock" }
+                { "id":1042,"title": "Item Name", "path": "itemName" },
+                {"id":1043, "title": "Placement", "path": "placement" },
+                {"id":1044, "title": "Qty Remained", "path": "qtyInStock" }
               ]
             },
-            {
+            {"id":116,
               "title": "Dead Stock",
               "path": "/subReports",
               "status": "active",
               "fields": [
-                { "title": "Item Name", "path": "itemName" },
-                { "title": "Qty Sold", "path": "soldQty" },
-                { "title": "Qty Remained", "path": "qtyInStock" },
-                { "title": "Capial Invested", "path": "qtyInStock" }
+                { "id":1045,"title": "Item Name", "path": "itemName" },
+                {"id":1046, "title": "Qty Sold", "path": "soldQty" },
+                {"id":1047, "title": "Qty Remained", "path": "qtyInStock" },
+                {"id":1048, "title": "Capial Invested", "path": "qtyInStock" }
               ]
             },
-            {
+            {"id":117,
               "title": "Return",
               "path": "/subReports",
               "status": "active",
               "fields": [
-                { "title": "Item Name", "path": "itemName" },
-                { "title": "Return Qty", "path": "returnQty" },
-                { "title": "Qty Remained", "path": "qtyInStock" },
-                { "title": "Buy Price", "path": "qtyInStock" },
-                { "title": "Selling Price", "path": "qtyInStock" },
-                { "title": "Capial Invested", "path": "qtyInStock" },
-                { "title": "Statment", "path": "LossOrProfit" }
+                {"id":1049, "title": "Item Name", "path": "itemName" },
+                {"id":1050, "title": "Return Qty", "path": "returnQty" },
+                {"id":1051, "title": "Qty Remained", "path": "qtyInStock" },
+                {"id":1052, "title": "Buy Price", "path": "qtyInStock" },
+                {"id":1053, "title": "Selling Price", "path": "qtyInStock" },
+                {"id":1054, "title": "Capial Invested", "path": "qtyInStock" },
+                {"id":1055, "title": "Statment", "path": "LossOrProfit" }
               ]
             }
           ]
         },
     
-        {
+        {"id":5,
           "title": "HRM",
           "path": "/hrm",
           "status": "inactive",
           "subMenu": [
-            {
+            {"id":118,
               "title": "Customers",
               "path": "/subReports",
               "status": "active",
               "logo":"<ImProfile size={iconSixe} color={iconColor} />",
               "fields": [
-                { "title": "Customer Name", "path": "customerName" },
-                { "title": "Mobile", "path": "customerMobile" },
-                { "title": "Last Purchase", "path": "lastPurchase" }
+                { "id":1056,"title": "Customer Name", "path": "customerName" },
+                {"id":1057, "title": "Mobile", "path": "customerMobile" },
+                {"id":1058, "title": "Last Purchase", "path": "lastPurchase" }
               ]
             },
-            {
+            {"id":119,
               "title": "Suppliers",
               "path": "/subReports",
               "status": "active",
               "logo":"<FaTruckMoving size={iconSixe} color={iconColor} />",
               "fields": [
-                { "title": "Supplier Name", "path": "supplierName" },
-                { "title": "Mobile", "path": "supplierMobile" },
-                { "title": "Credit", "path": "creditRemain" },
-                { "title": "Debit", "path": "debitRemain" }
+                { "id":1059,"title": "Supplier Name", "path": "supplierName" },
+                {"id":1060, "title": "Mobile", "path": "supplierMobile" },
+                {"id":1061, "title": "Credit", "path": "creditRemain" },
+                {"id":1062, "title": "Debit", "path": "debitRemain" }
               ]
             },
-            {
+            {"id":120,
               "title": "Staff",
               "path": "/subReports",
               "status": "active",
               "logo":"<RiTeamFill size={iconSixe} color={iconColor} />",
               "fields": [
-                { "title": "Staff Name", "path": "staffName" },
-                { "title": "Mobile", "path": "staffMobile" },
-                { "title": "email", "path": "staffEmail" },
-                { "title": "Password", "path": "role" },
-                { "title": "Access", "path": "access" }
+                {"id":1063, "title": "Staff Name", "path": "staffName" },
+                {"id":1064, "title": "Mobile", "path": "staffMobile" },
+                {"id":1065, "title": "email", "path": "staffEmail" },
+                {"id":1066, "title": "Password", "path": "role" },
+                {"id":1067, "title": "Access", "path": "access" }
               ]
             }
           ]
         },
-        {
+        {"id":6,
           "title": "Accounts",
           "path": "/accounts",
           "status": "active",
           "subMenu": [
-            { 
+            { "id":121,
               "title": "Settle Bills",
               "path": "/subReports", 
               "status": "active",
               "logo":"<RiBillFill size={iconSixe} color={iconColor} />"
              },
 
-            {
+            {"id":122,
             "title": "Transactions", 
             "path": "/subReports",
             "status": "active",
             "logo":"<AiOutlineTransaction size={iconSixe} color={iconColor} />" 
           },
 
-          { 
+          { "id":123,
             "title": "Credits", 
             "path": "/subReports", 
             "status": "active" ,
             "logo":"<BsFillCreditCard2FrontFill size={iconSixe} color={iconColor} />"
           },
            
-            {
+            {"id":124,
             "title": "Debits", 
             "path": "/subReports", 
             "status": "active" ,
@@ -334,54 +334,54 @@
           },
             
             
-            {
+            {"id":125,
             "title": "Reports", 
             "path": "/subReports", 
             "status": "active" ,
             "logo":"<TbReportAnalytics size={iconSixe} color={iconColor} />"}
           ]
         },
-        {
+        {"id":7,
           "title": "Masters",
           "path": "/masters",
           "status": "active",
           "subMenu": [
-            { 
+            { "id":126,
               "title": "Menu Master", 
               "path": "/subReports", 
               "status": "active" ,
               "logo":"<GiHamburgerMenu size={iconSixe} color={iconColor} />"
             },
 
-            {
+            {"id":127,
                "title": "Sell Units", 
                "path": "/subReports", 
                "status": "active" ,
                "logo":"<RiNumbersFill size={iconSixe} color={iconColor} />"
 
             },
-            { 
+            { "id":128,
               "title": "Invoices", 
               "path": "/subReports", 
               "status": "active" ,
               "logo":"<MdPendingActions size={iconSixe} color={iconColor} />"
             },
 
-            {
+            {"id":129,
                "title": "Printers", 
                "path": "/subReports", 
                "status": "active" ,
                "logo":"<BsFillPrinterFill size={iconSixe} color={iconColor} />"
             },
 
-            {
+            {"id":130,
                "title": "Tax Slab", 
                "path": "/subReports", 
                "status": "active" ,
                "logo":"<TbReceiptTax size={iconSixe} color={iconColor} />"
             },
 
-            {
+            {"id":131,
                "title": "View Master", 
                "path": "/subReports", 
                "status": "active",

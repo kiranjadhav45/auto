@@ -167,15 +167,15 @@ const Sales = ({ t }) => {
 
   useEffect(() => {
     if (
-      localStorage.getItem("sales") === undefined ||
-      localStorage.getItem("sales") === null
+      localStorage.getItem("sales_Menu") === undefined ||
+      localStorage.getItem("sales_Menu") === null
     ) {
       console.log("Local Storage value is undefined or null in Sales page ");
     } else {
-      let p = localStorage.getItem("sales");
+      let p = localStorage.getItem("sales_Menu");
       let z = JSON.parse(p);
       setSalesMenu(z);
-      // console.log(z);
+      console.log(z);
     }
   }, []);
   let salesData = [
@@ -187,12 +187,12 @@ const Sales = ({ t }) => {
     {
       title: salesSubmenu[1].title,
       logo: <BiTrendingUp size={iconSixe} color="black" />,
-      showButton: salesMenu.ServiceChecked,
+      showButton: salesMenu.Service,
     },
     {
       title: salesSubmenu[2].title,
       logo: <GrVmMaintenance size={iconSixe} color="black" />,
-      showButton: salesMenu.maintainanceChecked,
+      showButton: salesMenu.Maintainance,
     },
   ];
   const searchHandle = (e) => {

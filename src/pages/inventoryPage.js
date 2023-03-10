@@ -161,14 +161,15 @@ function InventoryPage({ t }) {
 
   useEffect(() => {
     if (
-      localStorage.getItem("inventory") === undefined ||
-      localStorage.getItem("inventory") === null
+      localStorage.getItem("inventory_Menu") === undefined ||
+      localStorage.getItem("inventory_Menu") === null
     ) {
       console.log("local storage undefined or null in inventory page");
     } else {
-      let p = localStorage.getItem("inventory");
+      let p = localStorage.getItem("inventory_Menu");
       let z = JSON.parse(p);
       setInventoryMenu(z);
+      console.log(z);
     }
   }, []);
 
@@ -184,31 +185,31 @@ function InventoryPage({ t }) {
       title: salesSubmenu[1].title ? salesSubmenu[1].title : "Exp Managment",
       path: "/subReports",
       logo: <FcExpired size={iconSixe} color="black" />,
-      showButton: inventoryMenu.ExpManagmentChecked,
+      showButton: inventoryMenu.ExpiryManagement,
     },
     {
       title: salesSubmenu[2].title ? salesSubmenu[2].title : "Rack Managment",
       path: "/totalSales",
       logo: <BsHddRackFill size={iconSixe} color="black" />,
-      showButton: inventoryMenu.RackManagmentChecked,
+      showButton: inventoryMenu.RackManagement,
     },
     {
       title: salesSubmenu[3].title ? salesSubmenu[3].title : "Dead Stocks",
       path: "/Maintainance",
       logo: <HiArrowSmDown size={iconSixe} color="black" />,
-      showButton: inventoryMenu.DeadStocksChecked,
+      showButton: inventoryMenu.DeadStock,
     },
     {
       title: salesSubmenu[4].title ? salesSubmenu[4].title : "UnSold Stock",
       path: "/Maintainance",
       logo: <IoWarning size={iconSixe} color="black" />,
-      showButton: inventoryMenu.UnSoldStockChecked,
+      showButton: inventoryMenu.Unsold,
     },
     {
       title: salesSubmenu[5].title ? salesSubmenu[5].title : "Returns",
       path: "/Maintainance",
       logo: <TbTruckReturn size={iconSixe} color="black" />,
-      showButton: inventoryMenu.ReturnsChecked,
+      showButton: inventoryMenu.Return,
     },
   ];
 
