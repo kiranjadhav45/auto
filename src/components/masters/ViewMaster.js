@@ -6,6 +6,8 @@ import jwtDecode from "jwt-decode";
 import { FaAngleDown } from "react-icons/fa";
 
 function ViewMaster() {
+  // const [salesCheacked, setSalesCheacked] = useEffect({});
+
   let token = localStorage.getItem("auth")
     ? localStorage.getItem("auth")
     : "auth token not found";
@@ -24,22 +26,33 @@ function ViewMaster() {
     : "can`t resolve accountTitle";
 
   // console.log("getInventoryData", getInventoryData);
-
+  const [salessssCheacked, setSalessssCheacked] = useState({});
   const [inventoryMenuCheaked, setInventoryMenuCheaked] = useState("");
   useEffect(() => {
     if (
       localStorage.getItem("inventory_Menu") === undefined ||
       localStorage.getItem("inventory_Menu") === null
     ) {
-      console.log("local storage undefined or null in inventory page");
+      console.log("local storage undefined or null in view master page");
     } else {
       let p = localStorage.getItem("inventory_Menu");
       let z = JSON.parse(p);
       setInventoryMenuCheaked(z);
-      console.log("z", z);
+    }
+
+    if (
+      localStorage.getItem("dashboard_Menu") === undefined ||
+      localStorage.getItem("dashboard_Menu") === null
+    ) {
+      console.log("local storage undefined or null in view master page");
+    } else {
+      let p = localStorage.getItem("dashboard_Menu");
+      let z = JSON.parse(p);
+      setSalessssCheacked(z);
+      console.log("zzz", z);
     }
   }, []);
-
+  console.log("salesCheacked", salessssCheacked.PreOrder);
   const [pagesStatus, setPagesStatus] = useState({
     Dashboard: "",
     Sales: "",
@@ -131,6 +144,7 @@ function ViewMaster() {
   const handleOnDashboardMenuChange = (e) => {
     const value = e.target.value;
     const checked = e.target.checked;
+    console.log(value, checked);
     let data = { ...stateDashboard };
     if (value === "Previous Orders") data.PreOrder = checked;
     if (value === "Total Sales") data.Service = checked;
@@ -184,6 +198,29 @@ function ViewMaster() {
     setStateInventory(data);
   };
 
+  const handleOnMostSold = (e) => {
+    const value = e.target.value;
+    const checked = e.target.checked;
+
+    let data = { ...inSubMenuMostSold };
+    if (value === "Item Name") data.ItemName = checked;
+    if (value === "Qty Sold") data.QtySold = checked;
+    if (value === "Qty Remained") data.QtyRemained = checked;
+    setInSubMenuMostSold(data);
+  };
+
+  const handleOnExpiryManagement = (e) => {
+    const value = e.target.value;
+    const checked = e.target.checked;
+    console.log(value, checked);
+
+    let data = { ...inSubMenuExpManage };
+    if (value === "Item Name") data.ItemName = checked;
+    if (value === "Expire On") data.ExpireOn = checked;
+    if (value === "Qty Remained") data.QtyRemained = checked;
+    setInSubMenuExpManage(data);
+  };
+
   const onInventorySubmit = () => {
     let inventory = { ...stateInventory };
     localStorage.setItem("inventory_Menu", JSON.stringify(inventory));
@@ -191,19 +228,11 @@ function ViewMaster() {
     let mostSold = { ...inSubMenuMostSold };
     localStorage.setItem("most_Sold", JSON.stringify(mostSold));
 
+    let ExpManagment = { ...inSubMenuExpManage };
+    localStorage.setItem("expiry_Management", JSON.stringify(ExpManagment));
+
     setShowAlert(true);
     hideAlertAfterDelay(2000);
-  };
-
-  const handleOnMostSold = (e) => {
-    const value = e.target.value;
-    const checked = e.target.checked;
-    console.log(value, checked);
-    let data = { ...inSubMenuMostSold };
-    if (value === "Item Name") data.ItemName = checked;
-    if (value === "Qty Sold") data.QtySold = checked;
-    if (value === "Qty Remained") data.QtyRemained = checked;
-    setInSubMenuMostSold(data);
   };
 
   // 👇👇👇👇👇 Alert timeOut function start 👇👇👇👇👇
@@ -212,11 +241,12 @@ function ViewMaster() {
       setShowAlert(false);
     }, delay);
   };
+
   return (
     <>
       <div>
         <Row>
-          <Col>
+          <Col className="col-lg-6">
             <div className="mx-2">
               <input
                 className="mx-2"
@@ -233,17 +263,22 @@ function ViewMaster() {
                 <div>
                   <input
                     className="mx-2"
+                    checked={salessssCheacked.PreOrder}
                     type="checkbox"
-                    onChange={handleOnDashboardMenuChange}
+                    onChange={(e) => handleOnDashboardMenuChange(e)}
                     value={dashboardtitle[0].title}
                   />
-                  <label>{dashboardtitle[0].title}</label>
+                  <label>
+                    {salessssCheacked.PreOrder}
+                    {dashboardtitle[0].title}
+                  </label>
                 </div>
                 <div>
                   <input
                     className="mx-2"
+                    // checked={salessssCheacked.Service}
                     type="checkbox"
-                    onChange={handleOnDashboardMenuChange}
+                    onChange={(e) => handleOnDashboardMenuChange(e)}
                     value={dashboardtitle[1].title}
                   />
                   <label>{dashboardtitle[1].title}</label>
@@ -251,8 +286,9 @@ function ViewMaster() {
                 <div>
                   <input
                     className="mx-2"
+                    // checked={salessssCheacked.pendingsettlements}
                     type="checkbox"
-                    onChange={handleOnDashboardMenuChange}
+                    onChange={(e) => handleOnDashboardMenuChange(e)}
                     value={dashboardtitle[2].title}
                   />
                   <label>{dashboardtitle[2].title}</label>
@@ -265,7 +301,7 @@ function ViewMaster() {
               ""
             )}
           </Col>
-          <Col>
+          <Col className="col-lg-6">
             <div className="mx-2">
               <input
                 className="mx-2"
@@ -314,7 +350,7 @@ function ViewMaster() {
               ""
             )}
           </Col>
-          <Col>
+          <Col className="col-lg-12">
             <div className="mx-2">
               <input
                 className="mx-2"
@@ -393,7 +429,7 @@ function ViewMaster() {
                         <input
                           className="mx-2"
                           type="checkbox"
-                          // onChange={handleOnInSubMenuChange}
+                          onChange={handleOnExpiryManagement}
                           value={getInventoryData[1].fields[0].title}
                         />
                         <label>{getInventoryData[1].fields[0].title}</label>
@@ -403,7 +439,7 @@ function ViewMaster() {
                         <input
                           className="mx-2"
                           type="checkbox"
-                          // onChange={handleOnInSubMenuChange}
+                          onChange={handleOnExpiryManagement}
                           value={getInventoryData[1].fields[1].title}
                         />
                         <label>{getInventoryData[1].fields[1].title}</label>
@@ -413,7 +449,7 @@ function ViewMaster() {
                         <input
                           className="mx-2"
                           type="checkbox"
-                          // onChange={handleOnInSubMenuChange}
+                          onChange={handleOnExpiryManagement}
                           value={getInventoryData[1].fields[2].title}
                         />
                         <label>{getInventoryData[1].fields[2].title}</label>

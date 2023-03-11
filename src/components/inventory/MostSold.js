@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { withNamespaces } from "react-i18next";
+import jwtDecode from "jwt-decode";
 
 import {
   Button,
@@ -36,8 +37,35 @@ import Pagination from "react-bootstrap/Pagination";
 import { setMessage } from "../../redux/slices/navslice";
 
 function MostSold({ t, items, currentFullInvoice }) {
+  const [mostSoldMenu, setMostSoldMenu] = useState("");
   const [data, setData] = useState(currentFullInvoice);
   const [order, setOrder] = useState("ASC");
+
+  let token = localStorage.getItem("auth")
+    ? localStorage.getItem("auth")
+    : "auth token not found in inventory page";
+  let decoded = jwtDecode(token)
+    ? jwtDecode(token)
+    : "can`t decode jwt in most sold page";
+  let mostSoldSubMenuTitle = decoded.bundle[3].subMenu[0].fields
+    ? decoded.bundle[3].subMenu[0].fields
+    : "can`t find inventorySubmenu in most sold page";
+
+  console.log("inventoryMostSoldSubMenu", mostSoldSubMenuTitle);
+  useEffect(() => {
+    if (
+      localStorage.getItem("most_Sold") === undefined ||
+      localStorage.getItem("most_Sold") === null
+    ) {
+      console.log("local storage undefined or null in most sold page");
+    } else {
+      let p = localStorage.getItem("most_Sold");
+      let z = JSON.parse(p);
+      setMostSoldMenu(z);
+      console.log(z);
+      console.log("mostSoldMenu", mostSoldMenu);
+    }
+  }, []);
 
   // sorting function
   const handleSortData = (col) => {
@@ -148,30 +176,43 @@ function MostSold({ t, items, currentFullInvoice }) {
               <thead>
                 <tr>
                   <th data-priority="1">Sr No</th>
-                  <th data-priority="2">Product Name</th>
-                  <th data-priority="3">
-                    Sold Quantity{" "}
-                    <button
-                      className="headerButton mx-2"
-                      onClick={() => {
-                        handleSortData("Quantity");
-                      }}
-                    >
-                      <RiArrowUpDownFill size={17} />
-                    </button>
-                  </th>
-                  <th data-priority="4">Price</th>
-                  <th data-priority="4">
-                    Total Amount Sold{" "}
-                    <button
-                      className="headerButton mx-2"
-                      onClick={() => {
-                        handleSortData("Total Amount");
-                      }}
-                    >
-                      <RiArrowUpDownFill size={17} />
-                    </button>
-                  </th>
+                  {mostSoldMenu.ItemName === true ? (
+                    <th data-priority="2">{mostSoldSubMenuTitle[0].title}</th>
+                  ) : (
+                    ""
+                  )}
+
+                  {mostSoldMenu.QtySold === true ? (
+                    <th data-priority="3">
+                      Sold Quantity{" "}
+                      <button
+                        className="headerButton mx-2"
+                        onClick={() => {
+                          handleSortData("Quantity");
+                        }}
+                      >
+                        <RiArrowUpDownFill size={17} />
+                      </button>
+                    </th>
+                  ) : (
+                    ""
+                  )}
+
+                  {mostSoldMenu.QtyRemained === true ? (
+                    <th data-priority="4">
+                      QTY Remaining{" "}
+                      <button
+                        className="headerButton mx-2"
+                        onClick={() => {
+                          handleSortData("Total Amount");
+                        }}
+                      >
+                        <RiArrowUpDownFill size={17} />
+                      </button>
+                    </th>
+                  ) : (
+                    ""
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -180,10 +221,22 @@ function MostSold({ t, items, currentFullInvoice }) {
                     return (
                       <tr key={index}>
                         <td>{index + 1}</td>
-                        <td>{item.productName}</td>
-                        <td>{item.quantity}</td>
-                        <td>{item.price}</td>
-                        <td>{item.quantity * item.price}</td>
+                        {mostSoldMenu.ItemName === true ? (
+                          <td>{item.productName}</td>
+                        ) : (
+                          ""
+                        )}
+                        {mostSoldMenu.QtySold === true ? (
+                          <td>{item.quantity}</td>
+                        ) : (
+                          ""
+                        )}
+
+                        {mostSoldMenu.QtyRemained === true ? (
+                          <td>{item.quantity}</td>
+                        ) : (
+                          ""
+                        )}
                       </tr>
                     );
                   })}
